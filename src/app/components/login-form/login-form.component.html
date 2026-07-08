@@ -1,0 +1,28 @@
+<h1>Boas-vindas!</h1>
+
+<div class="login-form-container">
+
+  <form [formGroup]="loginForm" (ngSubmit)="UsuarioLogin()">
+    
+    <div class="input-container">
+      <span class="icon">
+          <i class="bi bi-person-circle"></i>
+      </span>
+      <div class="divisor"></div>
+      <input formControlName="nome" type="text" name="email" placeholder="Insira seu e-mail" id="nomeid" class="fordform" required>
+    </div>
+    <p class="texto">Nunca compartilharemos seu e-mail com ninguém.</p>
+  
+    <div class="input-container">
+      <span class="icon">
+          <i class="bi bi-lock"></i>
+      </span> <div class="divisor"></div>
+      <input formControlName="senha" type="password" name="senha" placeholder="Insira sua senha" class="fordform" required>
+    </div>
+    <br>
+  
+    <br><br><br>
+  
+    <button type="submit" class="botao">Entrar</button>
+  </form>
+</div>

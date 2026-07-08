@@ -1,0 +1,11 @@
+header {
+    margin: 0;
+    padding: 0;
+}
+
+.linha-divisoria {
+  border: 0;
+  height: 1px;
+  background-color: gray;
+  margin: 0;
+}
