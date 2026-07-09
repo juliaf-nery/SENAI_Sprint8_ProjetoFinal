@@ -1,28 +1,128 @@
-<h1>Boas-vindas!</h1>
+<div class="login-container">
 
-<div class="login-form-container">
+  <div class="left-panel"
+    [style.background-image]="'linear-gradient(rgba(10, 37, 64, 0.85), rgba(10, 37, 64, 0.85)), url(' + images[currentImageIndex] + ')'">
+    <div class="brand">
+      <i class="fa-solid fa-graduation-cap"></i> EduConecta
+    </div>
 
-  <form [formGroup]="loginForm" (ngSubmit)="UsuarioLogin()">
-    
-    <div class="input-container">
-      <span class="icon">
-          <i class="bi bi-person-circle"></i>
-      </span>
-      <div class="divisor"></div>
-      <input formControlName="nome" type="text" name="email" placeholder="Insira seu e-mail" id="nomeid" class="fordform" required>
+    <div class="left-content">
+      <h1>Conectando toda a comunidade escolar</h1>
+      <p>Centralize comunicação, atividades, calendário e avisos em um único portal.</p>
+
+      <div class="carousel-controls">
+        <div class="dots">
+          <span *ngFor="let img of images; let i = index" class="dot" [class.active]="currentImageIndex === i"
+            (click)="setCurrentImage(i)">
+          </span>
+        </div>
+        <div class="arrows">
+          <button class="arrow-btn" type="button" (click)="prevImage()">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <button class="arrow-btn" type="button" (click)="nextImage()">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
     </div>
-    <p class="texto">Nunca compartilharemos seu e-mail com ninguém.</p>
-  
-    <div class="input-container">
-      <span class="icon">
-          <i class="bi bi-lock"></i>
-      </span> <div class="divisor"></div>
-      <input formControlName="senha" type="password" name="senha" placeholder="Insira sua senha" class="fordform" required>
+  </div>
+
+  <div class="right-panel">
+    <div class="right-content-wrapper">
+
+      <div class="login-card">
+        <div class="card-header">
+          <div class="logo-icon">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <h2>Bem-vindo(a)!</h2>
+          <p>Plataforma de Comunicação e Gestão Escolar</p>
+        </div>
+
+        <form id="loginForm">
+          <div class="input-group">
+            <label for="username">CPF ou Matrícula</label>
+            <div class="input-wrapper">
+              <i class="fa-regular fa-user input-icon"></i>
+              <input type="text" id="username" placeholder="Digite seu CPF ou matrícula" required>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="password">Senha</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-lock input-icon"></i>
+              <input type="password" id="password" placeholder="Digite sua senha" required>
+              <i class="fa-regular fa-eye toggle-password" id="togglePassword"></i>
+            </div>
+          </div>
+
+          <div class="form-options">
+            <label class="remember-me">
+              <input type="checkbox" id="remember">
+              <span>Lembrar de mim</span>
+            </label>
+            <a href="#" class="forgot-password">Esqueci minha senha</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Entrar</button>
+          <button type="button" class="btn btn-outline">Primeiro Acesso</button>
+        </form>
+      </div>
+
+      <div class="demo-section">
+        <h3>ACESSOS PARA DEMONSTRAÇÃO</h3>
+        <p>Clique em um perfil para preencher automaticamente</p>
+
+        <div class="demo-grid">
+          <div class="demo-card" data-user="admin@educonecta.com" data-pass="Admin@123">
+            <div class="demo-icon color-1"><i class="fa-solid fa-building-columns"></i></div>
+            <div class="demo-info">
+              <h4>Administrador Estadual</h4>
+              <p>Secretaria Estadual</p>
+            </div>
+          </div>
+          <div class="demo-card" data-user="direcao.modelo" data-pass="Direcao@123">
+            <div class="demo-icon color-2"><i class="fa-solid fa-user-tie"></i></div>
+            <div class="demo-info">
+              <h4>Direção Escolar</h4>
+              <p>Colégio Estadual...</p>
+            </div>
+          </div>
+          <div class="demo-card" data-user="prof.matematica" data-pass="Professor@123">
+            <div class="demo-icon color-3"><i class="fa-solid fa-chalkboard-user"></i></div>
+            <div class="demo-info">
+              <h4>Professor</h4>
+              <p>Colégio Estadual...</p>
+            </div>
+          </div>
+          <div class="demo-card" data-user="secretaria.modelo" data-pass="Secretaria@123">
+            <div class="demo-icon color-4"><i class="fa-solid fa-file-invoice"></i></div>
+            <div class="demo-info">
+              <h4>Secretaria Escolar</h4>
+              <p>Colégio Estadual...</p>
+            </div>
+          </div>
+          <div class="demo-card" data-user="2023001458" data-pass="Aluno@123">
+            <div class="demo-icon color-5"><i class="fa-solid fa-user-graduate"></i></div>
+            <div class="demo-info">
+              <h4>Aluno</h4>
+              <p>Colégio Estadual...</p>
+            </div>
+          </div>
+          <div class="demo-card" data-user="responsavel.joao" data-pass="Responsavel@123">
+            <div class="demo-icon color-6"><i class="fa-solid fa-users"></i></div>
+            <div class="demo-info">
+              <h4>Responsável</h4>
+              <p>Resp. por João Po...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
-    <br>
-  
-    <br><br><br>
-  
-    <button type="submit" class="botao">Entrar</button>
-  </form>
+  </div>
 </div>
+
+<script src="app.js"></script>
