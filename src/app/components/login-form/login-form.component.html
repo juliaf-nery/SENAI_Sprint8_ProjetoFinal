@@ -3,7 +3,7 @@
   <div class="left-panel"
     [style.background-image]="'linear-gradient(rgba(10, 37, 64, 0.85), rgba(10, 37, 64, 0.85)), url(' + images[currentImageIndex] + ')'">
     <div class="brand">
-      <i class="fa-solid fa-graduation-cap"></i> EduConecta
+      <i class="fa-solid fa-graduation-cap"></i><a class="link" routerLink="/">EduConecta</a>
     </div>
 
     <div class="left-content">
@@ -18,10 +18,10 @@
         </div>
         <div class="arrows">
           <button class="arrow-btn" type="button" (click)="prevImage()">
-            <i class="fa-solid fa-chevron-left"></i>
+            <i class="bi bi-caret-left"></i>
           </button>
           <button class="arrow-btn" type="button" (click)="nextImage()">
-            <i class="fa-solid fa-chevron-right"></i>
+            <i class="bi bi-caret-right"></i>
           </button>
         </div>
       </div>
@@ -44,7 +44,7 @@
           <div class="input-group">
             <label for="username">CPF ou Matrícula</label>
             <div class="input-wrapper">
-              <i class="fa-regular fa-user input-icon"></i>
+              <i i class="bi bi-person input-icon"></i>
               <input type="text" id="username" placeholder="Digite seu CPF ou matrícula" required>
             </div>
           </div>
@@ -52,9 +52,9 @@
           <div class="input-group">
             <label for="password">Senha</label>
             <div class="input-wrapper">
-              <i class="fa-solid fa-lock input-icon"></i>
+              <i class="bi bi-lock input-icon"></i>
               <input type="password" id="password" placeholder="Digite sua senha" required>
-              <i class="fa-regular fa-eye toggle-password" id="togglePassword"></i>
+              <i class="bi bi-eye toggle-password" id="togglePassword"></i>
             </div>
           </div>
 
@@ -77,45 +77,43 @@
 
         <div class="demo-grid">
           <div class="demo-card" data-user="admin@educonecta.com" data-pass="Admin@123">
-            <div class="demo-icon color-1"><i class="fa-solid fa-building-columns"></i></div>
+            <div class="demo-icon color-1"><i class="bi bi-person-workspace"></i></div>
             <div class="demo-info">
               <h4>Administrador Estadual</h4>
               <p>Secretaria Estadual</p>
+              <hr>
             </div>
           </div>
           <div class="demo-card" data-user="direcao.modelo" data-pass="Direcao@123">
-            <div class="demo-icon color-2"><i class="fa-solid fa-user-tie"></i></div>
+            <div class="demo-icon color-2"><i class="bi bi-person-gear"></i></div>
             <div class="demo-info">
               <h4>Direção Escolar</h4>
               <p>Colégio Estadual...</p>
+              <hr>
             </div>
           </div>
           <div class="demo-card" data-user="prof.matematica" data-pass="Professor@123">
-            <div class="demo-icon color-3"><i class="fa-solid fa-chalkboard-user"></i></div>
+            <div class="demo-icon color-3"><i class="bi bi-book-half"></i></div>
             <div class="demo-info">
               <h4>Professor</h4>
               <p>Colégio Estadual...</p>
-            </div>
-          </div>
-          <div class="demo-card" data-user="secretaria.modelo" data-pass="Secretaria@123">
-            <div class="demo-icon color-4"><i class="fa-solid fa-file-invoice"></i></div>
-            <div class="demo-info">
-              <h4>Secretaria Escolar</h4>
-              <p>Colégio Estadual...</p>
+              <hr>
             </div>
           </div>
           <div class="demo-card" data-user="2023001458" data-pass="Aluno@123">
-            <div class="demo-icon color-5"><i class="fa-solid fa-user-graduate"></i></div>
+            <div class="demo-icon color-4"><i class="bi bi-backpack2"></i></div>
             <div class="demo-info">
               <h4>Aluno</h4>
               <p>Colégio Estadual...</p>
+              <hr>
             </div>
           </div>
           <div class="demo-card" data-user="responsavel.joao" data-pass="Responsavel@123">
-            <div class="demo-icon color-6"><i class="fa-solid fa-users"></i></div>
+            <div class="demo-icon color-5"><i class="bi bi-people-fill"></i></div>
             <div class="demo-info">
               <h4>Responsável</h4>
               <p>Resp. por João Po...</p>
+              <hr>
             </div>
           </div>
         </div>

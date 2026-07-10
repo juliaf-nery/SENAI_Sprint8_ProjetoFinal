@@ -19,14 +19,13 @@
 body {
     background-color: var(--bg-light);
     color: var(--text-main);
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
 }
 
 .login-container {
     display: flex;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 /* Painel Esquerdo */
@@ -38,6 +37,7 @@ body {
     background-position: center center;
     background-size: cover;
     color: var(--white);
+    min-height: 100vh;
     padding: 40px;
     display: flex;
     flex-direction: column;
@@ -51,6 +51,12 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+    color: #ffffff; /* Alterado de cinza para branco absoluto */
+}
+
+.link {
+    text-decoration: none;
+    color: white;
 }
 
 .left-content h1 {
@@ -95,36 +101,44 @@ body {
 
 .arrows {
     display: flex;
-    gap: 10px;
+    gap: 16px;
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    z-index: 10;
 }
 
 .arrow-btn {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.2); /* Fundo translúcido idêntico à imagem */
     border: none;
-    color: var(--white);
-    width: 36px;
-    height: 36px;
+    color: var(--white) !important;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     cursor: pointer;
-    display: flex;
+    display: flex; /* Essencial para centralizar o ícone interno */
     align-items: center;
     justify-content: center;
     transition: background 0.3s;
 }
 
 .arrow-btn:hover {
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.35);
+}
+
+.arrow-btn i {
+    font-size: 1.2rem;
+    color: #ffffff;
 }
 
 /* Painel Direito */
 .right-panel {
-    flex: 0.9;
-    background-color: var(--bg-light);
+    flex: 1;
+    background-color: #f8fafc; /* Cor de fundo suave para destacar o card */
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow-y: auto;
-    padding: 40px 20px;
+    padding: 60px 5px;
 }
 
 .right-content-wrapper {
@@ -134,10 +148,10 @@ body {
 
 /* Card de Login */
 .login-card {
-    background: var(--white);
-    padding: 35px;
-    border-radius: 16px;
-    box-shadow: var(--shadow);
+    background: white;
+    padding: 40px; /* Mais espaçamento interno como na imagem */
+    border-radius: 24px; /* Bordas bem arredondadas */
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
     margin-bottom: 30px;
 }
 
@@ -149,18 +163,19 @@ body {
 .logo-icon {
     background-color: var(--primary-color);
     color: var(--white);
-    width: 50px;
-    height: 50px;
+    width: 48px;
+    height: 48px;
     border-radius: 12px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.4rem;
-    margin-bottom: 15px;
+    font-size: 1.25rem;
+    margin-bottom: 20px;
 }
 
 .card-header h2 {
-    font-size: 1.6rem;
+    font-size: 1.75rem;
+    font-weight: 700;
     color: #0f172a;
     margin-bottom: 8px;
 }
@@ -172,6 +187,8 @@ body {
 
 .input-group {
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .input-group label {
@@ -190,25 +207,34 @@ body {
 
 .input-icon {
     position: absolute;
-    left: 14px;
+    left: 16px;
     color: #94a3b8;
+    font-size: 1rem;
+    pointer-events: none;
 }
 
 .toggle-password {
     position: absolute;
-    right: 14px;
+    right: 16px;
     color: #94a3b8;
     cursor: pointer;
+    font-size: 1rem;
 }
 
 .input-wrapper input {
     width: 100%;
-    padding: 12px 40px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
+    padding: 14px 16px 14px 46px; /* Espaço na esquerda para o ícone */
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
     font-size: 0.95rem;
     outline: none;
     transition: border-color 0.3s;
+    background-color: #ffffff;
+}
+
+.input-wrapper input[type="password"],
+.input-wrapper input#password {
+    padding-right: 46px;
 }
 
 .input-wrapper input:focus {
@@ -243,45 +269,47 @@ body {
 
 .btn {
     width: 100%;
-    padding: 14px;
-    border-radius: 8px;
+    padding: 12px;
+    border-radius: 12px;
     font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s;
     margin-bottom: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .btn-primary {
-    background-color: var(--primary-color);
+    background-color: #0f4094;
     border: none;
-    color: var(--white);
 }
 
 .btn-primary:hover {
-    background-color: var(--primary-hover);
+    background-color: #1351b4;
 }
 
 .btn-outline {
     background-color: transparent;
-    border: 1px solid var(--border-color);
-    color: var(--primary-color);
+    color: #0f4094;
+    border: 2px solid #0f4094;
 }
 
 .btn-outline:hover {
-    background-color: rgba(0, 86, 179, 0.04);
-    border-color: var(--primary-color);
+    background-color: #e9f0f6;
 }
 
 /* Seção de Demonstração */
 .demo-section {
-    text-align: center;
+  text-align: center;
 }
 
 .demo-section h3 {
     font-size: 0.75rem;
     letter-spacing: 1px;
     color: #475569;
+    font-weight: 600;
     margin-bottom: 4px;
 }
 
@@ -298,7 +326,7 @@ body {
 }
 
 .demo-card {
-    background: var(--white);
+    background: white;
     border: 1px solid #f1f5f9;
     border-radius: 10px;
     padding: 12px;
@@ -308,6 +336,16 @@ body {
     cursor: pointer;
     text-align: left;
     transition: transform 0.2s, box-shadow 0.2s;
+}
+
+hr {
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
 }
 
 .demo-card:hover {
