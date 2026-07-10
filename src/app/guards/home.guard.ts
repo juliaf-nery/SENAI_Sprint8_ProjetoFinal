@@ -7,9 +7,9 @@ export const homeGuard: CanActivateFn = (route, state) => {
   const platformId = inject(PLATFORM_ID);
 
   if (isPlatformBrowser(platformId)) {
-    const nome = sessionStorage.getItem("nome");
+    const token = sessionStorage.getItem("token");
 
-    if (!nome) {
+    if (!token) {
       router.navigate([""]);
       return false;
     }

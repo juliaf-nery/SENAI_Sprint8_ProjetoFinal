@@ -387,6 +387,11 @@ hr {
     max-width: 140px;
 }
 
+p .user {
+    color: gray !important;
+    font-size: 10px;
+}
+
 /* Responsividade Básica */
 @media (max-width: 900px) {
     .left-panel {

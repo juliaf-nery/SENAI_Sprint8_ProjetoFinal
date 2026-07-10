@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { UserInfo } from '../pages/types/user';
+import { LoginResponse } from '../pages/types/user';
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +9,14 @@ import { UserInfo } from '../pages/types/user';
 export class LoginService {
   http = inject(HttpClient);
 
-  login(nome: string, senha: string): Observable<UserInfo> {
-    return this.http.post<UserInfo>("http://localhost:3001/login", { nome, senha })
+  login(identifier: string, senha: string): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>("http://localhost:3001/login", { identifier, senha })
       .pipe(
         tap(
-          (user) => {
-            sessionStorage.setItem("nome", user.nome)
+          (response) => {
+            sessionStorage.setItem("token", response.token);
+            sessionStorage.setItem("nome", response.user.nome);
+            sessionStorage.setItem("role", response.user.role);
           }
         )
       )

@@ -47,19 +47,19 @@ images: string[] = [
   router = inject(Router);
 
   loginForm = new FormGroup({
-    nome: new FormControl(''),
+    identifier: new FormControl(''),
     senha: new FormControl('')
   });
 
   UsuarioLogin() {
-    const { nome, senha } = this.loginForm.value;
+    const { identifier, senha } = this.loginForm.value;
     
-    if (!this.loginForm.valid || !nome || !senha) {
+    if (!this.loginForm.valid || !identifier || !senha) {
       alert("Por favor, preencha os campos vazios!")
       return;
     }
 
-    this.loginService.login(nome, senha).subscribe({
+    this.loginService.login(identifier, senha).subscribe({
       error: (err) => {
         if(err.status === 401) {
           alert("Usuário ou senha incorretos!")

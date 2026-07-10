@@ -40,12 +40,12 @@
           <p>Plataforma de Comunicação e Gestão Escolar</p>
         </div>
 
-        <form id="loginForm">
+        <form id="loginForm" [formGroup]="loginForm" (ngSubmit)="UsuarioLogin()">
           <div class="input-group">
             <label for="username">CPF ou Matrícula</label>
             <div class="input-wrapper">
               <i i class="bi bi-person input-icon"></i>
-              <input type="text" id="username" placeholder="Digite seu CPF ou matrícula" required>
+              <input type="text" id="username" formControlName="identifier" placeholder="Digite seu CPF ou matrícula" required>
             </div>
           </div>
 
@@ -53,7 +53,7 @@
             <label for="password">Senha</label>
             <div class="input-wrapper">
               <i class="bi bi-lock input-icon"></i>
-              <input type="password" id="password" placeholder="Digite sua senha" required>
+              <input type="password" id="password" formControlName="senha" placeholder="Digite sua senha" required>
               <i class="bi bi-eye toggle-password" id="togglePassword"></i>
             </div>
           </div>
@@ -82,6 +82,8 @@
               <h4>Administrador Estadual</h4>
               <p>Secretaria Estadual</p>
               <hr>
+              <p class="user">2026109482</p>
+              <p class="user">admin123</p>
             </div>
           </div>
           <div class="demo-card" data-user="direcao.modelo" data-pass="Direcao@123">
@@ -90,6 +92,8 @@
               <h4>Direção Escolar</h4>
               <p>Colégio Estadual...</p>
               <hr>
+              <p class="user">20260759312</p>
+              <p class="user">direcao123</p>
             </div>
           </div>
           <div class="demo-card" data-user="prof.matematica" data-pass="Professor@123">
@@ -98,6 +102,8 @@
               <h4>Professor</h4>
               <p>Colégio Estadual...</p>
               <hr>
+              <p class="user">2026091112</p>
+              <p class="user">professor123</p>
             </div>
           </div>
           <div class="demo-card" data-user="2023001458" data-pass="Aluno@123">
@@ -106,6 +112,8 @@
               <h4>Aluno</h4>
               <p>Colégio Estadual...</p>
               <hr>
+              <p class="user">2026106379</p>
+              <p class="user">aluno123</p>
             </div>
           </div>
           <div class="demo-card" data-user="responsavel.joao" data-pass="Responsavel@123">
@@ -114,6 +122,8 @@
               <h4>Responsável</h4>
               <p>Resp. por João Po...</p>
               <hr>
+              <p class="user">111111</p>
+              <p class="user">responsavel123</p>
             </div>
           </div>
         </div>
