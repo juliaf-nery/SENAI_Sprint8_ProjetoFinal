@@ -76,61 +76,36 @@
         <p>Clique em um perfil para preencher automaticamente</p>
 
         <div class="demo-grid">
-          <div class="demo-card" data-user="admin@educonecta.com" data-pass="Admin@123">
-            <div class="demo-icon color-1"><i class="bi bi-person-workspace"></i></div>
-            <div class="demo-info">
-              <h4>Administrador Estadual</h4>
-              <p>Secretaria Estadual</p>
+          @for (conta of demoAccounts; track conta.identifier) {
+            <div
+              class="demo-card"
+              role="button"
+              tabindex="0"
+              [attr.aria-label]="'Preencher formulário com o acesso de ' + conta.role"
+              (click)="preencherCampos(conta)"
+              (keyup.enter)="preencherCampos(conta)"
+            >
+              <div class="demo-card-top {{ conta.colorClass }}">
+                <i class="bi {{ conta.icon }} demo-icon"></i>
+                <span class="demo-dot"></span>
+              </div>
+
+              <div class="demo-info">
+                <h4>{{ conta.role }}</h4>
+                <p class="subtitle">{{ conta.description }}</p>
+              </div>
+
               <hr>
-              <p class="user">2026109482</p>
-              <p class="user">admin123</p>
+
+              <div class="demo-credentials">
+                <p class="user-id">{{ conta.identifier }}</p>
+                <p class="user-pass">{{ conta.senha }}</p>
+              </div>
             </div>
-          </div>
-          <div class="demo-card" data-user="direcao.modelo" data-pass="Direcao@123">
-            <div class="demo-icon color-2"><i class="bi bi-person-gear"></i></div>
-            <div class="demo-info">
-              <h4>Direção Escolar</h4>
-              <p>Colégio Estadual...</p>
-              <hr>
-              <p class="user">20260759312</p>
-              <p class="user">direcao123</p>
-            </div>
-          </div>
-          <div class="demo-card" data-user="prof.matematica" data-pass="Professor@123">
-            <div class="demo-icon color-3"><i class="bi bi-book-half"></i></div>
-            <div class="demo-info">
-              <h4>Professor</h4>
-              <p>Colégio Estadual...</p>
-              <hr>
-              <p class="user">2026091112</p>
-              <p class="user">professor123</p>
-            </div>
-          </div>
-          <div class="demo-card" data-user="2023001458" data-pass="Aluno@123">
-            <div class="demo-icon color-4"><i class="bi bi-backpack2"></i></div>
-            <div class="demo-info">
-              <h4>Aluno</h4>
-              <p>Colégio Estadual...</p>
-              <hr>
-              <p class="user">2026106379</p>
-              <p class="user">aluno123</p>
-            </div>
-          </div>
-          <div class="demo-card" data-user="responsavel.joao" data-pass="Responsavel@123">
-            <div class="demo-icon color-5"><i class="bi bi-people-fill"></i></div>
-            <div class="demo-info">
-              <h4>Responsável</h4>
-              <p>Resp. por João Po...</p>
-              <hr>
-              <p class="user">111111</p>
-              <p class="user">responsavel123</p>
-            </div>
-          </div>
+          }
         </div>
       </div>
 
     </div>
   </div>
 </div>
-
-<script src="app.js"></script>

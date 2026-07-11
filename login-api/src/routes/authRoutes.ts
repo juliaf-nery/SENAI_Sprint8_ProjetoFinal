@@ -60,7 +60,6 @@ router.post(
   }
 );
 
-// Rota protegida de exemplo, útil para o front-end validar o token/sessão
 router.get("/me", authMiddleware, (req: Request, res: Response) => {
   if (!req.user) {
     return res.status(401).json({ message: "Não autenticado." });

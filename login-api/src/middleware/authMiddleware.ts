@@ -2,7 +2,6 @@ import { NextFunction, Request, Response } from "express";
 import { verifyToken } from "../services/authService";
 import { JwtPayload } from "../types";
 
-// Estende o tipo Request do Express para incluir o usuário autenticado
 declare global {
   namespace Express {
     interface Request {

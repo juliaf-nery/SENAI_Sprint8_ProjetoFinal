@@ -1,10 +1,6 @@
 import bcrypt from "bcryptjs";
 import { UserRecord } from "../types";
 
-/**
- * Senha padrão de todos os usuários mock: "mudar123"
- * O hash é gerado em tempo de execução (nunca guardamos senha em texto puro).
- */
 // const SENHA_PADRAO = "mudar123";
 const SENHA_ADMIN = "admin123";
 const SENHA_DIRECAO = "direcao123";
@@ -17,10 +13,6 @@ function hash(senha: string): string {
   return bcrypt.hashSync(senha, SALT_ROUNDS);
 }
 
-/**
- * Base de usuários em memória (mock).
- * Em um cenário real, isso viria de um banco de dados.
- */
 export const users: UserRecord[] = [
   {
     id: 1,

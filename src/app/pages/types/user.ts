@@ -19,5 +19,4 @@ export type LoginResponse = {
     user: PublicUser;
 }
 
-// Mantido por compatibilidade com código existente
 export type UserInfo = PublicUser;
