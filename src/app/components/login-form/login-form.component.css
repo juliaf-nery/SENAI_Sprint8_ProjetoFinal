@@ -32,7 +32,6 @@ body {
 .left-panel {
     flex: 1.1;
     position: relative;
-    /* REMOVA a linha que continha a URL da imagem antiga aqui */
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -42,7 +41,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: background-image 0.5s ease-in-out; /* Opcional: Adiciona uma transição suave ao trocar de imagem */
+    transition: background-image 0.5s ease-in-out;
 }
 
 .brand {
@@ -51,7 +50,7 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #ffffff; /* Alterado de cinza para branco absoluto */
+    color: #ffffff;
 }
 
 .link {
@@ -109,14 +108,14 @@ body {
 }
 
 .arrow-btn {
-    background: rgba(255, 255, 255, 0.2); /* Fundo translúcido idêntico à imagem */
+    background: rgba(255, 255, 255, 0.2);
     border: none;
     color: var(--white) !important;
     width: 48px;
     height: 48px;
     border-radius: 50%;
     cursor: pointer;
-    display: flex; /* Essencial para centralizar o ícone interno */
+    display: flex;
     align-items: center;
     justify-content: center;
     transition: background 0.3s;
@@ -134,7 +133,7 @@ body {
 /* Painel Direito */
 .right-panel {
     flex: 1;
-    background-color: #f8fafc; /* Cor de fundo suave para destacar o card */
+    background-color: #f8fafc;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -149,8 +148,8 @@ body {
 /* Card de Login */
 .login-card {
     background: white;
-    padding: 40px; /* Mais espaçamento interno como na imagem */
-    border-radius: 24px; /* Bordas bem arredondadas */
+    padding: 30px;
+    border-radius: 24px;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
     margin-bottom: 30px;
 }
@@ -223,7 +222,7 @@ body {
 
 .input-wrapper input {
     width: 100%;
-    padding: 14px 16px 14px 46px; /* Espaço na esquerda para o ícone */
+    padding: 14px 16px 14px 46px;
     border: 1px solid #e2e8f0;
     border-radius: 12px;
     font-size: 0.95rem;
@@ -321,75 +320,100 @@ body {
 
 .demo-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 14px;
 }
 
 .demo-card {
     background: white;
-    border: 1px solid #f1f5f9;
-    border-radius: 10px;
-    padding: 12px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    border: 1px solid #eef1f6;
+    border-radius: 14px;
+    padding: 16px;
     cursor: pointer;
     text-align: left;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-hr {
-  display: block;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-  margin-left: auto;
-  margin-right: auto;
-  border-style: inset;
-  border-width: 1px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 
 .demo-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 10px 20px -8px rgba(15, 23, 42, 0.12);
+    border-color: #dbe4f0;
+}
+
+.demo-card:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+.demo-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 .demo-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.9rem;
+    font-size: 1.35rem;
+    line-height: 1;
+    color: var(--icon-color, #1e3a8a);
 }
 
-/* Cores dos ícones baseadas na imagem */
-.color-1 { background-color: #eff6ff; color: #1e40af; }
-.color-2 { background-color: #fef2f2; color: #991b1b; }
-.color-3 { background-color: #f0fdf4; color: #166534; }
-.color-4 { background-color: #fff7ed; color: #9a3412; }
-.color-5 { background-color: #faf5ff; color: #6b21a8; }
-.color-6 { background-color: #f0fdfa; color: #0f766e; }
+.demo-dot {
+    width: 8px;
+    height: 8px;
+    margin-top: 3px;
+    border-radius: 50%;
+    background-color: var(--dot-color, #1d4ed8);
+    flex-shrink: 0;
+}
+
+hr {
+  display: block;
+  margin: 10px 0;
+  margin-top: 10px;
+  border: none;
+  border-top: 1px solid #bdbdbd;
+}
+
+.color-1 { --icon-color: #a7a7a7; --dot-color: #0f4094; } /* Administrador */
+.color-2 { --icon-color: #693d14; --dot-color: #1351b4; } /* Direção */
+.color-3 { --icon-color: #0f766e; --dot-color: #16a34a; } /* Professor */
+.color-4 { --icon-color: #000000; --dot-color: #1351b4; } /* Aluno */
+.color-5 { --icon-color: #a56da6  ; --dot-color: #dc2626; } /* Responsável */
 
 .demo-info h4 {
     font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text-main);
+    font-weight: 700;
+    line-height: 1.25;
+    color: #0f172a;
+    margin-bottom: 2px;
 }
 
-.demo-info p {
-    font-size: 0.75rem;
+.demo-info .subtitle {
+    font-size: 0.72rem;
     color: var(--text-muted);
-    margin-bottom: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 140px;
 }
 
-p .user {
-    color: gray !important;
-    font-size: 10px;
+.demo-credentials p {
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.demo-credentials .user-id {
+    color: #334155;
+    font-weight: 500;
+}
+
+.demo-credentials .user-pass {
+    color: #94a3b8;
 }
 
 /* Responsividade Básica */

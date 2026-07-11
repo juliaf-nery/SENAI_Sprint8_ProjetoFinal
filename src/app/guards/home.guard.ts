@@ -13,7 +13,7 @@ export const homeGuard: CanActivateFn = (route, state) => {
       router.navigate([""]);
       return false;
     }
-
+    
     return true;
   }
 
