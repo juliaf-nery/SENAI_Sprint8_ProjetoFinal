@@ -1,0 +1,65 @@
+<app-dashboard-shell
+  tituloPagina="Professores"
+  subtitulo="Catálogo de professores do Colégio Estadual Modelo da Bahia"
+  [perfilLabel]="perfilLabel"
+  [corTema]="corTema"
+>
+
+<section class="dashboard-section">
+    <div class="professores-busca">
+      <i class="bi bi-search"></i>
+      <input type="text" placeholder="Pesquisar por nome ou disciplina..." [(ngModel)]="termoBusca" />
+      <span class="professores-total">{{ totalProfessores }} professores</span>
+    </div>
+  </section>
+
+  @for (grupo of gruposFiltrados; track grupo.disciplina) {
+    <section class="dashboard-section">
+      <div class="dashboard-section-header">
+        <h2>{{ grupo.disciplina }}</h2>
+        <span>{{ grupo.professores.length }} professor(es)</span>
+      </div>
+
+      <div class="professores-grid">
+        @for (professor of grupo.professores; track professor.email) {
+          <div class="professor-card">
+            <div class="professor-foto">
+              @if (professor.fotoUrl) {
+                <img [src]="professor.fotoUrl" [alt]="professor.nome" class="foto-img">
+              } @else {
+                <span class="foto-iniciais">{{ iniciais(professor.nome) }}</span>
+              }
+            </div>
+
+            <div class="professor-info">
+              <div class="professor-nome-linha">
+                <h3>{{ professor.nome }}</h3>
+              </div>
+              <p class="professor-bio">{{ professor.bio }}</p>
+
+              <div class="professor-rodape">
+                <div class="professor-stats">
+                  <span title="Turmas"><i class="bi bi-people-fill"></i>{{ professor.turmas }}</span>
+                  <span title="Anos de experiência"><i class="bi bi-mortarboard-fill"></i>{{ professor.anosExperiencia }}</span>
+                </div>
+                <button type="button" class="btn-contato" (click)="alternarContato(professor)">
+                  <i class="bi" [class.bi-envelope]="!contatoAberto(professor)" [class.bi-x-lg]="contatoAberto(professor)"></i>
+                  {{ contatoAberto(professor) ? 'Fechar' : 'Contato' }}
+                </button>
+              </div>
+
+              @if (contatoAberto(professor)) {
+                <div class="professor-contato">
+                  <span><i class="bi bi-envelope"></i>{{ professor.email }}</span>
+                  <span><i class="bi bi-telephone"></i>{{ professor.telefone }}</span>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+  } @empty {
+    <p class="professores-vazio">Nenhum professor encontrado para essa busca.</p>
+  }
+</app-dashboard-shell>

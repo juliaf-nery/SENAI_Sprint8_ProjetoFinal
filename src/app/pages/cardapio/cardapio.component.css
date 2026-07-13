@@ -1,0 +1,101 @@
+.cardapio-tabela-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.cardapio-tabela-wrapper {
+  overflow-x: auto;
+}
+
+.cardapio-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+
+.cardapio-tabela thead th {
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 14px 16px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.cardapio-tabela thead th.coluna-hora {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cardapio-tabela tbody tr {
+  background: #ffffff;
+  border-bottom: 1px solid #eef1f6;
+}
+
+.cardapio-tabela tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+.cardapio-tabela tbody tr:last-child {
+  border-bottom: none;
+}
+
+.cardapio-tabela td {
+  padding: 16px;
+  font-size: 0.84rem;
+  color: #334155;
+  line-height: 1.5;
+  vertical-align: top;
+}
+
+.cardapio-tabela td.coluna-hora {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.cardapio-tabela td.coluna-hora i {
+  font-size: 1.1rem;
+  color: #0057A8;
+  width: 34px;
+  height: 34px;
+  border-radius: 2px;
+  background: #eaf2fb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.linha-nome {
+  display: block;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.linha-horario {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #64748b;
+}
+
+.cardapio-aviso {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: #64748b;
+  margin-top: 16px;
+}
+
+.cardapio-aviso i {
+  color: #0057A8;
+}

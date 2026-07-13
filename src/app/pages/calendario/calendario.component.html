@@ -1,0 +1,110 @@
+<app-dashboard-shell
+  tituloPagina="Calendário"
+  subtitulo="Colégio Estadual Modelo da Bahia"
+  [perfilLabel]="perfilLabel"
+  [corTema]="corTema"
+>
+  <div class="calendario-layout">
+    <!-- Grade do calendário -->
+    <div class="dashboard-widget calendario-grade-wrap">
+      <div class="calendario-topo">
+        <h2 class="calendario-mes-titulo">{{ mesAnoLabel }}</h2>
+        <div class="calendario-topo-direita">
+          <div class="calendario-nav">
+            <button type="button" (click)="mesAnterior()" aria-label="Mês anterior">
+              <i class="bi bi-chevron-left"></i>
+            </button>
+            <button type="button" (click)="proximoMes()" aria-label="Próximo mês">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </div>
+          @if (exibirBotaoNovoEvento) {
+            <button type="button" class="btn-novo-evento">
+              <i class="bi bi-plus-lg"></i>
+              Novo Evento
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="calendario-semana-header">
+        @for (dia of diasSemana; track dia) {
+          <span>{{ dia }}</span>
+        }
+      </div>
+
+      <div class="calendario-grade">
+        @for (dia of diasDoMes; track dia.data.getTime()) {
+          <button
+            type="button"
+            class="calendario-dia"
+            [class.fora-do-mes]="!dia.noMesAtual"
+            [class.dia-hoje]="ehHoje(dia.data)"
+            [class.dia-selecionado]="ehSelecionado(dia.data)"
+            (click)="selecionarDia(dia)"
+          >
+            <span class="calendario-dia-numero">{{ dia.data.getDate() }}</span>
+            @if (dia.eventos.length) {
+              <span class="calendario-dia-pontos">
+                @for (evento of dia.eventos.slice(0, 3); track evento.titulo) {
+                  <span class="ponto-dot ponto-{{ evento.tipo }}"></span>
+                }
+              </span>
+            }
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- Painel lateral -->
+    <div class="calendario-lateral">
+      <div class="dashboard-widget">
+        <h2>{{ diaSelecionadoLabel }}</h2>
+        @if (eventosDoDiaSelecionado.length) {
+          <div class="dashboard-list">
+            @for (evento of eventosDoDiaSelecionado; track evento.titulo) {
+              <div class="dashboard-list-item">
+                <span class="ponto-dot ponto-{{ evento.tipo }}"></span>
+                <div>
+                  <div class="item-title">{{ evento.titulo }}</div>
+                  <div class="item-meta">{{ tipoLabel[evento.tipo] }} @if (evento.horario) { · {{ evento.horario }} }</div>
+                </div>
+              </div>
+            }
+          </div>
+        } @else {
+          <p class="calendario-sem-eventos">Nenhum evento nesse dia.</p>
+        }
+      </div>
+
+      <div class="dashboard-widget">
+        <h2>Legenda</h2>
+        <div class="calendario-legenda">
+          @for (tipo of tiposLegenda; track tipo) {
+            <div class="legenda-item">
+              <span class="ponto-dot ponto-{{ tipo }}"></span>
+              <span>{{ tipoLabel[tipo] }}</span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="dashboard-widget">
+        <h2>Próximos Eventos</h2>
+        <div class="dashboard-list">
+          @for (evento of proximosEventos; track evento.titulo) {
+            <div class="dashboard-list-item">
+              <span class="ponto-dot ponto-{{ evento.tipo }}"></span>
+              <div>
+                <div class="item-title">{{ evento.titulo }}</div>
+                <div class="item-meta">{{ eventoDataLabel(evento.data) }}</div>
+              </div>
+            </div>
+          } @empty {
+            <p class="calendario-sem-eventos">Nenhum evento futuro cadastrado.</p>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</app-dashboard-shell>

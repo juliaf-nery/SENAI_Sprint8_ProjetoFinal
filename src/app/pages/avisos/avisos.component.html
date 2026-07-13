@@ -1,0 +1,59 @@
+<app-dashboard-shell
+  tituloPagina="Avisos"
+  subtitulo="Comunicados da direção e da secretaria escolar"
+  [perfilLabel]="perfilLabel"
+  [corTema]="corTema"
+>
+  @if (avisoDestaque) {
+    <section class="dashboard-section">
+      <div class="aviso-destaque aviso-destaque-{{ avisoDestaque.tipo }}">
+        <span class="aviso-destaque-tag">{{ tipoLabel[avisoDestaque.tipo] }}</span>
+        <h2>{{ avisoDestaque.titulo }}</h2>
+        <p>{{ avisoDestaque.descricao }}</p>
+        <span class="aviso-destaque-meta"><i class="bi bi-calendar3"></i>{{ dataLabel(avisoDestaque.data) }} · {{ avisoDestaque.autor }}</span>
+      </div>
+    </section>
+  }
+
+  <section class="dashboard-section">
+    <div class="dashboard-toolbar avisos-toolbar">
+      <div class="avisos-busca">
+        <i class="bi bi-search"></i>
+        <input type="text" placeholder="Pesquisar avisos..." [(ngModel)]="termoBusca" />
+      </div>
+
+      <label>
+        Tipo
+        <select [(ngModel)]="filtroAtivo">
+          @for (f of filtros; track f.valor) {
+            <option [value]="f.valor">{{ f.label }}</option>
+          }
+        </select>
+      </label>
+
+      @if (exibirBotaoNovoAviso) {
+        <button type="button" class="btn-novo-aviso">
+          <i class="bi bi-plus-lg"></i>
+          Novo Aviso
+        </button>
+      }
+    </div>
+  </section>
+
+  <section class="dashboard-section">
+    <div class="lista-avisos">
+      @for (aviso of avisosFiltrados; track aviso.id) {
+        <div class="dashboard-widget aviso-item">
+          <div class="aviso-item-topo">
+            <h3>{{ aviso.titulo }}</h3>
+            <span [class]="classeTipo(aviso.tipo)">{{ tipoLabel[aviso.tipo] }}</span>
+          </div>
+          <p>{{ aviso.descricao }}</p>
+          <span class="aviso-item-meta"><i class="bi bi-calendar3"></i>{{ dataLabel(aviso.data) }} · <i class="bi bi-person"></i>{{ aviso.autor }}</span>
+        </div>
+      } @empty {
+        <p class="avisos-vazio">Nenhum aviso encontrado.</p>
+      }
+    </div>
+  </section>
+</app-dashboard-shell>

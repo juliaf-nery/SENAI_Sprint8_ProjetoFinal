@@ -1,0 +1,20 @@
+<app-dashboard-shell
+  [tituloPagina]="titulo"
+  perfilLabel="{{ perfilLabel }}"
+  corTema="{{ corTema }}"
+>
+  <div class="em-breve">
+    <div class="em-breve-icon">
+      <i class="bi {{ icon }}"></i>
+    </div>
+    <h2>{{ titulo }}</h2>
+    <p>
+      Este módulo está em desenvolvimento. No protótipo completo do EduConecta,
+      aqui será exibida a funcionalidade de <strong>{{ titulo }}</strong>.
+    </p>
+    <a [routerLink]="inicioRoute" class="btn-voltar">
+      <i class="bi bi-arrow-left"></i>
+      Voltar ao Início
+    </a>
+  </div>
+</app-dashboard-shell>

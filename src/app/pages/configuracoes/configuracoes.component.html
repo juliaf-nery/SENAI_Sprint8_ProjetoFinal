@@ -1,0 +1,152 @@
+<app-dashboard-shell
+  tituloPagina="Configurações"
+  subtitulo="Personalize sua experiência na plataforma"
+  [perfilLabel]="perfilLabel"
+  [corTema]="corTema"
+>
+  @if (erroNotificacoes) {
+    <section class="dashboard-section">
+      <div class="config-alerta">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        Ao menos uma das notificações deve estar ativada.
+      </div>
+    </section>
+  }
+
+  @if (mensagemSalvo) {
+    <section class="dashboard-section">
+      <div class="config-sucesso">
+        <i class="bi bi-check-circle-fill"></i>
+        Configurações salvas com sucesso.
+      </div>
+    </section>
+  }
+
+  <section class="dashboard-section">
+    <div class="dashboard-widget config-card">
+      <div class="config-card-titulo">
+        <i class="bi bi-bell-fill"></i>
+        <div>
+          <h2>Notificações</h2>
+          <p>Como você deseja ser notificado</p>
+        </div>
+      </div>
+
+      <div class="config-item">
+        <div>
+          <span class="config-item-titulo">Notificações no navegador</span>
+          <span class="config-item-desc">Receber alertas push no navegador</span>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" [(ngModel)]="config.notifNavegador" />
+          <span class="toggle-trilho"></span>
+        </label>
+      </div>
+
+      <div class="config-item">
+        <div>
+          <span class="config-item-titulo">Notificações por e-mail</span>
+          <span class="config-item-desc">Receber resumos e avisos por e-mail</span>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" [(ngModel)]="config.notifEmail" />
+          <span class="toggle-trilho"></span>
+        </label>
+      </div>
+
+      <div class="config-item">
+        <div>
+          <span class="config-item-titulo">Notificações por SMS</span>
+          <span class="config-item-desc">Receber mensagens no celular</span>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" [(ngModel)]="config.notifSms" />
+          <span class="toggle-trilho"></span>
+        </label>
+      </div>
+
+      <div class="config-item">
+        <div>
+          <span class="config-item-titulo">Som de notificação</span>
+          <span class="config-item-desc">Tocar som ao receber notificações</span>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" [(ngModel)]="config.somNotificacao" />
+          <span class="toggle-trilho"></span>
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <section class="dashboard-section">
+    <div class="dashboard-widget config-card">
+      <div class="config-card-titulo">
+        <i class="bi bi-moon-stars-fill"></i>
+        <div>
+          <h2>Aparência</h2>
+          <p>Personalize o visual da plataforma</p>
+        </div>
+      </div>
+
+      <div class="config-item">
+        <div>
+          <span class="config-item-titulo">Tema escuro</span>
+          <span class="config-item-desc">Ativar modo escuro na plataforma (aplicado ao salvar)</span>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" [(ngModel)]="config.temaEscuro" />
+          <span class="toggle-trilho"></span>
+        </label>
+      </div>
+
+      <div class="config-item config-item-select">
+        <div>
+          <span class="config-item-titulo">Idioma</span>
+          <span class="config-item-desc">Selecione o idioma da plataforma</span>
+        </div>
+        <select [(ngModel)]="config.idioma">
+          <option value="pt-BR">Português (Brasil)</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <section class="dashboard-section">
+    <div class="dashboard-widget config-card">
+      <div class="config-card-titulo">
+        <i class="bi bi-universal-access-circle"></i>
+        <div>
+          <h2>Acessibilidade</h2>
+          <p>Recursos de acessibilidade</p>
+        </div>
+      </div>
+
+      <div class="config-item">
+        <div>
+          <span class="config-item-titulo">Reduzir movimento</span>
+          <span class="config-item-desc">Minimizar animações e transições</span>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" [(ngModel)]="config.reduzirMovimento" />
+          <span class="toggle-trilho"></span>
+        </label>
+      </div>
+
+      <div class="config-item">
+        <div>
+          <span class="config-item-titulo">Alto contraste</span>
+          <span class="config-item-desc">Aumentar o contraste das cores</span>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" [(ngModel)]="config.altoContraste" />
+          <span class="toggle-trilho"></span>
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <section class="dashboard-section config-acoes">
+    <button type="button" class="btn-cancelar" (click)="cancelar()">Cancelar</button>
+    <button type="button" class="btn-salvar" (click)="salvarConfiguracoes()">Salvar Configurações</button>
+  </section>
+</app-dashboard-shell>

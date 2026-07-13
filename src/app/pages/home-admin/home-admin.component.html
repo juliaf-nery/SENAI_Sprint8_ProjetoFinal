@@ -1,1 +1,80 @@
-<p>home-admin works!</p>
+<app-dashboard-shell
+  tituloPagina="Painel do Administrador Estadual"
+  subtitulo="Secretaria Estadual de Educação"
+  perfilLabel="Administrador Estadual"
+  corTema="#0057A8"
+>
+  <!-- Filtros -->
+  <div class="dashboard-toolbar">
+    <label>
+      Escola
+      <select>
+        <option>Todas as escolas da rede</option>
+        <option>Colégio Estadual Modelo da Bahia</option>
+        <option>Colégio Estadual do Litoral Norte</option>
+        <option>Escola Estadual Rio de Contas</option>
+      </select>
+    </label>
+
+    <label>
+      Período
+      <select>
+        <option>Ano letivo de 2026</option>
+        <option>Ano letivo de 2025</option>
+        <option>Último trimestre</option>
+      </select>
+    </label>
+  </div>
+
+  <!-- KPIs -->
+  <section class="dashboard-section">
+    <div class="dashboard-grid kpi-grid">
+      <app-dashboard-card icon="bi-building" titulo="Escolas" valor="312" descricao="Unidades ativas na rede" cor="azul"></app-dashboard-card>
+      <app-dashboard-card icon="bi-people-fill" titulo="Alunos" valor="184.502" descricao="Matriculados no estado" cor="verde"></app-dashboard-card>
+      <app-dashboard-card icon="bi-person-workspace" titulo="Professores" valor="12.340" descricao="Em regência de turma" cor="azul-escuro"></app-dashboard-card>
+      <app-dashboard-card icon="bi-person-badge" titulo="Funcionários" valor="5.128" descricao="Corpo técnico-administrativo" cor="amarelo"></app-dashboard-card>
+    </div>
+  </section>
+
+  <!-- Gestão e Indicadores -->
+  <section class="dashboard-section">
+    <div class="dashboard-section-header">
+      <h2>Gestão e Indicadores</h2>
+      <span>Acesso rápido aos módulos de gestão estadual</span>
+    </div>
+    <div class="dashboard-grid">
+      <app-dashboard-card icon="bi-graph-up-arrow" titulo="Indicadores" descricao="Desempenho da rede estadual" cor="azul"></app-dashboard-card>
+      <app-dashboard-card icon="bi-clipboard2-check" titulo="Pesquisas" descricao="Satisfação da comunidade escolar" cor="verde"></app-dashboard-card>
+      <app-dashboard-card icon="bi-megaphone" titulo="Ouvidorias" descricao="18 protocolos em análise" cor="vermelho"></app-dashboard-card>
+      <app-dashboard-card icon="bi-kanban" titulo="Plano de Ação" descricao="Acompanhamento de metas" cor="azul-escuro"></app-dashboard-card>
+      <app-dashboard-card icon="bi-file-earmark-text" titulo="Relatórios" descricao="Exportação em PDF por filtro" cor="amarelo"></app-dashboard-card>
+    </div>
+  </section>
+
+  <!-- Gráficos e Mapa -->
+  <section class="dashboard-section">
+    <div class="dashboard-widgets-row">
+      <div class="dashboard-widget">
+        <h2>Evolução de Matrículas</h2>
+        <p>Total de alunos matriculados na rede estadual (em milhares)</p>
+        <div class="mini-bar-chart">
+          @for (item of indicadoresGraficoAlunos; track item.label) {
+            <div class="bar-item">
+              <div class="bar" [style.height.%]="alturaBarra(item.valor)"></div>
+              <span class="bar-label">{{ item.label }}</span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="dashboard-widget">
+        <h2>Mapa do Estado</h2>
+        <p>Distribuição das escolas por região da Bahia</p>
+        <div class="map-placeholder">
+          <i class="bi bi-geo-alt-fill"></i>
+          <span>Visualização geográfica das 312 escolas estaduais em breve nesta área</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</app-dashboard-shell>

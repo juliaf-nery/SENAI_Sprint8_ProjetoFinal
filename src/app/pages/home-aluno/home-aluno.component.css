@@ -1,0 +1,163 @@
+.slide-categoria {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    opacity: 0.85;
+    margin-bottom: 4px;
+}
+
+.gradiente-projeto {
+    background: linear-gradient(135deg, #0057A8, #003E7E);
+}
+
+.gradiente-evento {
+    background: linear-gradient(135deg, #2E7D32, #1b5e20);
+}
+
+.gradiente-aviso {
+    background: linear-gradient(135deg, #C62828, #8e1c1c);
+}
+
+/* Banner de boas-vindas */
+.boas-vindas-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: linear-gradient(120deg, #0057A8, #0f4094);
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 22px 26px;
+}
+
+.boas-vindas-selo {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    opacity: 0.85;
+    margin-bottom: 2px;
+}
+
+.boas-vindas-banner h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.boas-vindas-banner p {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    margin-top: 2px;
+}
+
+.boas-vindas-icone {
+    font-size: 2.2rem;
+    opacity: 0.9;
+}
+
+.atalhos-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+}
+
+.atalhos-grid app-dashboard-card {
+    text-align: center;
+}
+
+.notas-lista {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.nota-linha {
+    display: grid;
+    grid-template-columns: 90px 1fr 34px;
+    align-items: center;
+    gap: 10px;
+}
+
+.nota-disciplina {
+    font-size: 0.78rem;
+    color: #475569;
+    font-weight: 600;
+}
+
+.nota-barra-fundo {
+    height: 10px;
+    border-radius: 999px;
+    background: #eef1f6;
+    overflow: hidden;
+}
+
+.nota-barra-preenchida {
+    height: 100%;
+    border-radius: 999px;
+    background: #2E7D32;
+    transition: width 0.3s ease;
+}
+
+.nota-barra-preenchida.nota-baixa {
+    background: #C62828;
+}
+
+.nota-valor {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #0f172a;
+    text-align: right;
+}
+
+.radar-chart {
+    width: 100%;
+    max-width: 260px;
+    display: block;
+    margin: 0 auto;
+}
+
+.radar-anel {
+    fill: none;
+    stroke: #e5e9f0;
+    stroke-width: 1;
+}
+
+.radar-area {
+    fill: rgba(0, 87, 168, 0.25);
+    stroke: #0057A8;
+    stroke-width: 2;
+}
+
+.radar-label {
+    font-size: 7px;
+    fill: #64748b;
+    font-weight: 600;
+}
+
+.linha-chart {
+    width: 100%;
+    display: block;
+}
+
+.linha-evolucao {
+    fill: none;
+    stroke: #0057A8;
+    stroke-width: 1;
+}
+
+.linha-ponto {
+    fill: #0057A8;
+    stroke: #ffffff;
+    stroke-width: 2;
+}
+
+.linha-label-x {
+    font-size: 9px;
+    fill: #64748b;
+}
+
+.linha-label-valor {
+    font-size: 9px;
+    font-weight: 700;
+    fill: #0057A8;
+}

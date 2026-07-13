@@ -1,0 +1,156 @@
+<app-dashboard-shell
+  tituloPagina="Ouvidoria Escolar"
+  subtitulo="Canal seguro e sigiloso para comunicação com a gestão escolar"
+  [perfilLabel]="perfilLabel"
+  [corTema]="corTema"
+>
+  <section class="dashboard-section">
+    <div class="ouvidoria-tabs">
+      <button type="button" class="ouvidoria-tab" [class.active]="abaAtiva === 'nova'" (click)="irParaAba('nova')">Nova Manifestação</button>
+      <button type="button" class="ouvidoria-tab" [class.active]="abaAtiva === 'minhas'" (click)="irParaAba('minhas')">Minhas Manifestações</button>
+    </div>
+  </section>
+
+  @if (abaAtiva === 'nova') {
+    <section class="dashboard-section">
+      <div class="dashboard-widget">
+        <label class="campo-label">Categorias * <span class="campo-dica">(selecione uma ou mais)</span></label>
+        <div class="categorias-grid">
+          @for (c of categorias; track c.label) {
+            <button
+              type="button"
+              class="categoria-btn"
+              [class.active]="categoriaEstaSelecionada(c.label)"
+              (click)="alternarCategoria(c.label)"
+            >
+              @if (categoriaEstaSelecionada(c.label)) {
+                <i class="bi bi-check-square-fill"></i>
+              } @else {
+                <i class="bi {{ c.icon }}"></i>
+              }
+              {{ c.label }}
+            </button>
+          }
+        </div>
+
+        <label class="campo-label" for="ouv-titulo">Título *</label>
+        <input id="ouv-titulo" type="text" placeholder="Descreva brevemente" [(ngModel)]="titulo" />
+
+        <label class="campo-label" for="ouv-descricao">Descrição Detalhada *</label>
+        <textarea id="ouv-descricao" rows="5" placeholder="Descreva com detalhes sua manifestação..." [(ngModel)]="descricao"></textarea>
+
+        <button type="button" class="btn-enviar" [disabled]="!formularioValido" (click)="enviarManifestacao()">
+          <i class="bi bi-send-fill"></i>
+          Enviar Manifestação
+        </button>
+
+        <p class="ouvidoria-nota"><i class="bi bi-shield-lock"></i>Sua identidade é sigilosa conforme a LGPD.</p>
+      </div>
+    </section>
+  } @else {
+    <section class="dashboard-section">
+      <div class="lista-manifestacoes">
+        @for (m of manifestacoes; track m.protocolo) {
+          <div class="dashboard-widget manifestacao-item" (click)="abrirDetalhe(m)">
+            <div class="manifestacao-topo">
+              <div>
+                <h3>{{ m.titulo }}</h3>
+                <span class="manifestacao-meta">
+                  {{ m.protocolo }} · {{ m.data }}
+                  @for (cat of m.categorias; track cat) {
+                    <span class="chip-categoria">{{ cat }}</span>
+                  }
+                </span>
+              </div>
+              <span [class]="classeStatus(m.statusAtual)">{{ statusLabelBadge(m.statusAtual) }}</span>
+            </div>
+
+            <div class="manifestacao-timeline">
+              @for (etapa of m.etapas; track etapa.status) {
+                <div class="timeline-etapa" [class.concluida]="etapa.concluida">
+                  <i class="bi" [class.bi-check-circle-fill]="etapa.concluida" [class.bi-circle]="!etapa.concluida"></i>
+                  <div>
+                    <span class="timeline-label">{{ etapa.label }}</span>
+                    @if (etapa.data) {
+                      <span class="timeline-data">{{ etapa.data }}</span>
+                    }
+                  </div>
+                </div>
+              }
+            </div>
+
+            <span class="manifestacao-ver-mais"><i class="bi bi-eye"></i>Ver detalhes e resposta</span>
+          </div>
+        } @empty {
+          <p class="ouvidoria-vazio">Você ainda não enviou manifestações.</p>
+        }
+      </div>
+    </section>
+  }
+
+  @if (mostrarPopupEnviado) {
+    <div class="modal-backdrop" (click)="fecharPopup()">
+      <div class="modal-confirmacao" (click)="$event.stopPropagation()">
+        <i class="bi bi-check-circle-fill"></i>
+        <h3>Manifestação enviada</h3>
+        <p>Sua manifestação foi registrada com sigilo. Acompanhe o andamento em "Minhas Manifestações".</p>
+        <button type="button" (click)="fecharPopup()">Fechar</button>
+      </div>
+    </div>
+  }
+
+  @if (manifestacaoSelecionada) {
+    <div class="modal-backdrop" (click)="fecharDetalhe()">
+      <div class="modal-detalhe" (click)="$event.stopPropagation()">
+        <button type="button" class="modal-detalhe-fechar" (click)="fecharDetalhe()" aria-label="Fechar">
+          <i class="bi bi-x-lg"></i>
+        </button>
+
+        <div class="detalhe-topo">
+          <h3>{{ manifestacaoSelecionada.titulo }}</h3>
+          <span [class]="classeStatus(manifestacaoSelecionada.statusAtual)">{{ statusLabelBadge(manifestacaoSelecionada.statusAtual) }}</span>
+        </div>
+        <span class="manifestacao-meta">
+          {{ manifestacaoSelecionada.protocolo }} · {{ manifestacaoSelecionada.data }}
+          @for (cat of manifestacaoSelecionada.categorias; track cat) {
+            <span class="chip-categoria">{{ cat }}</span>
+          }
+        </span>
+
+        <div class="detalhe-bloco">
+          <span class="detalhe-rotulo"><i class="bi bi-chat-left-text"></i>O que você escreveu</span>
+          <p class="detalhe-texto">{{ manifestacaoSelecionada.descricao }}</p>
+        </div>
+
+        <div class="detalhe-bloco">
+          <span class="detalhe-rotulo"><i class="bi bi-signpost-split"></i>Andamento</span>
+          <div class="manifestacao-timeline">
+            @for (etapa of manifestacaoSelecionada.etapas; track etapa.status) {
+              <div class="timeline-etapa" [class.concluida]="etapa.concluida">
+                <i class="bi" [class.bi-check-circle-fill]="etapa.concluida" [class.bi-circle]="!etapa.concluida"></i>
+                <div>
+                  <span class="timeline-label">{{ etapa.label }}</span>
+                  @if (etapa.data) {
+                    <span class="timeline-data">{{ etapa.data }}</span>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+
+        <div class="detalhe-bloco">
+          <span class="detalhe-rotulo"><i class="bi bi-reply-fill"></i>Resposta da escola</span>
+          @if (manifestacaoSelecionada.resposta) {
+            <div class="detalhe-resposta">
+              <p class="detalhe-texto">{{ manifestacaoSelecionada.resposta.texto }}</p>
+              <span class="detalhe-resposta-meta">{{ manifestacaoSelecionada.resposta.autor }} · {{ manifestacaoSelecionada.resposta.data }}</span>
+            </div>
+          } @else {
+            <p class="detalhe-aguardando"><i class="bi bi-hourglass-split"></i>Ainda sem resposta. Você será notificado assim que a escola responder.</p>
+          }
+        </div>
+      </div>
+    </div>
+  }
+</app-dashboard-shell>

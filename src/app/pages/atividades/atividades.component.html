@@ -1,0 +1,84 @@
+<app-dashboard-shell
+  tituloPagina="Atividades"
+  subtitulo="Gerencie provas, trabalhos e exercícios"
+  [perfilLabel]="perfilLabel"
+  [corTema]="corTema"
+>
+  <!-- Cabeçalho com botão de nova atividade (somente professor) -->
+  @if (!ehAluno) {
+    <section class="dashboard-section atividades-topo">
+      <button type="button" class="btn-nova-atividade">
+        <i class="bi bi-plus-lg"></i>
+        Nova Atividade
+      </button>
+    </section>
+  }
+
+  <!-- Indicadores -->
+  <section class="dashboard-section">
+    <div class="dashboard-grid kpi-grid atividades-kpis">
+      <app-dashboard-card icon="bi-journal-text" titulo="Abertas" [valor]="contarPorStatus('aberta')" cor="azul"></app-dashboard-card>
+      <app-dashboard-card icon="bi-calendar2-week" titulo="Agendadas" [valor]="contarPorStatus('agendada')" cor="amarelo"></app-dashboard-card>
+      <app-dashboard-card icon="bi-send-check" titulo="Enviadas" [valor]="contarPorStatus('enviada')" cor="verde"></app-dashboard-card>
+      <app-dashboard-card icon="bi-pencil-square" titulo="Para Corrigir" [valor]="contarPorStatus('paraCorrigir')" cor="vermelho"></app-dashboard-card>
+      <app-dashboard-card icon="bi-journal-check" titulo="Total" [valor]="total" cor="azul-escuro"></app-dashboard-card>
+    </div>
+  </section>
+
+  <!-- Busca e filtro -->
+  <section class="dashboard-section">
+    <div class="atividades-filtros">
+      <div class="atividades-busca">
+        <i class="bi bi-search"></i>
+        <input type="text" placeholder="Pesquisar atividades..." [(ngModel)]="termoBusca" />
+      </div>
+
+      <select class="atividades-select" [(ngModel)]="filtroAtivo">
+        @for (opcao of filtros; track opcao.valor) {
+          <option [value]="opcao.valor">{{ opcao.label }}</option>
+        }
+      </select>
+    </div>
+  </section>
+
+  <!-- Lista de atividades -->
+  <section class="dashboard-section">
+    <div class="atividades-lista">
+      @for (atividade of atividadesFiltradas; track atividade.titulo) {
+        <div class="atividade-item">
+          <div class="atividade-icone">
+            <i class="bi bi-journal-text"></i>
+          </div>
+
+          <div class="atividade-corpo">
+            <div class="atividade-linha-topo">
+              <h3>{{ atividade.titulo }}</h3>
+              <span class="badge-status" [class]="statusClasse[atividade.status]">{{ statusLabel[atividade.status] }}</span>
+            </div>
+            <p class="atividade-descricao">{{ atividade.descricao }}</p>
+            <div class="atividade-meta">
+              <span><i class="bi bi-book"></i>{{ atividade.disciplina }}</span>
+              <span><i class="bi bi-people"></i>{{ atividade.turma }}</span>
+              <span><i class="bi bi-calendar3"></i>{{ atividade.data }}</span>
+              @if (atividade.nota !== undefined) {
+                <span class="atividade-nota"><i class="bi bi-star-fill"></i>Nota: {{ atividade.nota.toFixed(1) }}</span>
+              }
+            </div>
+
+            @if (atividade.progresso !== undefined) {
+              <div class="atividade-progresso-fundo">
+                <div
+                  class="atividade-progresso-preenchido"
+                  [class.progresso-completo]="atividade.progresso === 100"
+                  [style.width.%]="atividade.progresso"
+                ></div>
+              </div>
+            }
+          </div>
+        </div>
+      } @empty {
+        <p class="atividades-vazio">Nenhuma atividade encontrada para esse filtro.</p>
+      }
+    </div>
+  </section>
+</app-dashboard-shell>

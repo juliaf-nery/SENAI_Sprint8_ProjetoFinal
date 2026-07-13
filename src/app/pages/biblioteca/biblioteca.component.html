@@ -1,0 +1,56 @@
+<app-dashboard-shell
+  tituloPagina="Biblioteca Digital"
+  subtitulo="Acesse livros, apostilas, vídeos e slides"
+  [perfilLabel]="perfilLabel"
+  [corTema]="corTema"
+>
+  <section class="dashboard-section">
+    <div class="biblioteca-busca">
+      <i class="bi bi-search"></i>
+      <input type="text" placeholder="Pesquisar por título ou autor..." [(ngModel)]="termoBusca" />
+    </div>
+
+    <div class="biblioteca-tabs">
+      @for (d of disciplinas; track d) {
+        <button type="button" class="tab-btn" [class.active]="disciplinaAtiva === d" (click)="selecionarDisciplina(d)">
+          {{ d }}
+        </button>
+      }
+    </div>
+  </section>
+
+  <section class="dashboard-section">
+    <div class="biblioteca-grid">
+      @for (m of materiaisFiltrados; track m.titulo) {
+        <div class="material-card material-{{ m.tipo }}">
+          <span class="material-tag">{{ tipoLabel[m.tipo] }}</span>
+          <div class="material-icone"><i class="bi {{ m.icon }}"></i></div>
+          <div class="material-overlay">
+            <button type="button" class="btn-abrir" (click)="abrirMaterial()">Abrir</button>
+          </div>
+          <div class="material-info">
+            <h3>{{ m.titulo }}</h3>
+            <span>{{ m.professor }}</span>
+            <div class="material-meta">
+              <span><i class="bi bi-journal-bookmark"></i>{{ m.disciplina }}</span>
+              <span>{{ m.tamanhoOuDuracao }}</span>
+            </div>
+          </div>
+        </div>
+      } @empty {
+        <p class="biblioteca-vazio">Nenhum material encontrado.</p>
+      }
+    </div>
+  </section>
+
+  @if (mostrarModalEmBreve) {
+    <div class="modal-backdrop" (click)="fecharModal()">
+      <div class="modal-em-breve" (click)="$event.stopPropagation()">
+        <i class="bi bi-hourglass-split"></i>
+        <h3>Em breve</h3>
+        <p>Esse material estará disponível em breve na plataforma.</p>
+        <button type="button" (click)="fecharModal()">Fechar</button>
+      </div>
+    </div>
+  }
+</app-dashboard-shell>

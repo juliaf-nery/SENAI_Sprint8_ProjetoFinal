@@ -1,0 +1,85 @@
+<app-dashboard-shell
+  tituloPagina="Boletim Escolar"
+  [subtitulo]="nomeAluno + ' · 3º Ano A · ' + anoLetivo"
+  [perfilLabel]="perfilLabel"
+  [corTema]="corTema"
+>
+
+<section class="dashboard-section">
+    <div class="boletim-kpis">
+      <div class="boletim-kpi">
+        <span class="boletim-kpi-valor">{{ mediaGeral }}</span>
+        <span class="boletim-kpi-label">Média Geral</span>
+      </div>
+      <div class="boletim-kpi">
+        <span class="boletim-kpi-valor">{{ frequenciaGeral }}%</span>
+        <span class="boletim-kpi-label">Frequência</span>
+      </div>
+      <div class="boletim-kpi">
+        <span class="boletim-kpi-valor">{{ bimestreAtual }}</span>
+        <span class="boletim-kpi-label">Bimestre Atual</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Médias por disciplina -->
+  <section class="dashboard-section">
+    <div class="dashboard-widget">
+      <h2>Médias por Disciplina</h2>
+      <div class="mini-bar-chart boletim-bar-chart">
+        @for (item of notas; track item.disciplina) {
+          <div class="bar-item">
+            @if (item.media === maiorMedia) {
+              <span class="bar-tooltip">Média: {{ item.media.toFixed(2) }}</span>
+            }
+            <div
+              class="bar"
+              [class.bar-alerta]="item.situacao === 'recuperacao'"
+              [style.height.%]="alturaBarra(item.media)"
+            ></div>
+            <span class="bar-label">{{ item.disciplina }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="dashboard-section">
+    <div class="dashboard-widget">
+      <h2>Notas Detalhadas</h2>
+      <div class="boletim-tabela-wrap">
+        <table class="boletim-tabela">
+          <thead>
+            <tr>
+              <th>Disciplina</th>
+              <th>1º Uni</th>
+              <th>2º Uni</th>
+              <th>3º Uni</th>
+              <th>Média</th>
+              <th>Freq.</th>
+              <th>Situação</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of notas; track item.disciplina) {
+              <tr>
+                <td>
+                  <span class="boletim-disciplina-nome">{{ item.disciplina }}</span>
+                  <span class="boletim-disciplina-prof">{{ item.professor }}</span>
+                </td>
+                <td>{{ item.bim1 ?? '—' }}</td>
+                <td>{{ item.bim2 ?? '—' }}</td>
+                <td>{{ item.bim3 ?? '—' }}</td>
+                <td class="boletim-media">{{ item.media.toFixed(1) }}</td>
+                <td>{{ item.frequencia }}%</td>
+                <td>
+                  <span [class]="situacaoClasse(item.situacao)">{{ situacaoLabel(item.situacao) }}</span>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</app-dashboard-shell>

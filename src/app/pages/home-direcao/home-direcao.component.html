@@ -1,1 +1,79 @@
-<p>home-direcao works!</p>
+<app-dashboard-shell
+  tituloPagina="Painel da Direção Escolar"
+  subtitulo="Colégio Estadual Modelo da Bahia"
+  perfilLabel="Direção Escolar"
+  corTema="#003E7E"
+>
+  <!-- KPIs -->
+  <section class="dashboard-section">
+    <div class="dashboard-grid kpi-grid">
+      <app-dashboard-card icon="bi-people-fill" titulo="Alunos" valor="842" descricao="Matriculados nesta unidade" cor="azul"></app-dashboard-card>
+      <app-dashboard-card icon="bi-person-workspace" titulo="Professores" valor="56" descricao="Em regência de turma" cor="azul-escuro"></app-dashboard-card>
+    </div>
+  </section>
+
+  <!-- Módulos da escola -->
+  <section class="dashboard-section">
+    <div class="dashboard-section-header">
+      <h2>Gestão Escolar</h2>
+      <span>Acesso rápido aos módulos da unidade</span>
+    </div>
+    <div class="dashboard-grid">
+      <app-dashboard-card icon="bi-easel2" titulo="Projetos" descricao="7 projetos em andamento" cor="verde"></app-dashboard-card>
+      <app-dashboard-card icon="bi-calendar-event" titulo="Eventos" descricao="Próximo: Feira de Ciências" cor="amarelo"></app-dashboard-card>
+      <app-dashboard-card icon="bi-megaphone" titulo="Avisos" descricao="3 comunicados publicados" cor="vermelho"></app-dashboard-card>
+      <app-dashboard-card icon="bi-calendar3" titulo="Calendário" descricao="Eventos e datas letivas" cor="azul"></app-dashboard-card>
+      <app-dashboard-card icon="bi-exclamation-triangle" titulo="Problemas" descricao="2 ocorrências em aberto" cor="vermelho"></app-dashboard-card>
+      <app-dashboard-card icon="bi-kanban" titulo="Plano de Ação" descricao="Acompanhamento de metas" cor="azul-escuro"></app-dashboard-card>
+    </div>
+  </section>
+
+  <!-- Gráficos e Indicadores -->
+  <section class="dashboard-section">
+    <div class="dashboard-widgets-row">
+      <div class="dashboard-widget">
+        <h2>Frequência Média</h2>
+        <p>Percentual de presença dos alunos nos últimos meses</p>
+        <div class="mini-bar-chart">
+          @for (item of frequenciaMensal; track item.label) {
+            <div class="bar-item">
+              <div class="bar" [style.height.%]="alturaBarra(item.valor)"></div>
+              <span class="bar-label">{{ item.label }}</span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="dashboard-widget">
+        <h2>Indicadores da Escola</h2>
+        <p>Resumo do desempenho da unidade neste ano letivo</p>
+        <div class="dashboard-list">
+          <div class="dashboard-list-item">
+            <i class="bi bi-graph-up-arrow"></i>
+            <div>
+              <div class="item-title">Taxa de aprovação</div>
+              <div class="item-meta">Ano letivo de 2026</div>
+            </div>
+            <span class="badge-pill">92%</span>
+          </div>
+          <div class="dashboard-list-item">
+            <i class="bi bi-person-dash"></i>
+            <div>
+              <div class="item-title">Taxa de evasão</div>
+              <div class="item-meta">Ano letivo de 2026</div>
+            </div>
+            <span class="badge-pill atencao">3%</span>
+          </div>
+          <div class="dashboard-list-item">
+            <i class="bi bi-calendar-check"></i>
+            <div>
+              <div class="item-title">Frequência média</div>
+              <div class="item-meta">Últimos 30 dias</div>
+            </div>
+            <span class="badge-pill">95%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</app-dashboard-shell>

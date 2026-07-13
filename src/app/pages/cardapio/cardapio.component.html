@@ -1,0 +1,44 @@
+<app-dashboard-shell
+  tituloPagina="Cardápio Semanal"
+  subtitulo="Café da manhã e lanche da tarde da semana"
+  [perfilLabel]="perfilLabel"
+  [corTema]="corTema"
+>
+  <section class="dashboard-section">
+    <div class="dashboard-widget cardapio-tabela-card">
+      <div class="cardapio-tabela-wrapper">
+        <table class="cardapio-tabela">
+          <thead>
+            <tr [style.background]="corTema">
+              <th class="coluna-hora"><i class="bi bi-clock"></i>Hora</th>
+              @for (dia of diasSemana; track dia) {
+                <th>{{ dia }}</th>
+              }
+            </tr>
+          </thead>
+          <tbody>
+            @for (linha of linhasTabela; track linha.nome) {
+              <tr>
+                <td class="coluna-hora">
+                  <i class="bi {{ linha.icon }}"></i>
+                  <div>
+                    <span class="linha-nome">{{ linha.nome }}</span>
+                    <span class="linha-horario">{{ linha.horario }}</span>
+                  </div>
+                </td>
+                @for (item of linha.itensPorDia; track $index) {
+                  <td>{{ item }}</td>
+                }
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p class="cardapio-aviso">
+      <i class="bi bi-info-circle"></i>
+      Cardápio sujeito a alterações conforme disponibilidade de ingredientes.
+    </p>
+  </section>
+</app-dashboard-shell>

@@ -1,0 +1,227 @@
+.perfil-toast {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #eaf2fb;
+    color: #0057A8;
+    border: 1px solid #cfe0f5;
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-size: 0.82rem;
+    margin-bottom: 18px;
+}
+
+.perfil-card-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    background: #ffffff;
+    border: 1px solid #eef1f6;
+    border-radius: 16px;
+    padding: 22px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+.perfil-identidade {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.perfil-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #eaf2fb;
+    color: #0057A8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+.perfil-identidade h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.perfil-identidade p {
+    font-size: 0.82rem;
+    color: #64748b;
+    margin-top: 2px;
+}
+
+.perfil-badges {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.perfil-badge {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: #ffffff;
+    padding: 3px 10px;
+    border-radius: 999px;
+}
+
+.perfil-badge-secundario {
+    background: #eaf5eb !important;
+    color: #2E7D32 !important;
+}
+
+.btn-editar-perfil {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #0057A8;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-editar-perfil:hover {
+    background: #003E7E;
+}
+
+.perfil-tabs {
+    display: flex;
+    gap: 24px;
+    border-bottom: 1px solid #e5e9f0;
+    margin-bottom: 20px;
+}
+
+.perfil-tab {
+    background: none;
+    border: none;
+    padding: 10px 2px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+}
+
+.perfil-tab.active {
+    color: #0057A8;
+    border-bottom-color: #0057A8;
+}
+
+.perfil-conteudo {
+    background: #ffffff;
+    border: 1px solid #eef1f6;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+.perfil-form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.perfil-campo-largo {
+    grid-column: 1 / -1;
+}
+
+.perfil-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.perfil-campo span {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #64748b;
+}
+
+.perfil-campo input {
+    font-family: inherit;
+    font-size: 0.88rem;
+    color: #0f172a;
+    border: 1px solid #e5e9f0;
+    border-radius: 10px;
+    padding: 10px 12px;
+    background: #f8fafc;
+}
+
+.perfil-campo input:disabled {
+    color: #334155;
+    background: #f1f5f9;
+    cursor: default;
+}
+
+.perfil-campo input:not(:disabled) {
+    background: #ffffff;
+    border-color: #0057A8;
+}
+
+.perfil-form-acoes {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+.btn-cancelar {
+    background: #f1f5f9;
+    color: #334155;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-salvar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #0057A8;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-salvar:hover {
+    background: #003E7E;
+}
+
+.perfil-form-seguranca {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 360px;
+}
+
+.perfil-form-seguranca h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.perfil-form-seguranca .btn-salvar {
+    align-self: flex-start;
+}

@@ -4,6 +4,13 @@ import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { UserRole } from '../pages/types/user';
 
+/**
+ * Guard aplicado às rotas de Home por perfil.
+ * 1) Bloqueia acesso se não houver sessão (token) válida.
+ * 2) Se a rota declarar `data: { roles: [...] }`, garante que o perfil do
+ *    usuário logado bate com o perfil esperado pela rota; caso contrário,
+ *    redireciona automaticamente para a Home correta do usuário.
+ */
 export const homeGuard: CanActivateFn = (route) => {
   const router = inject(Router);
   const platformId = inject(PLATFORM_ID);

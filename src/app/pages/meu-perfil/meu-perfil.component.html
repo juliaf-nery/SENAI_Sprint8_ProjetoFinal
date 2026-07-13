@@ -1,0 +1,144 @@
+<app-dashboard-shell
+  tituloPagina="Meu Perfil"
+  [perfilLabel]="perfilLabel"
+  [corTema]="corTema"
+>
+  @if (mensagemSalvo) {
+    <div class="perfil-toast">
+      <i class="bi bi-info-circle-fill"></i>
+      Este é um protótipo de demonstração: as alterações não são salvas de fato.
+    </div>
+  }
+
+  <div class="perfil-card-topo">
+    <div class="perfil-identidade">
+      <div class="perfil-avatar">
+        <i class="bi bi-person-fill"></i>
+      </div>
+      <div>
+        <h2>{{ dadosOriginais.nomeCompleto }}</h2>
+        <p>{{ perfilLabel }} · {{ dadosOriginais.escola }}</p>
+        <div class="perfil-badges">
+          <span class="perfil-badge" [style.background]="corTema">{{ perfilLabel }}</span>
+          @if (exibirTurma) {
+            <span class="perfil-badge perfil-badge-secundario">{{ dadosOriginais.turma }}</span>
+          }
+        </div>
+      </div>
+    </div>
+
+    @if (!modoEdicao) {
+      <button type="button" class="btn-editar-perfil" (click)="editarPerfil()">
+        <i class="bi bi-pencil-fill"></i>
+        Editar Perfil
+      </button>
+    }
+  </div>
+
+  <div class="perfil-tabs">
+    <button
+      type="button"
+      class="perfil-tab"
+      [class.active]="abaAtiva === 'dados'"
+      (click)="selecionarAba('dados')"
+    >
+      Dados Pessoais
+    </button>
+    <button
+      type="button"
+      class="perfil-tab"
+      [class.active]="abaAtiva === 'seguranca'"
+      (click)="selecionarAba('seguranca')"
+    >
+      Segurança
+    </button>
+  </div>
+
+  @if (abaAtiva === 'dados') {
+    <div class="perfil-conteudo">
+      <form class="perfil-form-grid" (ngSubmit)="salvarAlteracoes()">
+        <label class="perfil-campo">
+          <span>Nome Completo</span>
+          <input type="text" name="nomeCompleto" [(ngModel)]="dados.nomeCompleto" [disabled]="!modoEdicao" />
+        </label>
+
+        <label class="perfil-campo">
+          <span>Escola</span>
+          <input type="text" name="escola" [(ngModel)]="dados.escola" [disabled]="!modoEdicao" />
+        </label>
+
+        <label class="perfil-campo">
+          <span>Cargo / Função</span>
+          <input type="text" name="cargo" [(ngModel)]="dados.cargo" [disabled]="!modoEdicao" />
+        </label>
+
+        @if (exibirTurma) {
+          <label class="perfil-campo">
+            <span>Turma</span>
+            <input type="text" name="turma" [(ngModel)]="dados.turma" [disabled]="!modoEdicao" />
+          </label>
+        }
+
+        <label class="perfil-campo">
+          <span>E-mail</span>
+          <input type="email" name="email" [(ngModel)]="dados.email" [disabled]="!modoEdicao" />
+        </label>
+
+        <label class="perfil-campo">
+          <span>CPF</span>
+          <input type="text" name="cpf" [(ngModel)]="dados.cpf" [disabled]="!modoEdicao" />
+        </label>
+
+        <label class="perfil-campo">
+          <span>Telefone</span>
+          <input type="text" name="telefone" [(ngModel)]="dados.telefone" [disabled]="!modoEdicao" />
+        </label>
+
+        <label class="perfil-campo">
+          <span>Data de Nascimento</span>
+          <input type="text" name="dataNascimento" [(ngModel)]="dados.dataNascimento" [disabled]="!modoEdicao" />
+        </label>
+
+        <label class="perfil-campo perfil-campo-largo">
+          <span>Endereço</span>
+          <input type="text" name="endereco" [(ngModel)]="dados.endereco" [disabled]="!modoEdicao" />
+        </label>
+
+        @if (modoEdicao) {
+          <div class="perfil-form-acoes">
+            <button type="button" class="btn-cancelar" (click)="cancelarEdicao()">Cancelar</button>
+            <button type="submit" class="btn-salvar">Salvar alterações</button>
+          </div>
+        }
+      </form>
+    </div>
+  }
+
+  @if (abaAtiva === 'seguranca') {
+    <div class="perfil-conteudo">
+      <form class="perfil-form-seguranca" (ngSubmit)="atualizarSenha()">
+        <h3>Alterar Senha</h3>
+
+        <label class="perfil-campo">
+          <span>Senha Atual</span>
+          <input type="password" name="senhaAtual" [(ngModel)]="senhaAtual" placeholder="••••••••" />
+        </label>
+
+        <label class="perfil-campo">
+          <span>Nova Senha</span>
+          <input type="password" name="novaSenha" [(ngModel)]="novaSenha" placeholder="••••••••" />
+        </label>
+
+        <label class="perfil-campo">
+          <span>Confirmar Nova Senha</span>
+          <input type="password" name="confirmarSenha" [(ngModel)]="confirmarSenha" placeholder="••••••••" />
+        </label>
+
+        <button type="submit" class="btn-salvar">
+          <i class="bi bi-shield-lock-fill"></i>
+          Atualizar Senha
+        </button>
+      </form>
+    </div>
+  }
+</app-dashboard-shell>

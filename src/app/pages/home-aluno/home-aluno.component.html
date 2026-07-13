@@ -1,1 +1,126 @@
-<p>home-aluno works!</p>
+<app-dashboard-shell
+  tituloPagina="Painel do Aluno"
+  subtitulo="Colégio Estadual Modelo da Bahia · 3º Ano A"
+  perfilLabel="Aluno"
+  corTema="#F9A825"
+>
+
+  <section class="dashboard-section">
+    <div class="boas-vindas-banner">
+      <div>
+        <span class="boas-vindas-selo">Bem-vindo(a) de volta!</span>
+        <h2>{{ primeiroNome }}</h2>
+        <p>Turma 3º Ano A · Colégio Estadual Modelo da Bahia</p>
+      </div>
+      <i class="bi bi-emoji-sunglasses-fill boas-vindas-icone"></i>
+    </div>
+  </section>
+
+  <section class="dashboard-section">
+    <div class="dashboard-grid kpi-grid">
+      <app-dashboard-card icon="bi-graph-up-arrow" titulo="Minha Média" valor="7,9" descricao="2º Bimestre" cor="verde"></app-dashboard-card>
+      <app-dashboard-card icon="bi-clipboard2-check" titulo="Frequência" valor="91%" descricao="Geral" cor="azul"></app-dashboard-card>
+      <app-dashboard-card icon="bi-alarm-fill" titulo="Próxima Prova" valor="15/07" descricao="Matemática" cor="vermelho"></app-dashboard-card>
+      <app-dashboard-card icon="bi-list-check" titulo="Atividades" valor="3" descricao="Pendentes" cor="amarelo"></app-dashboard-card>
+    </div>
+  </section>
+
+  <section class="dashboard-section">
+    <div class="dashboard-grid atalhos-grid">
+      <app-dashboard-card icon="bi-journal-text" titulo="Boletim" cor="azul" route="/boletim"></app-dashboard-card>
+      <app-dashboard-card icon="bi-book-half" titulo="Biblioteca" cor="azul-escuro" route="/biblioteca"></app-dashboard-card>
+      <app-dashboard-card icon="bi-cup-hot-fill" titulo="Cardápio" cor="amarelo" route="/cardapio"></app-dashboard-card>
+      <app-dashboard-card icon="bi-megaphone-fill" titulo="Avisos" cor="vermelho" route="/avisos"></app-dashboard-card>
+      <app-dashboard-card icon="bi-star-fill" titulo="Destaques" cor="amarelo" route="/destaques"></app-dashboard-card>
+      <app-dashboard-card icon="bi-calendar3" titulo="Calendário" cor="verde" route="/calendario"></app-dashboard-card>
+    </div>
+  </section>
+
+  <section class="dashboard-section">
+    <div class="dashboard-widgets-row">
+      <div class="dashboard-widget">
+        <h2>Notas por Disciplina</h2>
+        <div class="notas-lista">
+          @for (item of notasPorDisciplina; track item.disciplina) {
+            <div class="nota-linha">
+              <span class="nota-disciplina">{{ item.disciplina }}</span>
+              <div class="nota-barra-fundo">
+                <div
+                  class="nota-barra-preenchida"
+                  [class.nota-baixa]="item.nota < mediaNotaMinima"
+                  [style.width.%]="percentualNota(item.nota)"
+                ></div>
+              </div>
+              <span class="nota-valor">{{ item.nota.toFixed(1) }}</span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="dashboard-widget">
+        <h2>Desempenho</h2>
+        <svg class="radar-chart" viewBox="0 0 200 200">
+
+          <circle cx="100" cy="100" r="80" class="radar-anel" />
+          <circle cx="100" cy="100" r="53.3" class="radar-anel" />
+          <circle cx="100" cy="100" r="26.6" class="radar-anel" />
+          <polygon [attr.points]="radarPoints" class="radar-area" />
+          @for (item of notasPorDisciplina; track item.disciplina; let i = $index) {
+            <text
+              [attr.x]="radarLabelPos(i).x"
+              [attr.y]="radarLabelPos(i).y"
+              class="radar-label"
+              text-anchor="middle"
+              dominant-baseline="middle"
+            >{{ item.disciplina }}</text>
+          }
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="dashboard-section">
+    <div class="dashboard-widgets-row">
+      <div class="dashboard-widget">
+        <h2>Destaques</h2>
+        <div class="mini-carousel">
+          <div class="mini-carousel-track" [style.transform]="'translateX(-' + (currentSlide * 100) + '%)'">
+            @for (slide of destaques; track slide.titulo) {
+              <div class="mini-carousel-slide {{ slide.gradiente }}">
+                <i class="bi {{ slide.icon }}"></i>
+                <div>
+                  <span class="slide-categoria">{{ slide.categoria }}</span>
+                  <h3>{{ slide.titulo }}</h3>
+                  <p>{{ slide.descricao }}</p>
+                </div>
+              </div>
+            }
+          </div>
+
+          <div class="mini-carousel-dots">
+            @for (slide of destaques; track slide.titulo; let i = $index) {
+              <span [class.active]="currentSlide === i" (click)="irParaSlide(i)"></span>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-widget">
+        <h2>Evolução das Médias</h2>
+        <svg class="linha-chart" viewBox="0 0 300 140">
+          <polyline [attr.points]="evolucaoLinePoints" class="linha-evolucao" />
+          @for (ponto of evolucaoPoints; track ponto.item.bimestre) {
+            <circle [attr.cx]="ponto.x" [attr.cy]="ponto.y" r="4" class="linha-ponto" />
+            <text [attr.x]="ponto.x" [attr.y]="120" class="linha-label-x" text-anchor="middle">{{ ponto.item.bimestre }}</text>
+          }
+          <text
+            [attr.x]="evolucaoPoints[1].x"
+            [attr.y]="evolucaoPoints[1].y - 12"
+            class="linha-label-valor"
+            text-anchor="middle"
+          >Média Geral: {{ evolucaoPoints[1].item.media.toFixed(1) }}</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+</app-dashboard-shell>
