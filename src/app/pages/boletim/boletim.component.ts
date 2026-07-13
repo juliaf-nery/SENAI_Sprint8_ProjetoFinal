@@ -18,12 +18,6 @@ interface NotaDisciplina {
   situacao: Situacao;
 }
 
-/**
- * Página "Boletim Escolar" — disponível para Aluno e Responsável.
- * Segue o modelo definido no PDF de especificação: indicadores gerais
- * (média, frequência, bimestre atual), gráfico de médias por disciplina
- * e tabela detalhada de notas por bimestre.
- */
 @Component({
   selector: 'app-boletim',
   standalone: true,
@@ -38,11 +32,11 @@ export class BoletimComponent {
   readonly anoLetivo = '2026';
 
   readonly notas: NotaDisciplina[] = [
-    { disciplina: 'Matemática', professor: 'Prof. Mariana Santos', bim1: 7.5, bim2: 8.0, bim3: null, bim4: null, media: 8.0, frequencia: 94, situacao: 'aprovado' },
+    { disciplina: 'Empreendedorismo', professor: 'Prof. Wanderson Souza', bim1: 10, bim2: 10, bim3: null, bim4: null, media: 10, frequencia: 94, situacao: 'aprovado' },
     { disciplina: 'Língua Portuguesa', professor: 'Prof. Carlos Lima', bim1: 8.0, bim2: 7.5, bim3: null, bim4: null, media: 7.8, frequencia: 92, situacao: 'aprovado' },
     { disciplina: 'História', professor: 'Prof. Ana Costa', bim1: 8.0, bim2: 8.0, bim3: null, bim4: null, media: 8.0, frequencia: 96, situacao: 'aprovado' },
-    { disciplina: 'Biologia', professor: 'Prof. Roberto Alves', bim1: 8.5, bim2: 8.5, bim3: null, bim4: null, media: 8.5, frequencia: 98, situacao: 'aprovado' },
-    { disciplina: 'Física', professor: 'Prof. Juliana Ferreira', bim1: 7.0, bim2: 7.5, bim3: null, bim4: null, media: 7.3, frequencia: 91, situacao: 'aprovado' },
+    { disciplina: 'Artes', professor: 'Prof. Nathy Eliana', bim1: 8.5, bim2: 8.5, bim3: null, bim4: null, media: 8.5, frequencia: 98, situacao: 'aprovado' },
+    { disciplina: 'Filosofia', professor: 'Prof. Arthir Alves', bim1: 7.5, bim2: 7.5, bim3: null, bim4: null, media: 7.5, frequencia: 91, situacao: 'aprovado' },
     { disciplina: 'Química', professor: 'Prof. Pedro Souza', bim1: 5.5, bim2: 5.0, bim3: null, bim4: null, media: 5.3, frequencia: 85, situacao: 'recuperacao' },
     { disciplina: 'Geografia', professor: 'Prof. Costa Mendes', bim1: 7.8, bim2: 8.1, bim3: null, bim4: null, media: 8.0, frequencia: 93, situacao: 'aprovado' },
     { disciplina: 'Inglês', professor: 'Prof. Marcos Silva', bim1: 8.5, bim2: 8.5, bim3: null, bim4: null, media: 8.5, frequencia: 97, situacao: 'aprovado' },

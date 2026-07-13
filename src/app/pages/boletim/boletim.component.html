@@ -52,9 +52,10 @@
           <thead>
             <tr>
               <th>Disciplina</th>
-              <th>1º Uni</th>
-              <th>2º Uni</th>
-              <th>3º Uni</th>
+              <th>1º Bim</th>
+              <th>2º Bim</th>
+              <th>3º Bim</th>
+              <th>4º Bim</th>
               <th>Média</th>
               <th>Freq.</th>
               <th>Situação</th>
@@ -70,6 +71,7 @@
                 <td>{{ item.bim1 ?? '—' }}</td>
                 <td>{{ item.bim2 ?? '—' }}</td>
                 <td>{{ item.bim3 ?? '—' }}</td>
+                <td>{{ item.bim4 ?? '—' }}</td>
                 <td class="boletim-media">{{ item.media.toFixed(1) }}</td>
                 <td>{{ item.frequencia }}%</td>
                 <td>

@@ -32,14 +32,6 @@ interface UnidadeFrequencia {
   disciplinas: FrequenciaDisciplina[];
 }
 
-/**
- * Página "Frequência" — Professor, Aluno e Responsável.
- * Exibe a frequência do aluno ao longo do ano letivo (dividido em 3
- * unidades) e a frequência geral, em três formatos: dashboard mensal
- * (com percentual ao passar o mouse), mini calendário de faltas (com
- * legenda de falta justificada/não justificada) e lista por disciplina
- * (total de aulas e faltas).
- */
 @Component({
   selector: 'app-frequencia',
   standalone: true,
@@ -54,7 +46,7 @@ export class FrequenciaComponent {
     {
       id: 'geral',
       label: 'Geral (Ano Letivo)',
-      periodo: '1ª, 2ª e 3ª Unidades · 2026',
+      periodo: '1ª, 2ª e 3ª Bimestre · 2026',
       frequenciaGeral: 92,
       mesReferencia: 'Julho de 2026',
       diasNoMes: 31,
@@ -73,19 +65,19 @@ export class FrequenciaComponent {
         { dia: 25, justificada: false },
       ],
       disciplinas: [
-        { disciplina: 'Matemática', totalAulas: 80, faltas: 4 },
+        { disciplina: 'Empreendedorismo', totalAulas: 80, faltas: 4 },
         { disciplina: 'Língua Portuguesa', totalAulas: 80, faltas: 6 },
         { disciplina: 'História', totalAulas: 40, faltas: 2 },
-        { disciplina: 'Biologia', totalAulas: 40, faltas: 5 },
-        { disciplina: 'Física', totalAulas: 40, faltas: 3 },
+        { disciplina: 'Artes', totalAulas: 40, faltas: 5 },
+        { disciplina: 'Filosofia', totalAulas: 40, faltas: 3 },
         { disciplina: 'Química', totalAulas: 40, faltas: 7 },
         { disciplina: 'Geografia', totalAulas: 40, faltas: 2 },
         { disciplina: 'Inglês', totalAulas: 40, faltas: 1 },
       ],
     },
     {
-      id: 'unidade1',
-      label: '1ª Unidade',
+      id: 'bimestre1',
+      label: '1ª Bimeste',
       periodo: 'Fevereiro a Abril de 2026',
       frequenciaGeral: 94,
       mesReferencia: 'Abril de 2026',
@@ -100,19 +92,19 @@ export class FrequenciaComponent {
         { dia: 19, justificada: false },
       ],
       disciplinas: [
-        { disciplina: 'Matemática', totalAulas: 26, faltas: 1 },
+        { disciplina: 'Empreendedorismo', totalAulas: 26, faltas: 1 },
         { disciplina: 'Língua Portuguesa', totalAulas: 26, faltas: 2 },
         { disciplina: 'História', totalAulas: 13, faltas: 0 },
-        { disciplina: 'Biologia', totalAulas: 13, faltas: 1 },
-        { disciplina: 'Física', totalAulas: 13, faltas: 1 },
+        { disciplina: 'Artes', totalAulas: 13, faltas: 1 },
+        { disciplina: 'Filosofia', totalAulas: 13, faltas: 1 },
         { disciplina: 'Química', totalAulas: 13, faltas: 2 },
         { disciplina: 'Geografia', totalAulas: 13, faltas: 0 },
         { disciplina: 'Inglês', totalAulas: 13, faltas: 0 },
       ],
     },
     {
-      id: 'unidade2',
-      label: '2ª Unidade',
+      id: 'bimestre2',
+      label: '2ª Bimestre',
       periodo: 'Maio a Julho de 2026',
       frequenciaGeral: 90,
       mesReferencia: 'Julho de 2026',
@@ -128,19 +120,19 @@ export class FrequenciaComponent {
         { dia: 18, justificada: true },
       ],
       disciplinas: [
-        { disciplina: 'Matemática', totalAulas: 27, faltas: 2 },
+        { disciplina: 'Empreendedorismo', totalAulas: 27, faltas: 2 },
         { disciplina: 'Língua Portuguesa', totalAulas: 27, faltas: 3 },
         { disciplina: 'História', totalAulas: 13, faltas: 1 },
-        { disciplina: 'Biologia', totalAulas: 13, faltas: 2 },
-        { disciplina: 'Física', totalAulas: 13, faltas: 1 },
+        { disciplina: 'Artes', totalAulas: 13, faltas: 2 },
+        { disciplina: 'Filosofia', totalAulas: 13, faltas: 1 },
         { disciplina: 'Química', totalAulas: 13, faltas: 3 },
         { disciplina: 'Geografia', totalAulas: 13, faltas: 1 },
         { disciplina: 'Inglês', totalAulas: 13, faltas: 1 },
       ],
     },
     {
-      id: 'unidade3',
-      label: '3ª Unidade',
+      id: 'bimestre3',
+      label: '3ª Bimestre',
       periodo: 'Agosto a Novembro de 2026',
       frequenciaGeral: 0,
       mesReferencia: 'Ainda não iniciada',
@@ -153,11 +145,11 @@ export class FrequenciaComponent {
       ],
       faltasCalendario: [],
       disciplinas: [
-        { disciplina: 'Matemática', totalAulas: 0, faltas: 0 },
+        { disciplina: 'Empreendedorismo', totalAulas: 0, faltas: 0 },
         { disciplina: 'Língua Portuguesa', totalAulas: 0, faltas: 0 },
         { disciplina: 'História', totalAulas: 0, faltas: 0 },
-        { disciplina: 'Biologia', totalAulas: 0, faltas: 0 },
-        { disciplina: 'Física', totalAulas: 0, faltas: 0 },
+        { disciplina: 'Artes', totalAulas: 0, faltas: 0 },
+        { disciplina: 'Filosofia', totalAulas: 0, faltas: 0 },
         { disciplina: 'Química', totalAulas: 0, faltas: 0 },
         { disciplina: 'Geografia', totalAulas: 0, faltas: 0 },
         { disciplina: 'Inglês', totalAulas: 0, faltas: 0 },

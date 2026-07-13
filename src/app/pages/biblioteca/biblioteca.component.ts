@@ -22,12 +22,6 @@ const TIPO_LABEL: Record<TipoMaterial, string> = {
   pdf: 'PDF',
 };
 
-/**
- * Página "Biblioteca Digital" — Aluno.
- * Ao passar o mouse sobre um material aparece o botão "Abrir"; ao clicar,
- * é exibido um card informando "Em breve" (o conteúdo real ainda não
- * está disponível na plataforma).
- */
 @Component({
   selector: 'app-biblioteca',
   standalone: true,

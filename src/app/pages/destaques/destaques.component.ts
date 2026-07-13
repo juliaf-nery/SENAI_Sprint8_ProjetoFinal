@@ -5,7 +5,7 @@ import { PERFIL_COR, PERFIL_LABEL } from '../../config/perfil';
 import { UserRole } from '../types/user';
 import { FormsModule } from "@angular/forms";
 
-type CategoriaDestaque = 'Turma Destaque' | 'Funcionário Destaque' | 'Professor Destaque' | 'Aluno Destaque';
+type CategoriaDestaque = 'Turma Destaque' | 'Funcionário Destaque' | 'Professor Destaque' | 'Aluno Destaque' | 'Mascote Destaque';
 
 interface Destaque {
   categoria: CategoriaDestaque;
@@ -32,42 +32,51 @@ export class DestaquesComponent {
       categoria: 'Turma Destaque',
       nome: '3º Ano A',
       motivo: 'Maior média geral do bimestre e melhor frequência entre as turmas do ensino médio.',
-      fotoUrl: '',
+      fotoUrl: '/img/tur-dest.png',
       icon: 'bi-people-fill',
       cor: '#0057A8',
     },
     {
       categoria: 'Professor Destaque',
-      nome: 'Prof. Mariana Santos',
-      turma: 'Língua Portuguesa',
+      nome: 'Prof. Nathy Elaina',
+      turma: 'Artes',
       motivo: 'Reconhecida pelo uso de metodologias ativas e pelo alto índice de aprovação da turma.',
-      fotoUrl: '/img/ms.png',
+      fotoUrl: '/img/ne.png',
       icon: 'bi-person-workspace',
       cor: '#2E7D32',
     },
     {
       categoria: 'Funcionário Destaque',
-      nome: 'Sônia Ramos',
+      nome: 'Cauivis Nathan',
       motivo: 'Dedicação exemplar na secretaria escolar e atendimento acolhedor às famílias.',
-      fotoUrl: '/img/fnc.png',
+      fotoUrl: '/img/fun-dest.png',
       icon: 'bi-briefcase-fill',
       cor: '#6b21a8',
     },
     {
       categoria: 'Aluno Destaque',
-      nome: 'Ana Beatriz Souza',
-      turma: '3º Ano A · Biologia',
-      motivo: 'Melhor média em Biologia no bimestre, com destaque em projetos de iniciação científica.',
-      fotoUrl: '/img/alu-dest.png',
+      nome: 'Nelson Gabriel',
+      turma: '3º Ano A · Projeto de Vida',
+      motivo: 'Melhor dorminhoco da escola. Dorme em todo e qualquer lugar.',
+      fotoUrl: '/img/alu-dest1.png',
       icon: 'bi-mortarboard-fill',
       cor: '#F9A825',
     },
     {
       categoria: 'Aluno Destaque',
-      nome: 'Lucas Andrade',
+      nome: 'Emília Marcedo',
       turma: '3º Ano A · Matemática',
       motivo: 'Melhor média em Matemática no bimestre e participação em olimpíadas de exatas.',
       fotoUrl: '/img/alu-dest2.png',
+      icon: 'bi-mortarboard-fill',
+      cor: '#F9A825',
+    },
+    {
+      categoria: 'Mascote Destaque',
+      nome: 'Argolo da Hora',
+      turma: '3º Ano A · Matemática',
+      motivo: 'Melhor mascote do time de basquete.',
+      fotoUrl: '/img/masc-dest.png',
       icon: 'bi-mortarboard-fill',
       cor: '#F9A825',
     },

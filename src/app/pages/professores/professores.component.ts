@@ -37,15 +37,13 @@ export class ProfessoresComponent {
   private readonly contatosAbertos = new Set<string>();
 
   readonly professores: Professor[] = [
-    { nome: 'Joana Ribeira', disciplina: 'Biologia', email: 'joana.ribeira@escola.ba.gov.br', telefone: '(71) 98888-1001', fotoUrl: '/img/jr.png', bio: 'Bióloga apaixonada por despertar a curiosidade científica dos alunos.', turmas: 4, anosExperiencia: 9 },
-    { nome: 'Roberto Alves', disciplina: 'Biologia', email: 'roberto.alves@escola.ba.gov.br', telefone: '(71) 98888-1002', fotoUrl: '', bio: 'Focado em aulas práticas de laboratório e projetos de campo.', turmas: 3, anosExperiencia: 12 },
+    { nome: 'Nathy Eliana', disciplina: 'Artes', email: 'nathy.eliana@escola.ba.gov.br', telefone: '(71) 98888-1001', fotoUrl: '/img/ne.png', bio: 'Apaixonada por despertar a curiosidade artistíca dos alunos.', turmas: 4, anosExperiencia: 9 },
 
-    { nome: 'Juliana Ferreira', disciplina: 'Física', email: 'juliana.ferreira@escola.ba.gov.br', telefone: '(71) 98888-1003', fotoUrl: '/img/jf.png', bio: 'Torna a Física experimental acessível e divertida em sala.', turmas: 5, anosExperiencia: 7 },
-    { nome: 'Pedro Souza', disciplina: 'Física', email: 'pedro.souza@escola.ba.gov.br', telefone: '(71) 98888-1006', fotoUrl: '/img/ps.png', bio: 'Especialista em preparar turmas para olimpíadas de exatas.', turmas: 4, anosExperiencia: 15 },
+    { nome: 'Wanderson Souza', disciplina: 'Empreendedorismo', email: 'wanderson.souza@escola.ba.gov.br', telefone: '(71) 98888-1006', fotoUrl: '/img/ps.png', bio: 'Especialista em preparar turmas para lidar com o mercado de trabalho e financeiramente.', turmas: 4, anosExperiencia: 15 },
+    
+    { nome: 'Arthir Alves', disciplina: 'Filosofia', email: 'arthit.alves@escola.ba.gov.br', telefone: '(71) 98888-1002', fotoUrl: '/img/ra.png', bio: 'Focado em aulas teoricas e de pensamentos além do conhecimento.', turmas: 3, anosExperiencia: 12 },
 
-    { nome: 'Carlos Lima', disciplina: 'Língua Portuguesa', email: 'carlos.lima@escola.ba.gov.br', telefone: '(71) 98888-1004', fotoUrl: '', bio: 'Incentiva a leitura crítica e a produção textual autoral.', turmas: 6, anosExperiencia: 11 },
-    { nome: 'Mariana Santos', disciplina: 'Língua Portuguesa', email: 'mariana.santos@escola.ba.gov.br', telefone: '(71) 98888-1005', fotoUrl: '/img/ms.png', bio: 'Professora dedicada ao ensino de Língua Portuguesa.', turmas: 5, anosExperiencia: 8 },
-  ];
+];
 
   get gruposFiltrados(): GrupoDisciplina[] {
     const termo = this.termoBusca.trim().toLowerCase();

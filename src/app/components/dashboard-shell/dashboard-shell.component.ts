@@ -3,11 +3,6 @@ import { isPlatformBrowser } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { SidebarMenuComponent } from '../sidebar-menu/sidebar-menu.component';
 
-/**
- * Cabeçalho (topbar) + menu lateral compartilhados por todos os dashboards de perfil.
- * Exibe marca, título da página, usuário logado e botão de sair.
- * O conteúdo específico de cada dashboard é projetado via <ng-content>.
- */
 @Component({
   selector: 'app-dashboard-shell',
   imports: [SidebarMenuComponent],
