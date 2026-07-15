@@ -3,6 +3,7 @@ import { DashboardShellComponent } from '../../components/dashboard-shell/dashbo
 import { AuthService } from '../../services/auth.service';
 import { PERFIL_COR, PERFIL_LABEL } from '../../config/perfil';
 import { UserRole } from '../types/user';
+import { NotasService } from '../../services/notas.service';
 
 type Situacao = 'aprovado' | 'atencao' | 'recuperacao';
 
@@ -27,11 +28,18 @@ interface NotaDisciplina {
 })
 export class BoletimComponent {
   private readonly authService = inject(AuthService);
+  private readonly notasService = inject(NotasService);
+
+  /** Persona fixa usada em todo o painel do aluno nesta demonstração. */
+  private readonly ALUNO_EMAIL = 'joao.pedro@edu.conecta';
+  private readonly ALUNO_TURMA = '3º Ano A';
+  private readonly DISCIPLINA_PROFESSOR = 'Matemática';
 
   readonly bimestreAtual = '2º';
   readonly anoLetivo = '2026';
 
   readonly notas: NotaDisciplina[] = [
+    { disciplina: 'Matemática', professor: 'Prof. Eduardo Nascimento', bim1: 7.5, bim2: 8.0, bim3: null, bim4: null, media: 7.8, frequencia: 94, situacao: 'aprovado' },
     { disciplina: 'Empreendedorismo', professor: 'Prof. Wanderson Souza', bim1: 10, bim2: 10, bim3: null, bim4: null, media: 10, frequencia: 94, situacao: 'aprovado' },
     { disciplina: 'Língua Portuguesa', professor: 'Prof. Carlos Lima', bim1: 8.0, bim2: 7.5, bim3: null, bim4: null, media: 7.8, frequencia: 92, situacao: 'aprovado' },
     { disciplina: 'História', professor: 'Prof. Ana Costa', bim1: 8.0, bim2: 8.0, bim3: null, bim4: null, media: 8.0, frequencia: 96, situacao: 'aprovado' },
@@ -41,6 +49,20 @@ export class BoletimComponent {
     { disciplina: 'Geografia', professor: 'Prof. Costa Mendes', bim1: 7.8, bim2: 8.1, bim3: null, bim4: null, media: 8.0, frequencia: 93, situacao: 'aprovado' },
     { disciplina: 'Inglês', professor: 'Prof. Marcos Silva', bim1: 8.5, bim2: 8.5, bim3: null, bim4: null, media: 8.5, frequencia: 97, situacao: 'aprovado' },
   ];
+
+  /**
+   * Notas de Matemática publicadas pelo professor na página "Notas"
+   * (por categoria de avaliação). Some direto da fonte compartilhada
+   * NotasService, então refletem a publicação em tempo real.
+   */
+  get avaliacoesPublicadas(): { categoria: string; valor: number }[] {
+    return this.notasService.categorias
+      .map((categoria) => ({
+        categoria,
+        valor: this.notasService.obterNotaPublicada(this.ALUNO_TURMA, this.DISCIPLINA_PROFESSOR, this.ALUNO_EMAIL, categoria),
+      }))
+      .filter((n): n is { categoria: string; valor: number } => n.valor !== null);
+  }
 
   get mediaGeral(): string {
     const soma = this.notas.reduce((acc, n) => acc + n.media, 0);

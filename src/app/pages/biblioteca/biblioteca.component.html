@@ -5,9 +5,18 @@
   [corTema]="corTema"
 >
   <section class="dashboard-section">
-    <div class="biblioteca-busca">
-      <i class="bi bi-search"></i>
-      <input type="text" placeholder="Pesquisar por título ou autor..." [(ngModel)]="termoBusca" />
+    <div class="biblioteca-topo">
+      <div class="biblioteca-busca">
+        <i class="bi bi-search"></i>
+        <input type="text" placeholder="Pesquisar por título ou autor..." [(ngModel)]="termoBusca" />
+      </div>
+
+      @if (podeGerenciarBiblioteca) {
+        <button type="button" class="btn-adicionar-arquivo" (click)="abrirModalAdicionar()">
+          <i class="bi bi-plus-lg"></i>
+          Adicionar arquivo
+        </button>
+      }
     </div>
 
     <div class="biblioteca-tabs">
@@ -21,9 +30,14 @@
 
   <section class="dashboard-section">
     <div class="biblioteca-grid">
-      @for (m of materiaisFiltrados; track m.titulo) {
+      @for (m of materiaisFiltrados; track m.id) {
         <div class="material-card material-{{ m.tipo }}">
           <span class="material-tag">{{ tipoLabel[m.tipo] }}</span>
+          @if (podeGerenciarBiblioteca) {
+            <button type="button" class="btn-remover-material" (click)="removerMaterial(m, $event)" aria-label="Excluir arquivo">
+              <i class="bi bi-trash3-fill"></i>
+            </button>
+          }
           <div class="material-icone"><i class="bi {{ m.icon }}"></i></div>
           <div class="material-overlay">
             <button type="button" class="btn-abrir" (click)="abrirMaterial()">Abrir</button>
@@ -50,6 +64,57 @@
         <h3>Em breve</h3>
         <p>Esse material estará disponível em breve na plataforma.</p>
         <button type="button" (click)="fecharModal()">Fechar</button>
+      </div>
+    </div>
+  }
+
+  @if (modalAdicionarAberto) {
+    <div class="modal-backdrop" (click)="fecharModalAdicionar()">
+      <div class="modal-adicionar" (click)="$event.stopPropagation()">
+        <button type="button" class="modal-adicionar-fechar" (click)="fecharModalAdicionar()" aria-label="Fechar">
+          <i class="bi bi-x-lg"></i>
+        </button>
+
+        <h3 class="modal-titulo">Adicionar Arquivo</h3>
+        <p class="modal-subtitulo">Cadastre um novo material para a Biblioteca Digital.</p>
+
+        <form class="form-grid" (ngSubmit)="adicionarMaterial()">
+          <label class="campo-form campo-largo">
+            <span>Título</span>
+            <input type="text" name="titulo" [(ngModel)]="novoMaterial.titulo" required />
+          </label>
+
+          <label class="campo-form">
+            <span>Tipo</span>
+            <select name="tipo" [(ngModel)]="novoMaterial.tipo">
+              <option value="livro">Livro</option>
+              <option value="video">Vídeo</option>
+              <option value="pdf">PDF</option>
+            </select>
+          </label>
+
+          <label class="campo-form">
+            <span>Disciplina</span>
+            <select name="disciplina" [(ngModel)]="novoMaterial.disciplina">
+              @for (d of disciplinasCadastro; track d) {
+                <option [value]="d">{{ d }}</option>
+              }
+            </select>
+          </label>
+
+          <label class="campo-form campo-largo">
+            <span>Autor(a)</span>
+            <input type="text" name="autor" [(ngModel)]="novoMaterial.professor" placeholder="Ex: Prof. Mariana Santos" required />
+          </label>
+
+          <div class="form-acoes campo-largo">
+            <button type="button" class="btn-cancelar" (click)="fecharModalAdicionar()">Cancelar</button>
+            <button type="submit" class="btn-salvar">
+              <i class="bi bi-upload"></i>
+              Adicionar
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   }

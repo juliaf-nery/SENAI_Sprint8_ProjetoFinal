@@ -38,43 +38,51 @@
   display: flex;
   flex-direction: column;
   background: #ffffff;
-  border: 1px solid #eef1f6;
-  border-radius: 20px;
+  border: 1px solid #e2e8f0; /* Borda mais suave que #eef1f6 */
+  border-radius: 16px; /* Bordas levemente mais suaves */
   overflow: hidden;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .professor-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 24px -10px rgba(15, 23, 42, 0.15);
-    border-color: #dbe4f0;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
 }
 
 .professor-foto {
   width: 100%;
   aspect-ratio: 4 / 5;
-  background: linear-gradient(135deg, #eaf2fb, #f5f7fa);
+  background: linear-gradient(135deg, #e2e8f0, #f1f5f9);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  position: relative;
+}
+
+.professor-card:hover .foto-img {
+  transform: scale(1.05);
 }
 
 .foto-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease; /* Transição suave */
 }
 
 .foto-iniciais {
   font-size: 2.2rem;
   font-weight: 700;
-  color: #0057A8;
+  color: #204171;
 }
 
 .professor-info {
-  padding: 14px 16px 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .professor-nome-linha {
@@ -84,15 +92,16 @@
 }
 
 .professor-nome-linha h3 {
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: #0f172a;
+  margin-bottom: 6px;
 }
 
 .professor-bio {
   font-size: 0.78rem;
+  line-height: 1.5; /* Mais espaçamento entre linhas para leitura confortável */
   color: #64748b;
-  line-height: 1.4;
   margin-top: 4px;
 }
 
@@ -141,8 +150,8 @@
 }
 
 .btn-contato:hover {
-  border-color: #0057A8;
-  color: #0057A8;
+  border-color: #204171;
+  color: #204171;
 }
 
 .professor-contato {

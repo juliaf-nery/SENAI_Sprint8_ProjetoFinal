@@ -1,0 +1,144 @@
+<app-dashboard-shell
+  tituloPagina="Turmas"
+  subtitulo="Pastas de atividades, notas e testes compartilhados pelos professores com cada turma"
+  [perfilLabel]="perfilLabel"
+  [corTema]="corTema"
+>
+  @if (!pastaSelecionada) {
+    <section class="dashboard-section">
+      <div class="dashboard-grid pastas-grid">
+        @for (pasta of pastas; track pasta.id) {
+          <div class="pasta-card" (click)="abrirPasta(pasta.id)">
+            <div class="pasta-card-capa capa-{{ pasta.capaCor }}">
+              <i class="bi {{ pasta.capaIcone }}"></i>
+            </div>
+            <div class="pasta-card-corpo">
+              <span class="pasta-card-turma">{{ pasta.disciplina }} · {{ pasta.turma }}</span>
+              <h3>{{ pasta.titulo }}</h3>
+              <p>{{ pasta.descricao }}</p>
+              <span class="pasta-card-contagem">
+                <i class="bi bi-people"></i>
+                {{ totalAlunos(pasta.turma) }} aluno(s)
+              </span>
+              <span class="pasta-card-contagem">
+                <i class="bi bi-journal-check"></i>
+                {{ pasta.tarefas.length }} atividade(s) publicada(s)
+              </span>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+  } @else {
+    <section class="dashboard-section">
+      <button type="button" class="btn-voltar-pastas" (click)="fecharPasta()">
+        <i class="bi bi-arrow-left"></i>
+        Voltar às turmas
+      </button>
+
+      <div class="pasta-banner capa-{{ pastaSelecionada.capaCor }}">
+        <div class="pasta-banner-icone"><i class="bi {{ pastaSelecionada.capaIcone }}"></i></div>
+        <div class="pasta-banner-texto">
+          <span class="pasta-banner-turma">{{ pastaSelecionada.disciplina }} · {{ pastaSelecionada.turma }} · {{ totalAlunos(pastaSelecionada.turma) }} aluno(s)</span>
+          <h2>{{ pastaSelecionada.titulo }}</h2>
+          <p>{{ pastaSelecionada.descricao }}</p>
+        </div>
+        @if (podeEditarPasta) {
+          <button type="button" class="btn-editar-pasta" (click)="abrirModalEditarPasta()">
+            <i class="bi bi-pencil-fill"></i>
+            Editar pasta
+          </button>
+        }
+      </div>
+
+      <div class="dashboard-section-header" style="margin-top: 22px;">
+        <h2>Atividades publicadas</h2>
+        <span>Compartilhadas pelo professor com esta turma</span>
+      </div>
+
+      <div class="atividades-lista">
+        @for (tarefa of pastaSelecionada.tarefas; track tarefa.id) {
+          <div class="atividade-item">
+            <div class="atividade-icone">
+              <i class="bi bi-journal-text"></i>
+            </div>
+            <div class="atividade-corpo">
+              <div class="atividade-linha-topo">
+                <h3>{{ tarefa.titulo }}</h3>
+                <span class="badge-pill" [class.atencao]="tarefa.destinatarios === 'especificos'">
+                  {{ tarefa.destinatarios === 'todos' ? 'Toda a turma' : (tarefa.alunosSelecionados?.length ?? 0) + ' aluno(s)' }}
+                </span>
+              </div>
+              @if (tarefa.descricao) {
+                <p class="atividade-descricao">{{ tarefa.descricao }}</p>
+              }
+              <div class="atividade-meta">
+                <span><i class="bi bi-book"></i>{{ tarefa.disciplina }}</span>
+                @if (tarefa.objetivo) {
+                  <span><i class="bi bi-bullseye"></i>{{ tarefa.objetivo }}</span>
+                }
+                @if (tarefa.dataEntrega) {
+                  <span><i class="bi bi-calendar3"></i>Entrega: {{ tarefa.dataEntrega }}</span>
+                }
+                @if (tarefa.valor !== null) {
+                  <span><i class="bi bi-award"></i>Valor: {{ tarefa.valor }}</span>
+                }
+                @if (tarefa.arquivoNome) {
+                  <span><i class="bi bi-paperclip"></i>{{ tarefa.arquivoNome }}</span>
+                }
+              </div>
+            </div>
+          </div>
+        } @empty {
+          <p class="atividades-vazio">Nenhuma atividade publicada nesta turma ainda.</p>
+        }
+      </div>
+    </section>
+  }
+
+  <!-- Modal: Editar pasta (professor/direção são administradores) -->
+  @if (modalEditarPastaAberto && pastaSelecionada) {
+    <div class="modal-backdrop" (click)="fecharModalEditarPasta()">
+      <div class="modal-detalhe" (click)="$event.stopPropagation()">
+        <button type="button" class="modal-detalhe-fechar" (click)="fecharModalEditarPasta()" aria-label="Fechar">
+          <i class="bi bi-x-lg"></i>
+        </button>
+
+        <h3 class="modal-titulo">Editar Pasta</h3>
+        <p class="modal-subtitulo">{{ pastaSelecionada.disciplina }} · {{ pastaSelecionada.turma }}</p>
+
+        <form class="form-grid" (ngSubmit)="salvarPasta()">
+          <label class="campo-form campo-largo">
+            <span>Título</span>
+            <input type="text" name="tituloPasta" [(ngModel)]="editarPastaForm.titulo" required />
+          </label>
+
+          <label class="campo-form campo-largo">
+            <span>Descrição</span>
+            <textarea name="descricaoPasta" rows="3" [(ngModel)]="editarPastaForm.descricao"></textarea>
+          </label>
+
+          <div class="campo-form campo-largo">
+            <span>Capa</span>
+            <div class="capa-opcoes">
+              @for (cor of coresCapaDisponiveis; track cor) {
+                <button
+                  type="button"
+                  class="capa-opcao capa-{{ cor }}"
+                  [class.selecionada]="editarPastaForm.capaCor === cor"
+                  (click)="editarPastaForm.capaCor = cor"
+                  [attr.aria-label]="cor"
+                ></button>
+              }
+            </div>
+          </div>
+
+          <div class="form-acoes campo-largo">
+            <button type="button" class="btn-cancelar" (click)="fecharModalEditarPasta()">Cancelar</button>
+            <button type="submit" class="btn-salvar">Salvar alterações</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+</app-dashboard-shell>

@@ -9,7 +9,7 @@
 }
 
 .gradiente-projeto {
-    background: linear-gradient(135deg, #0057A8, #003E7E);
+    background: linear-gradient(135deg, #204171, #3669b2);
 }
 
 .gradiente-evento {
@@ -26,7 +26,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    background: linear-gradient(120deg, #0057A8, #0f4094);
+    background: linear-gradient(120deg, #204171, #3669b2);
     color: #ffffff;
     border-radius: 16px;
     padding: 22px 26px;
@@ -124,14 +124,19 @@
 
 .radar-area {
     fill: rgba(0, 87, 168, 0.25);
-    stroke: #0057A8;
+    stroke: #204171;
     stroke-width: 2;
 }
 
 .radar-label {
-    font-size: 7px;
-    fill: #64748b;
-    font-weight: 600;
+  font-size: 7.5px;
+  fill: #718096;
+  font-weight: 600;
+}
+
+.radar-eixo-linha {
+  stroke: #e5e9f0;
+  stroke-width: 1;
 }
 
 .linha-chart {
@@ -140,24 +145,75 @@
 }
 
 .linha-evolucao {
-    fill: none;
-    stroke: #0057A8;
-    stroke-width: 1;
+  fill: none;
+  stroke: #204171;
+  stroke-width: 2.5;
 }
 
 .linha-ponto {
-    fill: #0057A8;
-    stroke: #ffffff;
-    stroke-width: 2;
+  fill: #204171;
+  stroke: #ffffff;
+  stroke-width: 2.5;
 }
 
 .linha-label-x {
-    font-size: 9px;
-    fill: #64748b;
+  font-size: 8px;
+  fill: #a0aec0;
 }
 
 .linha-label-valor {
     font-size: 9px;
     font-weight: 700;
-    fill: #0057A8;
+    fill: #204171;
+}
+
+.eixo-linha {
+  stroke: #cbd5e0;
+  stroke-width: 1;
+}
+
+.linha-grade {
+  stroke: #e2e8f0;
+  stroke-width: 1;
+  stroke-dasharray: 2 2;
+}
+
+.label-y {
+  font-size: 8px;
+  fill: #a0aec0;
+  text-anchor: end;
+  font-family: sans-serif;
+}
+
+.ponto-grupo {
+  cursor: pointer;
+}
+
+
+.tooltip-valor {
+  font-size: 8px;
+  font-weight: 700;
+  fill: #204171;
+  font-family: sans-serif;
+  
+
+  opacity: 0;
+  transform: translateY(3px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+.ponto-gatilho {
+  fill: transparent;
+  stroke: transparent;
+}
+
+.ponto-grupo:hover .tooltip-valor {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ponto-grupo:hover .linha-ponto {
+  r: 6.5;
+  transition: r 0.2s ease;
 }

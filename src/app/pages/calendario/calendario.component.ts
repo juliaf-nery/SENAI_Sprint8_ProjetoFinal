@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { DashboardShellComponent } from '../../components/dashboard-shell/dashboard-shell.component';
 import { AuthService } from '../../services/auth.service';
 import { PERFIL_COR, PERFIL_LABEL } from '../../config/perfil';
@@ -12,6 +13,7 @@ interface EventoCalendario {
   titulo: string;
   tipo: TipoEvento;
   horario?: string;
+  descricao?: string;
 }
 
 interface DiaCalendario {
@@ -29,15 +31,10 @@ const TIPO_LABEL: Record<TipoEvento, string> = {
   aviso: 'Aviso',
 };
 
-/**
- * Página "Calendário" — comum a Professor, Aluno e Responsável.
- * Para o perfil Aluno, o botão "Novo Evento" não é exibido (somente
- * visualização), conforme especificação do PDF.
- */
 @Component({
   selector: 'app-calendario',
   standalone: true,
-  imports: [DashboardShellComponent],
+  imports: [DashboardShellComponent, FormsModule],
   templateUrl: './calendario.component.html',
   styleUrl: './calendario.component.css',
 })
@@ -49,6 +46,12 @@ export class CalendarioComponent {
 
   mesReferencia = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
   diaSelecionado: Date = new Date();
+
+  mostrarFormularioLembrete = false;
+  nomeLembrete = '';
+  horarioLembrete = '';
+  descricaoLembrete = '';
+  dataLembrete = '';
 
   private hoje = new Date();
 
@@ -69,19 +72,19 @@ export class CalendarioComponent {
     { data: this.novaData(-1), titulo: 'Simulado Bimestral', tipo: 'prova', horario: '08:00' },
   ];
 
-  /**
-   * Todos os eventos exibidos no calendário: os eventos próprios da agenda
-   * escolar somados aos avisos cadastrados na página "Avisos" (fonte única
-   * em config/avisos.ts), conforme especificado no PDF.
-   */
-  readonly eventos: EventoCalendario[] = [
-    ...this.eventosProprios,
-    ...AVISOS.map((aviso): EventoCalendario => ({
-      data: aviso.data,
-      titulo: aviso.titulo,
-      tipo: 'aviso',
-    })),
-  ];
+  private readonly lembretes: EventoCalendario[] = [];
+
+  get eventos(): EventoCalendario[] {
+    return [
+      ...this.eventosProprios,
+      ...this.lembretes,
+      ...AVISOS.map((aviso): EventoCalendario => ({
+        data: aviso.data,
+        titulo: aviso.titulo,
+        tipo: 'aviso',
+      })),
+    ];
+  }
 
   get mesAnoLabel(): string {
     return this.mesReferencia
@@ -93,7 +96,6 @@ export class CalendarioComponent {
     return ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
   }
 
-  /** Monta a grade de dias (6 semanas) do mês de referência, incluindo dias de padding. */
   get diasDoMes(): DiaCalendario[] {
     const primeiroDia = new Date(this.mesReferencia.getFullYear(), this.mesReferencia.getMonth(), 1);
     const inicioGrade = new Date(primeiroDia);
@@ -130,6 +132,7 @@ export class CalendarioComponent {
 
   selecionarDia(dia: DiaCalendario): void {
     this.diaSelecionado = dia.data;
+    this.mostrarFormularioLembrete = false;
   }
 
   mesAnterior(): void {
@@ -144,13 +147,54 @@ export class CalendarioComponent {
     return this.eventosDoDia(this.diaSelecionado).sort((a, b) => (a.horario ?? '').localeCompare(b.horario ?? ''));
   }
 
+  abrirFormularioLembrete(): void {
+    this.mostrarFormularioLembrete = true;
+    this.nomeLembrete = '';
+    this.horarioLembrete = '';
+    this.descricaoLembrete = '';
+    this.dataLembrete = this.formatarDataInput(this.diaSelecionado);
+  }
+
+  adicionarLembrete(): void {
+    if (!this.nomeLembrete.trim() || !this.dataLembrete) {
+      return;
+    }
+
+    const data = this.parseData(this.dataLembrete);
+    this.lembretes.push({
+      data,
+      titulo: this.nomeLembrete.trim(),
+      tipo: 'aviso',
+      horario: this.horarioLembrete.trim() || undefined,
+      descricao: this.descricaoLembrete.trim() || undefined,
+    });
+
+    this.diaSelecionado = data;
+    this.mostrarFormularioLembrete = false;
+    this.nomeLembrete = '';
+    this.horarioLembrete = '';
+    this.descricaoLembrete = '';
+    this.dataLembrete = this.formatarDataInput(data);
+  }
+
+  private formatarDataInput(data: Date): string {
+    const ano = data.getFullYear();
+    const mes = String(data.getMonth() + 1).padStart(2, '0');
+    const dia = String(data.getDate()).padStart(2, '0');
+    return `${ano}-${mes}-${dia}`;
+  }
+
+  private parseData(valor: string): Date {
+    const [ano, mes, dia] = valor.split('-').map(Number);
+    return new Date(ano, mes - 1, dia);
+  }
+
   get diaSelecionadoLabel(): string {
     return this.diaSelecionado
       .toLocaleDateString('pt-BR', { day: 'numeric', month: 'long' })
       .replace(/^\w/, (c) => c.toUpperCase());
   }
 
-  /** Próximos eventos a partir de hoje, ordenados cronologicamente. */
   get proximosEventos(): EventoCalendario[] {
     const hojeSemHora = new Date();
     hojeSemHora.setHours(0, 0, 0, 0);
@@ -164,9 +208,8 @@ export class CalendarioComponent {
     return data.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
   }
 
-  /** Para Aluno, o calendário é somente leitura — sem criação de eventos. */
-  get exibirBotaoNovoEvento(): boolean {
-    return this.authService.getRole() !== 'aluno';
+  get exibirBotaoNovoLembrete(): boolean {
+    return this.authService.getRole() !== null;
   }
 
   get perfilLabel(): string {

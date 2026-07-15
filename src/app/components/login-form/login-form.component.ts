@@ -87,20 +87,12 @@ images: string[] = [
 
   readonly demoAccounts: DemoAccount[] = [
     {
-      role: 'Administrador Estadual',
-      description: 'Secretaria Estadual',
-      identifier: '2026109482',
-      senha: 'admin123',
-      icon: 'bi-bank',
-      colorClass: 'color-1',
-    },
-    {
       role: 'Direção Escolar',
       description: 'Colégio Estadual...',
       identifier: '20260759312',
       senha: 'direcao123',
       icon: 'bi-building',
-      colorClass: 'color-2',
+      colorClass: 'color-21',
     },
     {
       role: 'Professor',
@@ -108,7 +100,7 @@ images: string[] = [
       identifier: '2026091112',
       senha: 'professor123',
       icon: 'bi-journal-bookmark-fill',
-      colorClass: 'color-3',
+      colorClass: 'color-2',
     },
     {
       role: 'Aluno',
@@ -116,7 +108,7 @@ images: string[] = [
       identifier: '2026106379',
       senha: 'aluno123',
       icon: 'bi-mortarboard-fill',
-      colorClass: 'color-4',
+      colorClass: 'color-3',
     },
     {
       role: 'Responsável',
@@ -124,7 +116,7 @@ images: string[] = [
       identifier: '111111',
       senha: 'responsavel123',
       icon: 'bi-people-fill',
-      colorClass: 'color-5',
+      colorClass: 'color-4',
     },
   ];
 

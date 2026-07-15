@@ -7,8 +7,8 @@
   <!-- KPIs -->
   <section class="dashboard-section">
     <div class="dashboard-grid kpi-grid">
-      <app-dashboard-card icon="bi-easel2-fill" titulo="Turmas" valor="5" descricao="Sob sua regência" cor="azul"></app-dashboard-card>
-      <app-dashboard-card icon="bi-journal-check" titulo="Atividades" valor="12" descricao="Aguardando correção" cor="amarelo"></app-dashboard-card>
+      <app-dashboard-card icon="bi-easel2-fill" titulo="Turmas" valor="5" descricao="Sob sua regência" cor="azul" route="/minhas-turmas"></app-dashboard-card>
+      <app-dashboard-card icon="bi-journal-check" titulo="Atividades" valor="12" descricao="Aguardando correção" cor="amarelo" route="/atividades"></app-dashboard-card>
     </div>
   </section>
 
@@ -19,11 +19,11 @@
       <span>Acesso rápido às suas ferramentas de sala de aula</span>
     </div>
     <div class="dashboard-grid">
-      <app-dashboard-card icon="bi-card-checklist" titulo="Notas" descricao="Lançamento e boletim das turmas" cor="verde"></app-dashboard-card>
-      <app-dashboard-card icon="bi-clipboard2-pulse" titulo="Frequência" descricao="Chamada e histórico de faltas" cor="azul-escuro"></app-dashboard-card>
-      <app-dashboard-card icon="bi-calendar3" titulo="Calendário" descricao="Aulas, provas e reuniões" cor="azul"></app-dashboard-card>
-      <app-dashboard-card icon="bi-chat-dots-fill" titulo="Mensagens" descricao="2 conversas não lidas" cor="vermelho"></app-dashboard-card>
-      <app-dashboard-card icon="bi-kanban" titulo="Projetos" descricao="Projetos vinculados às turmas" cor="amarelo"></app-dashboard-card>
+      <app-dashboard-card icon="bi-card-checklist" titulo="Notas" descricao="Lançamento e boletim das turmas" cor="verde" route="/notas"></app-dashboard-card>
+      <app-dashboard-card icon="bi-clipboard2-pulse" titulo="Frequência" descricao="Chamada e histórico de faltas" cor="azul-escuro" route="/frequencia"></app-dashboard-card>
+      <app-dashboard-card icon="bi-calendar3" titulo="Calendário" descricao="Aulas, provas e reuniões" cor="azul" route="/calendario"></app-dashboard-card>
+      <app-dashboard-card icon="bi-megaphone" titulo="Avisos" descricao="Comunicados da direção e da escola" cor="vermelho" route="/avisos"></app-dashboard-card>
+      <app-dashboard-card icon="bi-folder2-open" titulo="Materiais" descricao="FUTURO" cor="amarelo" route="/materiais"></app-dashboard-card>
     </div>
   </section>
 

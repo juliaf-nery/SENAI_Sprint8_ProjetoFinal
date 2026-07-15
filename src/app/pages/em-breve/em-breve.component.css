@@ -22,7 +22,7 @@
     justify-content: center;
     border-radius: 16px;
     background: #eaf2fb;
-    color: #0057A8;
+    color: #204171;
     font-size: 1.8rem;
     margin-bottom: 6px;
 }
@@ -46,7 +46,7 @@
     margin-top: 10px;
     padding: 10px 18px;
     border-radius: 10px;
-    background: #0057A8;
+    background: #204171;
     color: #ffffff;
     font-size: 0.85rem;
     font-weight: 600;
@@ -55,5 +55,5 @@
 }
 
 .btn-voltar:hover {
-    background: #003E7E;
+    background: #3669b2;
 }

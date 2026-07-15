@@ -194,7 +194,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    background: #0057A8;
+    background: #204171;
     color: #ffffff;
     border: none;
     border-radius: 10px;
@@ -206,7 +206,7 @@
 }
 
 .btn-salvar:hover {
-    background: #003E7E;
+    background: #3669b2;
 }
 
 .perfil-form-seguranca {

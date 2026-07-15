@@ -84,4 +84,28 @@
       </div>
     </div>
   </section>
+
+  <!-- Avaliações lançadas pelo professor (categorias), atualizado ao publicar -->
+  <section class="dashboard-section">
+    <div class="dashboard-widget">
+      <h2>Avaliações Publicadas — Matemática</h2>
+      <p class="boletim-avaliacoes-sub">Notas lançadas pelo professor, por categoria de avaliação</p>
+
+      @if (avaliacoesPublicadas.length) {
+        <div class="boletim-avaliacoes-grid">
+          @for (item of avaliacoesPublicadas; track item.categoria) {
+            <div class="avaliacao-chip">
+              <span class="avaliacao-categoria">{{ item.categoria }}</span>
+              <span class="avaliacao-valor">{{ item.valor.toFixed(1) }}</span>
+            </div>
+          }
+        </div>
+      } @else {
+        <p class="boletim-avaliacoes-vazio">
+          <i class="bi bi-hourglass-split"></i>
+          Nenhuma avaliação publicada pelo professor ainda.
+        </p>
+      }
+    </div>
+  </section>
 </app-dashboard-shell>

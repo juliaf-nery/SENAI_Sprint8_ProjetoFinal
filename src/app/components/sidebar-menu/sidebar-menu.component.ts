@@ -8,13 +8,6 @@ import {
   MenuItem,
 } from '../../config/menu-items';
 
-/**
- * Menu lateral compartilhado por todos os dashboards.
- * - Desktop: expansível/recolhível via botão na topbar.
- * - Tablet: inicia recolhido (somente ícones), continua expansível.
- * - Mobile: vira um drawer (gaveta) controlado pelo botão hambúrguer da topbar.
- * O estado (collapsed / mobileOpen) é controlado pelo DashboardShellComponent.
- */
 @Component({
   selector: 'app-sidebar-menu',
   standalone: true,

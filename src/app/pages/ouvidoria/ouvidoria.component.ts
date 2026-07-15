@@ -4,37 +4,15 @@ import { DashboardShellComponent } from '../../components/dashboard-shell/dashbo
 import { AuthService } from '../../services/auth.service';
 import { PERFIL_COR, PERFIL_LABEL } from '../../config/perfil';
 import { UserRole } from '../types/user';
+import { Manifestacao, OuvidoriaService, RemetenteManifestacao, StatusManifestacao } from '../../services/ouvidoria.service';
 
 interface Categoria {
   label: string;
   icon: string;
 }
 
-type StatusManifestacao = 'recebido' | 'analise' | 'respondido' | 'concluido';
-
-interface EtapaManifestacao {
-  status: StatusManifestacao;
-  label: string;
-  data?: string;
-  concluida: boolean;
-}
-
-interface RespostaEscola {
-  texto: string;
-  autor: string;
-  data: string;
-}
-
-interface Manifestacao {
-  protocolo: string;
-  titulo: string;
-  categorias: string[];
-  descricao: string;
-  data: string;
-  statusAtual: StatusManifestacao;
-  etapas: EtapaManifestacao[];
-  resposta?: RespostaEscola;
-}
+type AbaEnvio = 'nova' | 'minhas';
+type AbaGestao = 'recebidas' | 'respondidas';
 
 @Component({
   selector: 'app-ouvidoria',
@@ -45,8 +23,31 @@ interface Manifestacao {
 })
 export class OuvidoriaComponent {
   private readonly authService = inject(AuthService);
+  private readonly ouvidoriaService = inject(OuvidoriaService);
 
-  abaAtiva: 'nova' | 'minhas' = 'nova';
+  /**
+   * Direção Escolar (e Administrador, por ter o mesmo papel de gestão) não enviam
+   * manifestações: eles recebem e respondem as de alunos e professores. Por isso a
+   * página muda de "Nova/Minhas Manifestações" para "Recebidas/Respondidas".
+   */
+  get ehGestao(): boolean {
+    const role = this.authService.getRole();
+    return role === 'direcao' || role === 'administrador';
+  }
+
+  private get remetenteAtual(): RemetenteManifestacao {
+    return this.authService.getRole() === 'professor' ? 'professor' : 'aluno';
+  }
+
+  abaAtiva: AbaEnvio | AbaGestao = 'nova';
+
+  constructor() {
+    this.abaAtiva = this.ehGestao ? 'recebidas' : 'nova';
+  }
+
+  irParaAba(aba: AbaEnvio | AbaGestao): void {
+    this.abaAtiva = aba;
+  }
 
   readonly categorias: Categoria[] = [
     { label: 'Infraestrutura', icon: 'bi-tools' },
@@ -67,46 +68,11 @@ export class OuvidoriaComponent {
 
   manifestacaoSelecionada: Manifestacao | null = null;
 
-  private proximoProtocolo = 902;
+  // --- Visão Aluno/Professor: enviar e acompanhar "Minhas Manifestações" --
 
-  readonly manifestacoes: Manifestacao[] = [
-    {
-      protocolo: '#2026-0842',
-      titulo: 'Lâmpada queimada na sala 12',
-      categorias: ['Infraestrutura'],
-      descricao: 'A lâmpada do fundo da sala 12 está queimada há alguns dias, dificultando a leitura durante as aulas da tarde. Poderiam trocar assim que possível?',
-      data: '05/07/2026',
-      statusAtual: 'concluido',
-      etapas: [
-        { status: 'recebido', label: 'Recebido', data: '05/07/2026 08:30', concluida: true },
-        { status: 'analise', label: 'Em análise', data: '05/07/2026 14:00', concluida: true },
-        { status: 'respondido', label: 'Respondido', data: '06/07/2026 10:00', concluida: true },
-        { status: 'concluido', label: 'Concluído', data: '07/07/2026 09:00', concluida: true },
-      ],
-      resposta: {
-        texto: 'Obrigado pelo aviso! A manutenção já trocou a lâmpada da sala 12 no dia 07/07. Qualquer novo problema, é só nos avisar por aqui.',
-        autor: 'Setor de Manutenção',
-        data: '07/07/2026 09:00',
-      },
-    },
-    {
-      protocolo: '#2026-0901',
-      titulo: 'Sugestão de atividade extracurricular',
-      categorias: ['Sugestão', 'Ensino'],
-      descricao: 'Seria muito bacana se a escola oferecesse uma oficina de robótica no contraturno. Vários colegas da minha turma teriam interesse em participar.',
-      data: '08/07/2026',
-      statusAtual: 'analise',
-      etapas: [
-        { status: 'recebido', label: 'Recebido', data: '08/07/2026 16:00', concluida: true },
-        { status: 'analise', label: 'Em análise', data: '09/07/2026 09:00', concluida: true },
-        { status: 'respondido', label: 'Respondido', concluida: false },
-        { status: 'concluido', label: 'Concluído', concluida: false },
-      ],
-    },
-  ];
-
-  irParaAba(aba: 'nova' | 'minhas'): void {
-    this.abaAtiva = aba;
+  /** "Minhas Manifestações" do perfil logado (aluno/responsável ou professor). */
+  get manifestacoes(): Manifestacao[] {
+    return this.ouvidoriaService.obterPorRemetente(this.remetenteAtual);
   }
 
   alternarCategoria(categoria: string): void {
@@ -129,22 +95,10 @@ export class OuvidoriaComponent {
   enviarManifestacao(): void {
     if (!this.formularioValido) return;
 
-    const agora = new Date();
-    const dataFormatada = agora.toLocaleDateString('pt-BR');
-
-    this.manifestacoes.unshift({
-      protocolo: `#2026-0${this.proximoProtocolo++}`,
+    this.ouvidoriaService.registrarManifestacao(this.remetenteAtual, {
       titulo: this.titulo.trim(),
       categorias: [...this.categoriasSelecionadas],
       descricao: this.descricao.trim(),
-      data: dataFormatada,
-      statusAtual: 'recebido',
-      etapas: [
-        { status: 'recebido', label: 'Recebido', data: `${dataFormatada} ${agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`, concluida: true },
-        { status: 'analise', label: 'Em análise', concluida: false },
-        { status: 'respondido', label: 'Respondido', concluida: false },
-        { status: 'concluido', label: 'Concluído', concluida: false },
-      ],
     });
 
     this.mostrarPopupEnviado = true;
@@ -157,12 +111,50 @@ export class OuvidoriaComponent {
     this.mostrarPopupEnviado = false;
   }
 
+  // --- Visão Direção/Administrador: receber e responder ------------------
+
+  /** Manifestações aguardando resposta (aba "Manifestações Recebidas"). */
+  get manifestacoesRecebidas(): Manifestacao[] {
+    return this.ouvidoriaService.obterRecebidas();
+  }
+
+  /** Manifestações já respondidas (aba "Manifestações Respondidas") — as mesmas que aparecem como respondidas para quem enviou. */
+  get manifestacoesRespondidas(): Manifestacao[] {
+    return this.ouvidoriaService.obterRespondidas();
+  }
+
+  textoResposta = '';
+  mostrarPopupRespondido = false;
+
+  /** Só é possível responder pela tela de gestão, e apenas manifestações que ainda não têm resposta. */
+  get podeResponder(): boolean {
+    return this.ehGestao && !!this.manifestacaoSelecionada && !this.manifestacaoSelecionada.resposta;
+  }
+
+  enviarResposta(): void {
+    if (!this.podeResponder || !this.manifestacaoSelecionada || !this.textoResposta.trim()) return;
+
+    this.ouvidoriaService.responder(this.manifestacaoSelecionada.protocolo, this.textoResposta.trim(), this.perfilLabel);
+
+    this.textoResposta = '';
+    this.mostrarPopupRespondido = true;
+    setTimeout(() => (this.mostrarPopupRespondido = false), 3500);
+  }
+
+  fecharPopupRespondido(): void {
+    this.mostrarPopupRespondido = false;
+  }
+
+  // --- Card de detalhe (compartilhado pelas duas visões) ------------------
+
   abrirDetalhe(manifestacao: Manifestacao): void {
     this.manifestacaoSelecionada = manifestacao;
+    this.textoResposta = '';
   }
 
   fecharDetalhe(): void {
     this.manifestacaoSelecionada = null;
+    this.textoResposta = '';
   }
 
   statusLabelBadge(status: StatusManifestacao): string {
@@ -181,6 +173,10 @@ export class OuvidoriaComponent {
       case 'respondido': return 'badge-pill status-respondido';
       case 'recebido': return 'badge-pill status-recebido';
     }
+  }
+
+  remetenteLabel(remetente: RemetenteManifestacao): string {
+    return remetente === 'professor' ? 'Professor' : 'Aluno';
   }
 
   get perfilLabel(): string {

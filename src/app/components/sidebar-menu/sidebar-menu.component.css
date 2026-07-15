@@ -3,15 +3,22 @@
     --sidebar-width-collapsed: 76px;
 
     width: var(--sidebar-width);
+    min-height: 100vh;
+    height: 100vh;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    background: #0f4094;
+    background: #204171;
     color: #ffffff;
     padding: 18px 12px;
     gap: 8px;
+    box-sizing: border-box;
     transition: width 0.25s ease, transform 0.25s ease;
     overflow-x: hidden;
+    position: sticky;
+    top: 0;
+    left: 0;
+    align-self: stretch;
 }
 
 .sidebar.collapsed {
@@ -85,7 +92,7 @@
 
 .sidebar-link.active {
     background: #ffffff;
-    color: #003E7E;
+    color: #204171;
     font-weight: 700;
 }
 
@@ -98,14 +105,12 @@
     color: #ffffff;
 }
 
-/* Tablet: menu inicia recolhido (somente ícones) */
 @media (max-width: 1024px) {
     .sidebar:not(.mobile-open) {
         width: var(--sidebar-width-collapsed);
     }
 }
 
-/* Mobile: menu vira gaveta (drawer) sobreposta ao conteúdo */
 @media (max-width: 768px) {
     .sidebar {
         position: fixed;

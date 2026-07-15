@@ -1,5 +1,5 @@
 .dashboard-card {
-    --cor-icone: #0057A8;
+    --cor-icone: #204171;
     --cor-fundo-icone: #eaf2fb;
 
     display: flex;
@@ -80,8 +80,8 @@
     line-height: 1.4;
 }
 
-.cor-azul { --cor-icone: #0057A8; --cor-fundo-icone: #eaf2fb; }
-.cor-azul-escuro { --cor-icone: #003E7E; --cor-fundo-icone: #e6edf5; }
+.cor-azul { --cor-icone: #204171; --cor-fundo-icone: #eaf2fb; }
+.cor-azul-escuro { --cor-icone: #3669b2; --cor-fundo-icone: #e6edf5; }
 .cor-verde { --cor-icone: #2E7D32; --cor-fundo-icone: #eaf5eb; }
 .cor-amarelo { --cor-icone: #b7791f; --cor-fundo-icone: #fef6e6; }
 .cor-vermelho { --cor-icone: #C62828; --cor-fundo-icone: #fbeaea; }

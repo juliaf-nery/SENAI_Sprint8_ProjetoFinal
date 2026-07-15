@@ -1,0 +1,349 @@
+.turma-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.turma-tab {
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #64748b;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.turma-tab:hover {
+  border-color: #3669b2;
+}
+
+.turma-tab.active {
+  background: #204171;
+  border-color: #204171;
+  color: #ffffff;
+}
+
+.campo-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 10px;
+}
+
+.categorias-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.categoria-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: gray;
+  background: #eaf5eb;
+  padding: 6px 8px 6px 14px;
+  border-radius: 999px;
+}
+
+.categoria-chip button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(46, 125, 50, 0.15);
+  color: #2E7D32;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.categoria-chip button:hover {
+  background: rgba(46, 125, 50, 0.3);
+}
+
+.categoria-nova {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.categoria-nova input {
+  flex: 1;
+  min-width: 220px;
+  font-family: inherit;
+  font-size: 0.84rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 9px 14px;
+  background: #f8fafc;
+}
+
+.categoria-nova button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: #2E7D32;
+  border: none;
+  border-radius: 10px;
+  padding: 9px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.categoria-nova button:hover {
+  background: #3669b2;
+}
+
+/* Planilha */
+.planilha-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.planilha-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 20px 4px;
+}
+
+.planilha-topo h2 {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.planilha-sub {
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.planilha-wrapper {
+  overflow-x: auto;
+  padding: 16px 20px 4px;
+}
+
+.planilha-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 680px;
+}
+
+.planilha-tabela thead th {
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  padding: 10px 12px;
+  text-align: center;
+  white-space: nowrap;
+
+  background-color: #f8f9fa !important;
+  border-bottom: 2px solid #e9ecef;
+
+  color: #495057;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 12px 16px;
+}
+
+.planilha-tabela thead th.coluna-aluno {
+  text-align: left;
+}
+
+.planilha-tabela tbody tr {
+
+  color: #64748b;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.planilha-tabela tbody tr:hover {
+  background: #f8fafc;
+}
+
+.planilha-tabela td {
+  text-align: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+  font-size: 0.85rem;
+}
+
+.coluna-aluno {
+  text-align: left !important;
+  min-width: 200px;
+}
+
+.aluno-nome {
+  display: block;
+  font-size: 0.83rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.aluno-email {
+  display: block;
+  font-size: 0.7rem;
+  color: #94a3b8;
+}
+
+.celula-nota {
+  width: 64px;
+  font-family: inherit;
+  font-size: 0.84rem;
+  text-align: center;
+  color: #0f172a;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 7px 4px;
+  background: #ffffff;
+}
+
+.celula-nota:focus {
+  outline: none;
+  border-color: #204171;
+  background: #f8fafc;
+}
+
+.coluna-media {
+  font-weight: 700;
+  color: #204171;
+  white-space: nowrap;
+}
+
+.planilha-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #b7791f;
+  background: #fef6e6;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin: 4px 20px 0;
+}
+
+.planilha-status.status-publicado {
+  color: #204171;
+  background: #eaf5eb;
+}
+
+.planilha-acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 18px 20px 20px;
+}
+
+.btn-salvar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #64748b;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 10px 18px;
+  cursor: pointer;
+}
+
+.btn-salvar:hover {
+  border-color: #cbd5e1;
+}
+
+.btn-publicar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #ffffff;
+  background: #2E7D32;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  cursor: pointer;
+}
+
+.btn-publicar:hover {
+  background: #5197a6;
+}
+
+/* Pop-up de confirmação (Salvar/Publicar) */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 50;
+}
+
+.modal-confirmacao {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px;
+  text-align: center;
+  max-width: 340px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
+}
+
+.modal-confirmacao i {
+  font-size: 2.2rem;
+  color: #204171;
+  margin-bottom: 10px;
+}
+
+.modal-confirmacao h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.modal-confirmacao p {
+  font-size: 0.82rem;
+  color: #64748b;
+  margin-bottom: 18px;
+}
+
+.modal-confirmacao button {
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #ffffff;
+  background: #2E7D32;
+  border: none;
+  border-radius: 10px;
+  padding: 9px 24px;
+  cursor: pointer;
+}

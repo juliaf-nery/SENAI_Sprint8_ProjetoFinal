@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 .dashboard-shell {
-    --azul-principal: #0057A8;
-    --azul-escuro: #003E7E;
+    --azul-principal: #204171;
+    --azul-claro: #3669b2;
     --cinza-claro: #F5F7FA;
     --cinza-medio: #E5E7EB;
     --verde: #2E7D32;
@@ -12,12 +12,14 @@
     font-family: 'Inter', sans-serif;
     min-height: 100vh;
     display: flex;
+    align-items: stretch;
     background-color: var(--cinza-claro);
 }
 
 .dashboard-main {
     flex: 1;
     min-width: 0;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
@@ -60,7 +62,7 @@
     border-radius: 10px;
     border: 1px solid var(--cinza-medio);
     background: #ffffff;
-    color: var(--azul-escuro);
+    color: var(--azul-claro);
     font-size: 1.15rem;
     cursor: pointer;
     transition: background 0.2s;

@@ -15,15 +15,19 @@ export class DashboardShellComponent implements OnInit {
 
   /** Título principal exibido no topo da página (ex: "Painel do Professor"). */
   @Input() tituloPagina = '';
+
   /** Linha de contexto abaixo do título (ex: escola vinculada). */
   @Input() subtitulo = '';
+
   /** Rótulo do perfil exibido como badge ao lado do nome do usuário. */
   @Input() perfilLabel = '';
+
   /** Cor de destaque do badge de perfil (segue a paleta institucional). */
-  @Input() corTema = '#0057A8';
+  @Input() corTema = '#204171';
 
   /** Menu lateral recolhido (somente ícones). Começa recolhido em telas de tablet. */
   sidebarCollapsed = false;
+  
   /** Menu lateral aberto como gaveta (mobile). */
   sidebarMobileOpen = false;
 

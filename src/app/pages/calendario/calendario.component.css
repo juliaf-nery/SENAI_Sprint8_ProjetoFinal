@@ -67,7 +67,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    background: #0057A8;
+    background: #204171;
     color: #ffffff;
     border: none;
     border-radius: 10px;
@@ -79,7 +79,67 @@
 }
 
 .btn-novo-evento:hover {
-    background: #003E7E;
+    background: #3669b2;
+}
+
+.card-novo-lembrete {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px;
+    margin-bottom: 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #f8fafc;
+}
+
+.card-novo-lembrete h3 {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #0f172a;
+}
+
+.campo-label {
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: #475569;
+}
+
+.card-novo-lembrete input,
+.card-novo-lembrete textarea {
+    width: 100%;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-family: inherit;
+    font-size: 0.82rem;
+    color: #0f172a;
+    background: #ffffff;
+}
+
+.card-novo-lembrete textarea {
+    resize: vertical;
+    min-height: 72px;
+}
+
+.btn-adicionar-lembrete {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: none;
+    border-radius: 10px;
+    padding: 9px 12px;
+    background: #204171;
+    color: #ffffff;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-adicionar-lembrete:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
 }
 
 /* Cabeçalho dos dias da semana */
@@ -149,7 +209,7 @@
 }
 
 .calendario-dia.dia-selecionado {
-    border-color: #0057A8;
+    border-color: #204171;
     background: #eaf2fb;
 }
 
@@ -168,7 +228,7 @@
 }
 
 .ponto-prova { background: #C62828; }
-.ponto-atividade { background: #0057A8; }
+.ponto-atividade { background: #204171; }
 .ponto-reuniao { background: #b7791f; }
 .ponto-evento { background: #2E7D32; }
 .ponto-projeto { background: #6b21a8; }
@@ -190,5 +250,11 @@
 
 .calendario-sem-eventos {
     font-size: 0.82rem;
+    color: #64748b;
+}
+
+.item-descricao {
+    margin-top: 4px;
+    font-size: 0.74rem;
     color: #64748b;
 }

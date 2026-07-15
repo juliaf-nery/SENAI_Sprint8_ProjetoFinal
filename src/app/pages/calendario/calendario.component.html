@@ -18,14 +18,36 @@
               <i class="bi bi-chevron-right"></i>
             </button>
           </div>
-          @if (exibirBotaoNovoEvento) {
-            <button type="button" class="btn-novo-evento">
+          @if (exibirBotaoNovoLembrete) {
+            <button type="button" class="btn-novo-evento" (click)="abrirFormularioLembrete()">
               <i class="bi bi-plus-lg"></i>
-              Novo Evento
+              Novo lembrete
             </button>
           }
         </div>
       </div>
+
+      @if (mostrarFormularioLembrete) {
+        <div class="card-novo-lembrete">
+          <h3>Novo lembrete</h3>
+          <label class="campo-label">Nome do lembrete *</label>
+          <input type="text" [(ngModel)]="nomeLembrete" name="nomeLembrete" placeholder="Ex.: Revisar conteúdo" />
+
+          <label class="campo-label">Horário</label>
+          <input type="time" [(ngModel)]="horarioLembrete" name="horarioLembrete" />
+
+          <label class="campo-label">Descrição</label>
+          <textarea rows="3" [(ngModel)]="descricaoLembrete" name="descricaoLembrete" placeholder="Detalhes do lembrete"></textarea>
+
+          <label class="campo-label">Data do lembrete *</label>
+          <input type="date" [(ngModel)]="dataLembrete" name="dataLembrete" />
+
+          <button type="button" class="btn-adicionar-lembrete" [disabled]="!nomeLembrete.trim() || !dataLembrete" (click)="adicionarLembrete()">
+            <i class="bi bi-bookmark-plus-fill"></i>
+            Adicionar lembrete
+          </button>
+        </div>
+      }
 
       <div class="calendario-semana-header">
         @for (dia of diasSemana; track dia) {
@@ -68,6 +90,9 @@
                 <div>
                   <div class="item-title">{{ evento.titulo }}</div>
                   <div class="item-meta">{{ tipoLabel[evento.tipo] }} @if (evento.horario) { · {{ evento.horario }} }</div>
+                  @if (evento.descricao) {
+                    <div class="item-descricao">{{ evento.descricao }}</div>
+                  }
                 </div>
               </div>
             }

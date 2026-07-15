@@ -1,12 +1,14 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DashboardShellComponent } from '../../components/dashboard-shell/dashboard-shell.component';
 import { AuthService } from '../../services/auth.service';
 import { PERFIL_COR, PERFIL_LABEL } from '../../config/perfil';
 import { UserRole } from '../types/user';
-import { AVISOS, TIPO_AVISO_LABEL, TipoAviso } from '../../config/avisos';
+import { AVISOS, Aviso, TIPO_AVISO_LABEL, TipoAviso } from '../../config/avisos';
 
 type FiltroTipo = 'todos' | TipoAviso;
+
+type QuemPostou = 'Direção Escolar' | 'Secretaria Escolar' | 'Coordenação Pedagógica';
 
 /**
  * Página "Avisos" — Direção, Aluno e Responsável.
@@ -21,7 +23,7 @@ type FiltroTipo = 'todos' | TipoAviso;
   templateUrl: './avisos.component.html',
   styleUrl: './avisos.component.css',
 })
-export class AvisosComponent {
+export class AvisosComponent implements OnInit, OnDestroy {
   private readonly authService = inject(AuthService);
 
   readonly tipoLabel = TIPO_AVISO_LABEL;
@@ -39,8 +41,89 @@ export class AvisosComponent {
 
   private readonly avisos = [...AVISOS].sort((a, b) => b.data.getTime() - a.data.getTime());
 
-  get avisoDestaque() {
-    return this.avisos[0];
+  // --- Carrossel de avisos em destaque (banner do topo) -------------------
+
+  /** Os avisos mais recentes entram no carrossel do banner (a data mais nova primeiro). */
+  get carrosselAvisos(): Aviso[] {
+    return this.avisos.slice(0, 5);
+  }
+
+  carrosselIndex = 0;
+  private autoplayId?: ReturnType<typeof setInterval>;
+
+  ngOnInit(): void {
+    this.autoplayId = setInterval(() => this.proximoSlideAviso(), 6000);
+  }
+
+  ngOnDestroy(): void {
+    if (this.autoplayId) {
+      clearInterval(this.autoplayId);
+    }
+  }
+
+  irParaSlideAviso(index: number): void {
+    this.carrosselIndex = index;
+  }
+
+  proximoSlideAviso(): void {
+    if (!this.carrosselAvisos.length) return;
+    this.carrosselIndex = (this.carrosselIndex + 1) % this.carrosselAvisos.length;
+  }
+
+  // --- Modal "Novo Aviso" (Direção / Secretaria / Coordenação) -----------
+
+  readonly opcoesQuemPostou: QuemPostou[] = ['Direção Escolar', 'Secretaria Escolar', 'Coordenação Pedagógica'];
+
+  mostrarModalNovoAviso = false;
+  mostrarPopupAvisoPublicado = false;
+
+  novoAviso: { titulo: string; descricao: string; data: string; quemPostou: QuemPostou } = {
+    titulo: '',
+    descricao: '',
+    data: '',
+    quemPostou: 'Direção Escolar',
+  };
+
+  abrirModalNovoAviso(): void {
+    this.novoAviso = { titulo: '', descricao: '', data: '', quemPostou: 'Direção Escolar' };
+    this.mostrarModalNovoAviso = true;
+  }
+
+  fecharModalNovoAviso(): void {
+    this.mostrarModalNovoAviso = false;
+  }
+
+  get novoAvisoValido(): boolean {
+    return !!this.novoAviso.titulo.trim() && !!this.novoAviso.descricao.trim() && !!this.novoAviso.data.trim();
+  }
+
+  publicarAviso(): void {
+    if (!this.novoAvisoValido) return;
+
+    const [ano, mes, dia] = this.novoAviso.data.split('-').map(Number);
+
+    const aviso: Aviso = {
+      id: `aviso-${Date.now()}`,
+      titulo: this.novoAviso.titulo.trim(),
+      descricao: this.novoAviso.descricao.trim(),
+      data: new Date(ano, mes - 1, dia),
+      autor: this.novoAviso.quemPostou,
+      tipo: 'informativo',
+    };
+
+    // Publica na fonte compartilhada (também usada pelo Calendário) e na lista local desta página.
+    AVISOS.unshift(aviso);
+    this.avisos.unshift(aviso);
+    this.avisos.sort((a, b) => b.data.getTime() - a.data.getTime());
+
+    this.carrosselIndex = 0;
+    this.mostrarModalNovoAviso = false;
+    this.mostrarPopupAvisoPublicado = true;
+    setTimeout(() => (this.mostrarPopupAvisoPublicado = false), 3500);
+  }
+
+  fecharPopupAvisoPublicado(): void {
+    this.mostrarPopupAvisoPublicado = false;
   }
 
   get avisosFiltrados() {

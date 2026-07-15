@@ -11,12 +11,6 @@ body {
     font-weight: 500;
 }
 
-/* ==========================================================================
-   Utilitários compartilhados pelos Dashboards (Administrador, Direção,
-   Professor, Aluno, Responsável). Mantidos globais para evitar duplicar
-   o mesmo CSS em cada componente de dashboard.
-   ========================================================================== */
-
 .dashboard-toolbar {
     display: flex;
     flex-wrap: wrap;
@@ -91,27 +85,32 @@ body {
 }
 
 .dashboard-widget {
-    background: #ffffff;
-    border: 1px solid #eef1f6;
-    border-radius: 12px;
-    padding: 25px;
-    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+    background: #fff;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 8px 30px rgba(15, 23, 42, .08);
+    border: 1px solid #edf2f7;
+
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .dashboard-widget h2 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #0f172a;
-    margin-bottom: 4px;
+  font-size: 0.95rem; /* Um pouco menor para não gritar na tela */
+  font-weight: 600;    /* Semibold em vez de Bold puro (700) */
+  color: #1e293b;      /* Tom de slate escuro profissional */
+  letter-spacing: -0.01em;
+  margin-bottom: 0;
 }
 
-.dashboard-widget > p:first-of-type {
+.dashboard-widget>p:first-of-type {
     font-size: 0.78rem;
     color: #64748b;
     margin-bottom: 16px;
 }
 
-/* Mini gráfico de barras (mock visual, sem biblioteca de gráficos) */
 .mini-bar-chart {
     display: flex;
     align-items: flex-end;
@@ -128,13 +127,14 @@ body {
     gap: 8px;
     height: 100%;
     justify-content: flex-end;
+    
 }
 
 .mini-bar-chart .bar {
     width: 100%;
     max-width: 32px;
     border-radius: 6px 6px 0 0;
-    background: #0057A8;
+    background: #204171;
     transition: opacity 0.2s;
 }
 
@@ -157,7 +157,7 @@ body {
     height: 140px;
     border-radius: 12px;
     background: linear-gradient(135deg, #eaf2fb, #f5f7fa);
-    color: #0057A8;
+    color: #204171;
     text-align: center;
 }
 
@@ -188,7 +188,7 @@ body {
 }
 
 .dashboard-list-item i {
-    color: #0057A8;
+    color: #204171;
     font-size: 1rem;
     flex-shrink: 0;
 }
@@ -314,7 +314,9 @@ body.tema-escuro .user-name,
 body.tema-escuro .dashboard-section-header h2,
 body.tema-escuro .card-titulo,
 body.tema-escuro .card-valor,
-body.tema-escuro h1, body.tema-escuro h2, body.tema-escuro h3 {
+body.tema-escuro h1,
+body.tema-escuro h2,
+body.tema-escuro h3 {
     color: #f1f5f9 !important;
 }
 
@@ -337,6 +339,10 @@ body.tema-escuro .dashboard-list-item {
     background: #273548;
 }
 
+body.tema-escuro .rel-donut::after {
+    background: #1e293b;
+}
+
 body.tema-escuro table {
     color: #e2e8f0;
 }
@@ -345,6 +351,7 @@ body.tema-escuro th {
     color: #94a3b8 !important;
 }
 
-body.tema-escuro td, body.tema-escuro th {
+body.tema-escuro td,
+body.tema-escuro th {
     border-color: #334155 !important;
 }

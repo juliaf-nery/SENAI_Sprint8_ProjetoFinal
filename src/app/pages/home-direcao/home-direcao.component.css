@@ -1,0 +1,133 @@
+.chart-container {
+  display: flex;
+  height: 180px;
+  margin-top: 20px;
+  position: relative;
+}
+
+.chart-y-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-right: 10px;
+  font-size: 0.75rem;
+  color: #a0aec0;
+  width: 30px;
+  height: calc(100% - 20px);
+}
+
+.chart-content-area {
+  position: relative;
+  flex: 1;
+  height: calc(100% - 20px);
+  border-left: 2px solid #cbd5e0;
+  border-bottom: 2px solid #cbd5e0;
+}
+
+.chart-grid-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.grid-line {
+  width: 100%;
+  border-top: 1px dashed #e2e8f0;
+}
+
+.mini-bar-chart {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  z-index: 2;
+}
+
+.mini-bar-chart .bar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.bar-wrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+}
+
+/* A barra física */
+.mini-bar-chart .bar {
+  width: 100%;
+  max-width: 32px;
+  border-radius: 4px 4px 0 0;
+  background: #204171;
+  position: relative;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.mini-bar-chart .bar:hover {
+  background: #3669b2;
+}
+
+.mini-bar-chart .bar-label {
+  font-size: 0.75rem;
+  color: #718096;
+  margin-top: 6px;
+  position: absolute;
+  bottom: -20px;
+}
+
+/* TOOLTIP INTERATIVO */
+.bar-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  background-color: #1e293b;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 8px;
+  position: absolute;
+  z-index: 10;
+  bottom: 105%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+}
+
+.bar-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #1e293b transparent transparent transparent;
+}
+
+.bar:hover .bar-tooltip {
+  visibility: visible;
+  opacity: 1;
+}

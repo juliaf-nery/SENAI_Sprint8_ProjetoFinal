@@ -75,36 +75,61 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/ouvidoria/ouvidoria.component').then((c) => c.OuvidoriaComponent),
     canActivate: [homeGuard],
-    data: { titulo: 'Ouvidoria Escolar', icon: 'bi-megaphone', roles: ['administrador', 'direcao', 'aluno'] },
+    data: { titulo: 'Ouvidoria Escolar', icon: 'bi-megaphone', roles: ['administrador', 'direcao', 'professor', 'aluno'] },
   },
   { path: 'plano-de-acao', loadComponent: emBreve, canActivate: [homeGuard], data: { titulo: 'Plano de Ação Escolar', icon: 'bi-kanban', roles: ['administrador', 'direcao'] } },
-  { path: 'relatorios', loadComponent: emBreve, canActivate: [homeGuard], data: { titulo: 'Relatórios', icon: 'bi-file-earmark-text', roles: ['administrador', 'direcao'] } },
+  {
+    path: 'relatorios',
+    loadComponent: () =>
+      import('./pages/relatorios/relatorios.component').then((c) => c.RelatoriosComponent),
+    canActivate: [homeGuard],
+    data: { titulo: 'Relatórios', icon: 'bi-file-earmark-text', roles: ['administrador', 'direcao'] },
+  },
   {
     path: 'avisos',
     loadComponent: () =>
       import('./pages/avisos/avisos.component').then((c) => c.AvisosComponent),
     canActivate: [homeGuard],
-    data: { titulo: 'Avisos', icon: 'bi-megaphone', roles: ['direcao', 'aluno', 'responsavel'] },
+    data: { titulo: 'Avisos', icon: 'bi-megaphone', roles: ['direcao', 'professor', 'aluno', 'responsavel'] },
   },
-  { path: 'projetos', loadComponent: emBreve, canActivate: [homeGuard], data: { titulo: 'Projetos Escolares', icon: 'bi-kanban', roles: ['direcao', 'aluno'] } },
-  { path: 'eventos', loadComponent: emBreve, canActivate: [homeGuard], data: { titulo: 'Eventos', icon: 'bi-calendar-event', roles: ['direcao', 'aluno', 'responsavel'] } },
+  { path: 'projetos', loadComponent: emBreve, canActivate: [homeGuard], data: { titulo: 'Projetos Escolares', icon: 'bi-kanban', roles: ['direcao', 'professor', 'aluno'] } },
+  { path: 'eventos', loadComponent: emBreve, canActivate: [homeGuard], data: { titulo: 'Eventos', icon: 'bi-calendar-event', roles: ['direcao', 'professor', 'aluno', 'responsavel'] } },
   {
     path: 'professores',
     loadComponent: () =>
       import('./pages/professores/professores.component').then((c) => c.ProfessoresComponent),
     canActivate: [homeGuard],
-    data: { titulo: 'Professores', icon: 'bi-person-workspace', roles: ['direcao', 'aluno'] },
+    data: { titulo: 'Professores', icon: 'bi-person-workspace', roles: ['direcao', 'professor', 'aluno', 'responsavel'] },
   },
   {
     path: 'destaques',
     loadComponent: () =>
       import('./pages/destaques/destaques.component').then((c) => c.DestaquesComponent),
     canActivate: [homeGuard],
-    data: { titulo: 'Destaques', icon: 'bi-star-fill', roles: ['professor', 'aluno'] },
+    data: { titulo: 'Destaques', icon: 'bi-star-fill', roles: ['direcao', 'professor', 'aluno'] },
   },
   { path: 'indicadores-escola', loadComponent: emBreve, canActivate: [homeGuard], data: { titulo: 'Indicadores da Escola', icon: 'bi-graph-up-arrow', roles: ['direcao'] } },
-  { path: 'minhas-turmas', loadComponent: emBreve, canActivate: [homeGuard], data: { titulo: 'Minhas Turmas', icon: 'bi-easel2-fill', roles: ['professor'] } },
-  { path: 'notas', loadComponent: emBreve, canActivate: [homeGuard], data: { titulo: 'Notas', icon: 'bi-card-checklist', roles: ['professor'] } },
+  {
+    path: 'minhas-turmas',
+    loadComponent: () =>
+      import('./pages/minhas-turmas/minhas-turmas.component').then((c) => c.MinhasTurmasComponent),
+    canActivate: [homeGuard],
+    data: { titulo: 'Minhas Turmas', icon: 'bi-easel2-fill', roles: ['professor'] },
+  },
+  {
+    path: 'turmas',
+    loadComponent: () =>
+      import('./pages/turmas/turmas.component').then((c) => c.TurmasComponent),
+    canActivate: [homeGuard],
+    data: { titulo: 'Turmas', icon: 'bi-collection-fill', roles: ['direcao', 'professor'] },
+  },
+  {
+    path: 'notas',
+    loadComponent: () =>
+      import('./pages/notas/notas.component').then((c) => c.NotasComponent),
+    canActivate: [homeGuard],
+    data: { titulo: 'Notas', icon: 'bi-card-checklist', roles: ['professor'] },
+  },
   {
     path: 'frequencia',
     loadComponent: () =>
@@ -127,7 +152,7 @@ export const routes: Routes = [
     canActivate: [homeGuard],
     data: { titulo: 'Calendário', icon: 'bi-calendar3', roles: ['professor', 'aluno', 'responsavel'] },
   },
-  { path: 'mensagens', loadComponent: emBreve, canActivate: [homeGuard], data: { titulo: 'Mensagens', icon: 'bi-chat-dots-fill', roles: ['professor', 'aluno', 'responsavel'] } },
+  { path: 'mensagens', loadComponent: emBreve, canActivate: [homeGuard], data: { titulo: 'Mensagens', icon: 'bi-chat-dots-fill', roles: ['direçao', 'professor', 'responsavel'] } },
   {
     path: 'boletim',
     loadComponent: () =>
@@ -140,7 +165,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/biblioteca/biblioteca.component').then((c) => c.BibliotecaComponent),
     canActivate: [homeGuard],
-    data: { titulo: 'Biblioteca Digital', icon: 'bi-book-half', roles: ['aluno'] },
+    data: { titulo: 'Biblioteca Digital', icon: 'bi-book-half', roles: ['professor', 'aluno', 'direcao'] },
   },
   { path: 'galeria', loadComponent: emBreve, canActivate: [homeGuard], data: { titulo: 'Galeria de Fotos', icon: 'bi-images', roles: ['aluno'] } },
   {
@@ -148,7 +173,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/cardapio/cardapio.component').then((c) => c.CardapioComponent),
     canActivate: [homeGuard],
-    data: { titulo: 'Cardápio Escolar', icon: 'bi-cup-hot-fill', roles: ['aluno', 'responsavel'] },
+    data: { titulo: 'Cardápio Escolar', icon: 'bi-cup-hot-fill', roles: ['direcao', 'professor', 'aluno', 'responsavel'] },
   },
 
   // Comuns a todos os perfis autenticados (sem restrição de "roles")

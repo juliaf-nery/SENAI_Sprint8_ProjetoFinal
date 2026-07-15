@@ -1,0 +1,393 @@
+/* ==========================================================================
+   Pastas por turma (mesmo padrão visual usado na página Atividades)
+   ========================================================================== */
+
+.pasta-banner {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border-radius: 16px;
+    padding: 22px 26px;
+    color: #ffffff;
+}
+
+.pasta-banner-icone {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+}
+
+.pasta-banner-texto {
+    flex: 1;
+    min-width: 0;
+}
+
+.pasta-banner-turma {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    opacity: 0.85;
+    margin-bottom: 2px;
+}
+
+.pasta-banner h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.pasta-banner p {
+    font-size: 0.82rem;
+    opacity: 0.9;
+    margin-top: 4px;
+    max-width: 640px;
+}
+
+.btn-editar-pasta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+    padding: 9px 16px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.15s;
+}
+
+.btn-editar-pasta:hover {
+    background: rgba(255, 255, 255, 0.28);
+}
+
+.capa-azul { background: linear-gradient(120deg, #3669b2, #204171); }
+.capa-verde { background: linear-gradient(120deg, #2E7D32, #1b5e20); }
+.capa-laranja { background: linear-gradient(120deg, #b7791f, #8a5a10); }
+.capa-roxo { background: linear-gradient(120deg, #6b21a8, #4c1580); }
+
+.pastas-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.pasta-card {
+    background: #ffffff;
+    border: 1px solid #eef1f6;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.pasta-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 26px -12px rgba(15, 23, 42, 0.18);
+    border-color: #dbe4f0;
+}
+
+.pasta-card-capa {
+    height: 84px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 2rem;
+}
+
+.pasta-card-corpo {
+    padding: 16px 18px;
+}
+
+.pasta-card-turma {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #204171;
+    margin-bottom: 4px;
+}
+
+.pasta-card-corpo h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.pasta-card-corpo p {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-top: 4px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.pasta-card-contagem {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #94a3b8;
+    margin-top: 10px;
+}
+
+.btn-voltar-pastas {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    color: #204171;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 14px;
+    padding: 0;
+}
+
+/* ==========================================================================
+   Lista de atividades publicadas (somente leitura, nesta página)
+   ========================================================================== */
+
+.atividades-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.atividades-vazio {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    padding: 20px 0;
+}
+
+.atividade-item {
+    display: flex;
+    gap: 14px;
+    background: #ffffff;
+    border: 1px solid #eef1f6;
+    border-radius: 16px;
+    padding: 16px 18px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+.atividade-icone {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #eaf2fb;
+    color: #204171;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.atividade-corpo {
+    flex: 1;
+    min-width: 0;
+}
+
+.atividade-linha-topo {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.atividade-linha-topo h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.atividade-descricao {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+.atividade-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 10px;
+    font-size: 0.72rem;
+    color: #64748b;
+}
+
+.atividade-meta span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* ==========================================================================
+   Modal: Editar pasta
+   ========================================================================== */
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 50;
+}
+
+.modal-detalhe {
+    position: relative;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 28px;
+    width: 100%;
+    max-width: 520px;
+    max-height: 88vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
+}
+
+.modal-detalhe-fechar {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background: #f1f5f9;
+    color: #64748b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-titulo {
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: #0f172a;
+    padding-right: 30px;
+}
+
+.modal-subtitulo {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-top: 2px;
+    margin-bottom: 18px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.campo-largo {
+    grid-column: 1 / -1;
+}
+
+.campo-form {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.campo-form span {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #64748b;
+}
+
+.campo-form input[type="text"],
+.campo-form textarea {
+    font-family: inherit;
+    font-size: 0.85rem;
+    color: #0f172a;
+    border: 1px solid #e5e9f0;
+    border-radius: 10px;
+    padding: 9px 12px;
+    background: #f8fafc;
+    resize: vertical;
+}
+
+.campo-form input:focus,
+.campo-form textarea:focus {
+    outline: none;
+    border-color: #0057A8;
+    background: #ffffff;
+}
+
+.capa-opcoes {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.capa-opcao {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.capa-opcao.selecionada {
+    border-color: #0f172a;
+}
+
+.form-acoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+.btn-cancelar {
+    background: #f1f5f9;
+    color: #334155;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-salvar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #0057A8;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-salvar:hover {
+    background: #003E7E;
+}

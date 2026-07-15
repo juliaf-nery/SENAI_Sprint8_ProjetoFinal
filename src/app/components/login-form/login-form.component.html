@@ -3,7 +3,7 @@
   <div class="left-panel"
     [style.background-image]="'linear-gradient(rgba(10, 37, 64, 0.85), rgba(10, 37, 64, 0.85)), url(' + images[currentImageIndex] + ')'">
     <div class="brand">
-      <i class="fa-solid fa-graduation-cap"></i><a class="link" routerLink="/">EduConecta</a>
+      <img class="logo-img" src="/img/logo2.png"><a class="link" routerLink="/">EduConecta</a>
     </div>
 
     <div class="left-content">
@@ -33,9 +33,7 @@
 
       <div class="login-card">
         <div class="card-header">
-          <div class="logo-icon">
-            <i class="fa-solid fa-graduation-cap"></i>
-          </div>
+          <img class="logo-icon" src="/img/logo2.png" alt="logoConecta">
           <h2>Bem-vindo(a)!</h2>
           <p>Plataforma de Comunicação e Gestão Escolar</p>
         </div>
@@ -45,7 +43,8 @@
             <label for="username">CPF ou Matrícula</label>
             <div class="input-wrapper">
               <i i class="bi bi-person input-icon"></i>
-              <input type="text" id="username" formControlName="identifier" placeholder="Digite seu CPF ou matrícula" required>
+              <input type="text" id="username" formControlName="identifier" placeholder="Digite seu CPF ou matrícula"
+                required>
             </div>
           </div>
 
@@ -77,31 +76,26 @@
 
         <div class="demo-grid">
           @for (conta of demoAccounts; track conta.identifier) {
-            <div
-              class="demo-card"
-              role="button"
-              tabindex="0"
-              [attr.aria-label]="'Preencher formulário com o acesso de ' + conta.role"
-              (click)="preencherCampos(conta)"
-              (keyup.enter)="preencherCampos(conta)"
-            >
-              <div class="demo-card-top {{ conta.colorClass }}">
-                <i class="bi {{ conta.icon }} demo-icon"></i>
-                <span class="demo-dot"></span>
-              </div>
-
-              <div class="demo-info">
-                <h4>{{ conta.role }}</h4>
-                <p class="subtitle">{{ conta.description }}</p>
-              </div>
-
-              <hr>
-
-              <div class="demo-credentials">
-                <p class="user-id">{{ conta.identifier }}</p>
-                <p class="user-pass">{{ conta.senha }}</p>
-              </div>
+          <div class="demo-card" role="button" tabindex="0"
+            [attr.aria-label]="'Preencher formulário com o acesso de ' + conta.role" (click)="preencherCampos(conta)"
+            (keyup.enter)="preencherCampos(conta)">
+            <div class="demo-card-top {{ conta.colorClass }}">
+              <i class="bi {{ conta.icon }} demo-icon"></i>
+              <span class="demo-dot"></span>
             </div>
+
+            <div class="demo-info">
+              <h4>{{ conta.role }}</h4>
+              <p class="subtitle">{{ conta.description }}</p>
+            </div>
+
+            <hr>
+
+            <div class="demo-credentials">
+              <p class="user-id">{{ conta.identifier }}</p>
+              <p class="user-pass">{{ conta.senha }}</p>
+            </div>
+          </div>
           }
         </div>
       </div>

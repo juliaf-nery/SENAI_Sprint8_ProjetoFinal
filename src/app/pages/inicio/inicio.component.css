@@ -52,7 +52,7 @@ html {
 }
 
 .logo {
-  height: 40px;
+  height: 80px;
 }
 
 .header-actions {
@@ -68,10 +68,14 @@ html {
 }
 
 .nav-links a {
-  color: #1351b4;
+  color: #204171;
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
+}
+
+.nav-links a:hover {
+  color: #3669b2;
 }
 
 .divider-vertical {
@@ -102,18 +106,18 @@ html {
 
 .btn-atalhos {
   background-color: transparent;
-  border: 2px solid #1351b4;
-  color: #1351b4;
+  border: 2px solid #204171;
+  color: #204171;
 }
 
 .btn-acessar {
-  background-color: #1351b4;
+  background-color: #204171;
   border: none;
   color: white;
 }
 
 .btn-acessar:hover {
-    background-color: #0f4094;
+    background-color: #3669b2;
 }
 
 /* Configurações Gerais do  Main*/
@@ -174,7 +178,7 @@ html {
 
 /* Botão Azul Principal */
 .btn-primary-hero {
-    background-color: #1351b4;
+    background-color: #204171;
     text-decoration: none;
     color: white;
     border: none;
@@ -190,13 +194,13 @@ html {
 }
 
 .btn-primary-hero:hover {
-    background-color: #0f4094;
+    background-color: #3669b2;
 }
 
 .btn-secondary-hero {
     background-color: transparent;
-    color: #1351b4;
-    border: 2px solid #1351b4;
+    color: #204171;
+    border: 2px solid #204171;
     padding: 12px 24px;
     font-size: 14px;
     font-weight: 600;
@@ -274,7 +278,7 @@ html {
 
 .section-tag {
   background-color: #e6f0ff;
-  color: #1351b4;
+  color: #204171;
   font-size: 11px;
   font-weight: 600;
   padding: 6px 18px;
@@ -363,8 +367,6 @@ html {
   }
 }
 
-/* ID: SOLUÇÃO */
-/* CONFIGURAÇÃO DO GRID */
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -372,7 +374,6 @@ html {
   margin-top: 40px;
 }
 
-/* Responsividade: Transforma em 1 coluna se a tela for de celular */
 @media (max-width: 992px) {
   .cards-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -428,7 +429,7 @@ html {
 
 .icon-azul {
   background-color: #e6f0ff;
-  color: #1351b4;
+  color: #204171;
 }
 
 .icon-verde {
@@ -526,7 +527,6 @@ html {
   font-size: 18px;
 }
 
-/* RESPONSIVIDADE PARA TELAS MENORES */
 @media (max-width: 992px) {
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -543,13 +543,9 @@ html {
   }
 }
 
-/* ID: COMO FUNCIONA */
-/* TAG SUPERIOR */
 .section-tag-steps {
   background-color: #e6f9ed;
-  /* Verde bem clarinho de destaque */
   color: #43af46;
-  /* Texto verde escuro */
   font-size: 13px;
   font-weight: 600;
   padding: 6px 16px;
@@ -580,7 +576,7 @@ html {
 .step-number-box {
   width: 54px;
   height: 54px;
-  background-color: #43af46;
+  background-color: #5197a6;
   color: #ffffff;
   font-size: 18px;
   font-weight: 700;
@@ -644,7 +640,7 @@ html {
 /* ID: QUEM UTILIZA */
 .section-tag-user {
   background-color: #e6f0ff;
-  color: #1351b4;
+  color: #204171;
   font-size: 13px;
   font-weight: 600;
   padding: 6px 18px;
@@ -654,14 +650,14 @@ html {
 }
 
 .section-container.bg-azul-escuro {
-  background-color: #0c326f;
+  background-color: #204171;
   padding: 80px 20px;
 }
 
-/* GRID DE USUÁRIOS (6 COLUNAS LADO A LADO) */
+/* GRID DE USUÁRIOS (4 COLUNAS LADO A LADO) */
 .users-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   margin-top: 50px;
 }
@@ -669,7 +665,7 @@ html {
 .user-card {
   background-color: #ffffff;
   border: 1px solid #f1f3f5;
-  border-radius: 2px;
+  border-radius: 6px;
   padding: 40px 10px;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);

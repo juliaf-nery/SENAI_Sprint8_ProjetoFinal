@@ -101,12 +101,10 @@ export class HomeAlunoComponent implements OnInit, OnDestroy {
     this.currentSlide = (this.currentSlide + 1) % this.destaques.length;
   }
 
-  /** Percentual da barra horizontal (0-10 -> 0-100%) */
   percentualNota(nota: number): number {
     return (nota / this.notaMaxima) * 100;
   }
 
-  /** Pontos do polígono do radar de desempenho (SVG viewBox 0 0 200 200, centro 100,100, raio 80) */
   get radarPoints(): string {
     const centro = 100;
     const raio = 80;
@@ -123,7 +121,6 @@ export class HomeAlunoComponent implements OnInit, OnDestroy {
       .join(' ');
   }
 
-  /** Posição de cada rótulo de disciplina ao redor do radar */
   radarLabelPos(index: number): { x: number; y: number } {
     const centro = 100;
     const raio = 96;
@@ -135,16 +132,31 @@ export class HomeAlunoComponent implements OnInit, OnDestroy {
     };
   }
 
-  /** Pontos da linha de evolução das médias (SVG viewBox 0 0 300 140) */
   get evolucaoPoints(): { x: number; y: number; item: PontoEvolucao }[] {
-    const largura = 300;
-    const altura = 140;
-    const margem = 20;
     const total = this.evolucaoMedias.length;
 
+    const xInicio = 35;
+    const xFim = 295;
+    const larguraUtil = xFim - xInicio;
+
+    const yMaximo = 30;
+    const yMinimo = 110;
+    const alturaUtil = yMinimo - yMaximo;
+
+    const notaMinimaGrafico = 6;
+    const notaMaximaGrafico = 10;
+
     return this.evolucaoMedias.map((item, i) => {
-      const x = total > 1 ? margem + (i * (largura - margem * 2)) / (total - 1) : largura / 2;
-      const y = altura - margem - (item.media / this.notaMaxima) * (altura - margem * 2);
+      const x = total > 1
+        ? xInicio + (i * larguraUtil) / (total - 1)
+        : xInicio + (larguraUtil / 2);
+
+      const mediaClamped = Math.max(notaMinimaGrafico, Math.min(notaMaximaGrafico, item.media));
+
+      const proporcaoNota = (mediaClamped - notaMinimaGrafico) / (notaMaximaGrafico - notaMinimaGrafico);
+
+      const y = yMinimo - (proporcaoNota * alturaUtil);
+
       return { x, y, item };
     });
   }
@@ -152,4 +164,5 @@ export class HomeAlunoComponent implements OnInit, OnDestroy {
   get evolucaoLinePoints(): string {
     return this.evolucaoPoints.map((p) => `${p.x},${p.y}`).join(' ');
   }
+
 }
