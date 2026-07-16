@@ -60,13 +60,12 @@ npm run dev
 
 ## 4. Usuários mock disponíveis
 
-| Perfil (role)   | identifier (Matrícula/CPF) | senha       |
-|-----------------|-----------------------------|-------------|
-| Administrador   | 111111                       | mudar123    |
-| Direção Escolar | 222222                       | mudar123    |
-| Professor       | 333333                       | mudar123    |
-| Aluno           | 444444                       | mudar123    |
-| Responsável     | 555555                       | mudar123    |
+| Perfil (role)   | identifier (Matrícula/CPF)  | senha             |
+|-----------------|-----------------------------|-------------------|
+| Direção Escolar | 20260759312                 | direcao123        |
+| Professor       | 2026091112                  | professor123      |
+| Aluno           | 2026106379                  | aluno123          |
+| Responsável     | 111111                      | responsavel123    |
 
 As senhas são armazenadas com **hash bcrypt** (nunca em texto puro), gerado em tempo de execução a partir da senha padrão.
 
@@ -88,11 +87,11 @@ As senhas são armazenadas com **hash bcrypt** (nunca em texto puro), gerado em 
   "token": "eyJhbGciOiJIUzI1NiIs...",
   "expiresIn": "1h",
   "user": {
-    "id": 1,
+    "id": 4,
     "identifier": "111111",
-    "nome": "Administrador Geral",
-    "email": "administrador@educonecta.com",
-    "role": "administrador"
+    "nome": "Responsável",
+    "email": "responsavel@educonecta.com",
+    "role": "responsavel"
   }
 }
 ```
@@ -134,7 +133,7 @@ npm install
 npm start   # ng serve, http://localhost:4200
 ```
 
-Acesse `http://localhost:4200/login` e utilize qualquer um dos identificadores da tabela acima com a senha `mudar123`.
+Acesse `http://localhost:4200/login` e utilize qualquer um dos identificadores da tabela acima com suas respectivas senhas.
 
 ## 7. Segurança (observações)
 

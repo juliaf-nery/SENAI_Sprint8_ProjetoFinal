@@ -131,3 +131,97 @@
         width: var(--sidebar-width);
     }
 }
+
+@media (max-width: 1024px) {
+  /* Quando colapsado no tablet, esconde os textos de forma elegante para não quebrar a largura */
+  .sidebar:not(.mobile-open) .sidebar-brand span,
+  .sidebar:not(.mobile-open) .sidebar-link span {
+    display: none;
+  }
+
+  .sidebar:not(.mobile-open) {
+    width: var(--sidebar-width-collapsed);
+    align-items: center;
+  }
+
+  .sidebar:not(.mobile-open) .sidebar-brand,
+  .sidebar:not(.mobile-open) .sidebar-link {
+    padding: 10px 0;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .sidebar:not(.mobile-open) .sidebar-footer {
+    border-top: none;
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar .sidebar-brand span,
+  .sidebar .sidebar-link span {
+    display: inline !important;
+  }
+
+  .sidebar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100; 
+    width: var(--sidebar-width) !important;
+    transform: translateX(-100%); 
+    box-shadow: none;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .sidebar.mobile-open {
+    transform: translateX(0) !important;
+    box-shadow: 8px 0 24px rgba(15, 23, 42, 0.25);
+  }
+
+  .sidebar-link {
+    padding: 12px 14px !important;
+    font-size: 0.9rem !important;
+  }
+
+  .sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(2px);
+    z-index: 90;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s, visibility 0.25s;
+  }
+
+  .sidebar-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .sidebar-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    background: #204171;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(32, 65, 113, 0.3);
+    cursor: pointer;
+    z-index: 80;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    --sidebar-width: 220px;
+  }
+}

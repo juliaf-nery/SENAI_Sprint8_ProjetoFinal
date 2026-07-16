@@ -90,9 +90,6 @@ export class AtividadesComponent {
   private readonly notasService = inject(NotasService);
   private readonly pastasService = inject(PastasAtividadesService);
 
-  /** Persona fixa do aluno usada em todo o painel do aluno nesta demonstração
-   *  (mesma referência usada no Boletim), para exibir as notas publicadas
-   *  pelo professor na página "Notas". */
   private readonly ALUNO_DEMO_EMAIL = 'joao.pedro@edu.conecta';
   private readonly ALUNO_DEMO_TURMA = '3º Ano A';
   private readonly ALUNO_DEMO_DISCIPLINA = 'Matemática';
@@ -123,7 +120,6 @@ export class AtividadesComponent {
       .filter((n): n is { categoria: string; valor: number } => n.valor !== null);
   }
 
-  /** Atividades já corrigidas pelo professor na pasta aberta, com a nota individual de cada uma. */
   get atividadesComNota(): Atividade[] {
     return this.atividadesDaPastaAtual.filter((a) => a.nota !== undefined);
   }

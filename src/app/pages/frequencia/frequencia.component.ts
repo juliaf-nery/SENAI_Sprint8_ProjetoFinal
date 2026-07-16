@@ -55,32 +55,30 @@ export class FrequenciaComponent {
       id: 'geral',
       label: 'Geral (Ano Letivo)',
       periodo: '1ª, 2ª e 3ª Bimestre · 2026',
-      frequenciaGeral: 92,
+      frequenciaGeral: 95,
       mesReferencia: 'Julho de 2026',
       diasNoMes: 31,
       meses: [
-        { mes: 'Fev', percentual: 96 },
-        { mes: 'Mar', percentual: 94 },
-        { mes: 'Abr', percentual: 90 },
+        { mes: 'Fev', percentual: 100 },
+        { mes: 'Mar', percentual: 95 },
+        { mes: 'Abr', percentual: 100 },
         { mes: 'Mai', percentual: 93 },
-        { mes: 'Jun', percentual: 88 },
-        { mes: 'Jul', percentual: 91 },
+        { mes: 'Jun', percentual: 90 },
+        { mes: 'Jul', percentual: 100 },
       ],
       faltasCalendario: [
-        { dia: 4, justificada: true },
         { dia: 11, justificada: false },
-        { dia: 18, justificada: true },
         { dia: 25, justificada: false },
       ],
       disciplinas: [
-        { disciplina: 'Empreendedorismo', totalAulas: 80, faltas: 4 },
-        { disciplina: 'Língua Portuguesa', totalAulas: 80, faltas: 6 },
-        { disciplina: 'História', totalAulas: 40, faltas: 2 },
-        { disciplina: 'Artes', totalAulas: 40, faltas: 5 },
-        { disciplina: 'Filosofia', totalAulas: 40, faltas: 3 },
-        { disciplina: 'Química', totalAulas: 40, faltas: 7 },
-        { disciplina: 'Geografia', totalAulas: 40, faltas: 2 },
-        { disciplina: 'Inglês', totalAulas: 40, faltas: 1 },
+        { disciplina: 'Empreendedorismo', totalAulas: 80, faltas: 0 },
+        { disciplina: 'Língua Portuguesa', totalAulas: 80, faltas: 0 },
+        { disciplina: 'História', totalAulas: 40, faltas: 1 },
+        { disciplina: 'Artes', totalAulas: 40, faltas: 0 },
+        { disciplina: 'Filosofia', totalAulas: 40, faltas: 1 },
+        { disciplina: 'Química', totalAulas: 40, faltas: 0 },
+        { disciplina: 'Geografia', totalAulas: 40, faltas: 0 },
+        { disciplina: 'Inglês', totalAulas: 40, faltas: 0 },
       ],
     },
     {
@@ -97,7 +95,12 @@ export class FrequenciaComponent {
       ],
       faltasCalendario: [
         { dia: 6, justificada: true },
+        { dia: 10, justificada: false },
         { dia: 19, justificada: false },
+        { dia: 20, justificada: false },
+        { dia: 26, justificada: false },
+        { dia: 27, justificada: false },
+        { dia: 30, justificada: true },
       ],
       disciplinas: [
         { disciplina: 'Empreendedorismo', totalAulas: 26, faltas: 1 },
@@ -128,14 +131,14 @@ export class FrequenciaComponent {
         { dia: 18, justificada: true },
       ],
       disciplinas: [
-        { disciplina: 'Empreendedorismo', totalAulas: 27, faltas: 2 },
-        { disciplina: 'Língua Portuguesa', totalAulas: 27, faltas: 3 },
-        { disciplina: 'História', totalAulas: 13, faltas: 1 },
-        { disciplina: 'Artes', totalAulas: 13, faltas: 2 },
-        { disciplina: 'Filosofia', totalAulas: 13, faltas: 1 },
-        { disciplina: 'Química', totalAulas: 13, faltas: 3 },
-        { disciplina: 'Geografia', totalAulas: 13, faltas: 1 },
-        { disciplina: 'Inglês', totalAulas: 13, faltas: 1 },
+        { disciplina: 'Empreendedorismo', totalAulas: 27, faltas: 1 },
+        { disciplina: 'Língua Portuguesa', totalAulas: 27, faltas: 1 },
+        { disciplina: 'História', totalAulas: 13, faltas: 0 },
+        { disciplina: 'Artes', totalAulas: 13, faltas: 0 },
+        { disciplina: 'Filosofia', totalAulas: 13, faltas: 0 },
+        { disciplina: 'Química', totalAulas: 13, faltas: 1 },
+        { disciplina: 'Geografia', totalAulas: 13, faltas: 0 },
+        { disciplina: 'Inglês', totalAulas: 13, faltas: 0 },
       ],
     },
     {
@@ -225,7 +228,6 @@ export class FrequenciaComponent {
     return this.faltasCalendarioComLive.find((f) => f.dia === dia);
   }
 
-  /** Disciplinas da unidade selecionada, somando as faltas ao vivo em Matemática (turma/disciplina do professor-demo). */
   get disciplinasComLive(): FrequenciaDisciplina[] {
     const extras = this.faltasPublicadasAoVivo.length;
     if (!extras) return this.unidadeSelecionada.disciplinas;

@@ -37,11 +37,11 @@ export class ProfessoresComponent {
   private readonly contatosAbertos = new Set<string>();
 
   readonly professores: Professor[] = [
-    { nome: 'Nathy Eliana', disciplina: 'Artes', email: 'nathy.eliana@escola.ba.gov.br', telefone: '(71) 98888-1001', fotoUrl: '/img/ne.png', bio: 'Apaixonada por despertar a curiosidade artistíca dos alunos.', turmas: 4, anosExperiencia: 9 },
+    { nome: 'Nathy Eliana', disciplina: 'Artes', email: 'nathy.eliana@edu.conecta', telefone: '(71) 98888-1001', fotoUrl: '/img/ne.png', bio: 'Apaixonada por despertar a curiosidade artistíca dos alunos.', turmas: 4, anosExperiencia: 9 },
 
-    { nome: 'Wanderson Souza', disciplina: 'Empreendedorismo', email: 'wanderson.souza@escola.ba.gov.br', telefone: '(71) 98888-1006', fotoUrl: '/img/ps.png', bio: 'Especialista em preparar turmas para lidar com o mercado de trabalho e financeiramente.', turmas: 4, anosExperiencia: 15 },
+    { nome: 'Wanderson Souza', disciplina: 'Empreendedorismo', email: 'wanderson.souza@edu.conecta', telefone: '(71) 98888-1006', fotoUrl: '/img/ps.png', bio: 'Especialista em preparar turmas para lidar com o mercado de trabalho e financeiramente.', turmas: 4, anosExperiencia: 15 },
     
-    { nome: 'Arthir Alves', disciplina: 'Filosofia', email: 'arthit.alves@escola.ba.gov.br', telefone: '(71) 98888-1002', fotoUrl: '/img/ra.png', bio: 'Focado em aulas teoricas e de pensamentos além do conhecimento.', turmas: 3, anosExperiencia: 12 },
+    { nome: 'Arthir Alves', disciplina: 'Filosofia', email: 'arthit.alves@edu.conecta', telefone: '(71) 98888-1002', fotoUrl: '/img/ra.png', bio: 'Focado em aulas teoricas e de pensamentos além do conhecimento.', turmas: 3, anosExperiencia: 12 },
 
 ];
 

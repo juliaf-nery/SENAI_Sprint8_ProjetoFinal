@@ -3,7 +3,7 @@ html {
 }
 
 /* Configurações Gerais do Header */
-.govbr-header {
+.edu-header {
   width: 100%;
   font-family: 'Rawline', sans-serif;
   background-color: white;
@@ -12,7 +12,7 @@ html {
 /* BARRA SUPERIOR */
 .top-bar {
   width: 100%;
-    background-color: #ffffff; /* Ou a cor de fundo que você definiu */
+    background-color: #ffffff;
     padding: 8px 0;
     border-bottom: 1px solid #E6E6E6; 
     max-width: 1200px;  
@@ -94,7 +94,7 @@ html {
 .btn-acessar {
   font-family: 'Rawline', sans-serif;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600 !important;
   padding: 8px 18px;
   border-radius: 20px;
   display: inline-flex;
@@ -706,5 +706,177 @@ html {
 @media (max-width: 600px) {
   .users-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .container-header {
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+  }
+
+  .nav-links {
+    margin-right: 0;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .users-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-container,
+  .section-container.bg-branco-hero,
+  .section-container.bg-azul-escuro {
+    padding: 60px 16px !important;
+  }
+
+  .top-bar-content {
+    justify-content: center;
+    font-size: 12px;
+  }
+
+  .container-header {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .header-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
+  }
+
+  .divider-vertical {
+    display: none;
+  }
+
+  .button {
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-atalhos, .btn-acessar {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-title {
+    font-size: 32px !important;
+  }
+
+  .hero-subtitle {
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+
+  .hero-action-buttons {
+    width: 100%;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .btn-primary-hero, .btn-secondary-hero {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 20px;
+  }
+
+  .section-title {
+    font-size: 28px !important;
+  }
+
+  .section-subtitle {
+    font-size: 15px;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .card-item {
+    padding: 24px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .stat-card {
+    padding: 24px 16px;
+  }
+
+  .stat-number {
+    font-size: 32px;
+  }
+
+  .users-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .user-card {
+    padding: 24px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Detalhes do Top Bar */
+  .top-bar-content {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: 28px !important;
+  }
+
+  .section-title, .problem-title {
+    font-size: 24px !important;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .users-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .compliance-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding-left: 10px;
+  }
+
+  .step-item {
+    padding: 0;
+  }
+
+  .step-number-box {
+    width: 48px;
+    height: 48px;
+    font-size: 16px;
+    margin-bottom: 16px;
   }
 }

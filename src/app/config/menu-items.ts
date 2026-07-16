@@ -6,10 +6,6 @@ export interface MenuItem {
   route: string;
 }
 
-/**
- * Rota de "Início" (dashboard) de cada perfil.
- * Reaproveita o mesmo mapa usado pelo AuthService para redirecionamento pós-login.
- */
 export const INICIO_ROUTE_BY_ROLE: Record<UserRole, string> = {
   administrador: '/home-admin',
   direcao: '/home-direcao',
@@ -18,32 +14,24 @@ export const INICIO_ROUTE_BY_ROLE: Record<UserRole, string> = {
   responsavel: '/home-responsavel',
 };
 
-/**
- * Itens de menu por perfil, seguindo a seção "Controle de Permissões" do PDF.
- * Cada perfil só enxerga os módulos aos quais tem direito de acesso.
- * Módulos ainda não implementados apontam para a rota /em-breve/:modulo
- * (evita 404 durante a apresentação e demonstra a navegação completa).
- */
 export const MENU_ITEMS_BY_ROLE: Record<UserRole, MenuItem[]> = {
   administrador: [
     { label: 'Gerenciar Escolas', icon: 'bi-building', route: '/gerenciar-escolas' },
     { label: 'Gerenciar Usuários', icon: 'bi-people-fill', route: '/gerenciar-usuarios' },
     { label: 'Indicadores Estaduais', icon: 'bi-graph-up-arrow', route: '/indicadores-estaduais' },
     { label: 'Pesquisas', icon: 'bi-clipboard2-check', route: '/pesquisas' },
-    { label: 'Ouvidoria', icon: 'bi-megaphone', route: '/ouvidoria' },
+    { label: 'Ouvidoria', icon: 'bi-chat-square-dots', route: '/ouvidoria' },
     { label: 'Plano de Ação', icon: 'bi-kanban', route: '/plano-de-acao' },
     { label: 'Relatórios', icon: 'bi-file-earmark-text', route: '/relatorios' },
     { label: 'Configurações Gerais', icon: 'bi-gear-fill', route: '/configuracoes' },
   ],
   direcao: [
-    { label: 'Avisos', icon: 'bi-megaphone', route: '/avisos' },
     { label: 'Turmas', icon: 'bi-collection-fill', route: '/turmas' },
     { label: 'Projetos', icon: 'bi-easel2', route: '/projetos' },
-    { label: 'Eventos', icon: 'bi-calendar-event', route: '/eventos' },
+    { label: 'Calendário', icon: 'bi-calendar3', route: '/calendario' },
     { label: 'Professores', icon: 'bi-person-workspace', route: '/professores' },
     { label: 'Biblioteca Digital', icon: 'bi-book-half', route: '/biblioteca' },
     { label: 'Indicadores da Escola', icon: 'bi-graph-up-arrow', route: '/indicadores-escola' },
-    { label: 'Plano de Ação', icon: 'bi-kanban', route: '/plano-de-acao' },
     { label: 'Avisos', icon: 'bi-megaphone', route: '/avisos' },
     { label: 'Mensagens', icon: 'bi-chat-dots-fill', route: '/mensagens' },
     { label: 'Cardápio Escolar', icon: 'bi-cup-hot-fill', route: '/cardapio' },
@@ -61,8 +49,9 @@ export const MENU_ITEMS_BY_ROLE: Record<UserRole, MenuItem[]> = {
     { label: 'Materiais', icon: 'bi-folder2-open', route: '/materiais' },
     { label: 'Biblioteca Digital', icon: 'bi-book-half', route: '/biblioteca' },
     { label: 'Avisos', icon: 'bi-megaphone', route: '/avisos' },
+    { label: 'Mensagens', icon: 'bi-chat-dots-fill', route: '/mensagens' },
     { label: 'Cardápio', icon: 'bi-cup-hot-fill', route: '/cardapio' },
-    { label: 'Ouvidoria', icon: 'bi-chat-square-dots', route: '/ouvidoria' },
+    { label: 'Ouvidoria', icon: 'bi bi-person-raised-hand', route: '/ouvidoria' },
     { label: 'Destaques', icon: 'bi bi-star', route: '/destaques' },
   ],
   aluno: [
@@ -73,6 +62,7 @@ export const MENU_ITEMS_BY_ROLE: Record<UserRole, MenuItem[]> = {
     { label: 'Professores', icon: 'bi bi-person-badge', route: '/professores' },
     { label: 'Biblioteca Digital', icon: 'bi-book-half', route: '/biblioteca' },
     { label: 'Avisos', icon: 'bi-megaphone', route: '/avisos' },
+    { label: 'Mensagens', icon: 'bi-chat-dots-fill', route: '/mensagens' },
     { label: 'Cardápio', icon: 'bi-cup-hot-fill', route: '/cardapio' },
     { label: 'Ouvidoria', icon: 'bi bi-person-raised-hand', route: '/ouvidoria' },
     { label: 'Destaques', icon: 'bi bi-star', route: '/destaques' },
@@ -81,11 +71,11 @@ export const MENU_ITEMS_BY_ROLE: Record<UserRole, MenuItem[]> = {
     { label: 'Boletim do Aluno', icon: 'bi-journal-text', route: '/boletim' },
     { label: 'Frequência', icon: 'bi-clipboard2-check', route: '/frequencia' },
     { label: 'Professores', icon: 'bi bi-person-badge', route: '/professores' },
-    { label: 'Avisos', icon: 'bi-megaphone', route: '/avisos' },
-    { label: 'Eventos', icon: 'bi-calendar-event', route: '/eventos' },
     { label: 'Calendário', icon: 'bi-calendar3', route: '/calendario' },
+    { label: 'Avisos', icon: 'bi-megaphone', route: '/avisos' },
     { label: 'Mensagens', icon: 'bi-chat-dots-fill', route: '/mensagens' },
     { label: 'Cardápio Escolar', icon: 'bi-cup-hot-fill', route: '/cardapio' },
+    { label: 'Ouvidoria', icon: 'bi bi-person-raised-hand', route: '/ouvidoria' },  
   ],
 };
 

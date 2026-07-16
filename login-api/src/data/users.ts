@@ -2,7 +2,6 @@ import bcrypt from "bcryptjs";
 import { UserRecord } from "../types";
 
 // const SENHA_PADRAO = "mudar123";
-const SENHA_ADMIN = "admin123";
 const SENHA_DIRECAO = "direcao123";
 const SENHA_PROFESSOR = "professor123";
 const SENHA_ALUNO = "aluno123";
@@ -16,14 +15,6 @@ function hash(senha: string): string {
 export const users: UserRecord[] = [
   {
     id: 1,
-    identifier: "2026109482",
-    nome: "Administrador Geral",
-    email: "administrador@educonecta.com",
-    role: "administrador",
-    passwordHash: hash(SENHA_ADMIN),
-  },
-  {
-    id: 2,
     identifier: "20260759312",
     nome: "Direção Escolar",
     email: "direcao@educonecta.com",
@@ -31,7 +22,7 @@ export const users: UserRecord[] = [
     passwordHash: hash(SENHA_DIRECAO),
   },
   {
-    id: 3,
+    id: 2,
     identifier: "2026091112",
     nome: "Professor(a)",
     email: "professor@educonecta.com",
@@ -39,7 +30,7 @@ export const users: UserRecord[] = [
     passwordHash: hash(SENHA_PROFESSOR),
   },
   {
-    id: 4,
+    id: 3,
     identifier: "2026106379",
     nome: "Aluno(a)",
     email: "aluno@educonecta.com",
@@ -47,7 +38,7 @@ export const users: UserRecord[] = [
     passwordHash: hash(SENHA_ALUNO),
   },
   {
-    id: 5,
+    id: 4,
     identifier: "111111",
     nome: "Responsável",
     email: "responsavel@educonecta.com",

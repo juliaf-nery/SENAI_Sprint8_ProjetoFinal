@@ -1,0 +1,348 @@
+/* ESTRUTURAS GERAIS DE GRID & LAYOUT */
+.spacer-secoes {
+  height: 40px;
+  width: 100%;
+}
+
+/* Grid 1: Indicadores Básicos (Média, Recuperação, Alunos, NPS) */
+.indicadores-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* Grid 2: Indicadores Estratégicos com Detalhes */
+.indicadores-estrategicos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* CSS: CARDS BÁSICOS (GRID 1) */
+.card-indicador {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card-indicador:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  border-color: #cbd5e1;
+}
+
+.indicador-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.indicador-icon-wrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+}
+
+.indicador-icon-wrapper.azul { background-color: #eff6ff; color: #3b82f6; }
+.indicador-icon-wrapper.vermelho { background-color: #fef2f2; color: #ef4444; }
+.indicador-icon-wrapper.verde { background-color: #f0fdf4; color: #2e7d32; }
+.indicador-icon-wrapper.roxo { background-color: #faf5ff; color: #8b5cf6; }
+
+.indicador-tendencia {
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 12px;
+}
+
+.indicador-tendencia.positiva { background-color: #e8f5e9; color: #2e7d32; }
+.indicador-tendencia.negativa { background-color: #fde8e8; color: #c81e1e; }
+.indicador-tendencia i { font-size: 1.1rem; }
+
+.indicador-badge {
+  background-color: #f1f5f9;
+  color: #475569;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 12px;
+}
+
+.indicador-corpo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.indicador-label {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.indicador-valor {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.valor-limite {
+  font-size: 0.95rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+/* CSS: CARDS ESTRATÉGICOS COM DETALHES (GRID 2) */
+.card-estrategico {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card-estrategico:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.06);
+  border-color: #cbd5e1;
+}
+
+.card-estrategico.alerta-critico {
+  border-left: 5px solid #ef4444;
+  background-color: #fffafb;
+}
+
+.card-estrategico-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.icon-box.alert-red { background-color: #fef2f2; color: #ef4444; }
+.icon-box.soft-blue { background-color: #eff6ff; color: #3b82f6; }
+.icon-box.soft-green { background-color: #f0fdf4; color: #2e7d32; }
+
+.badge-acao {
+  background-color: #ef4444;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 12px;
+  letter-spacing: 0.04em;
+}
+
+.tendencia-alta {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.badge-meta {
+  background-color: #f1f5f9;
+  color: #475569;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.card-estrategico-corpo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.card-valor {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.valor-subtext {
+  font-size: 0.95rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.card-descricao {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.45;
+}
+
+.barra-progresso-mini {
+  background-color: #f1f5f9;
+  height: 6px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 4px 0;
+}
+
+.progresso-preenchido {
+  background-color: #3b82f6;
+  height: 100%;
+  border-radius: 4px;
+}
+
+.progresso-preenchido.verde-sucesso {
+  background-color: #2e7d32;
+}
+
+/* CSS: COMPONENTES DE DETALHES (DENTRO DO CARD) */
+.card-detalhes-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+  border-top: 1px dashed #e2e8f0;
+  padding-top: 16px;
+}
+
+/* 1. Alunos Risco Crítico */
+.detalhe-item-linha {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.detalhe-avatar-letra {
+  width: 32px;
+  height: 32px;
+  background-color: #fee2e2;
+  color: #ef4444;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+}
+
+.detalhe-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.detalhe-nome {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.detalhe-sub {
+  font-size: 0.7rem;
+  color: #64748b;
+}
+
+.detalhe-status-badge {
+  background-color: #fef2f2;
+  color: #ef4444;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+/* 2. Metas */
+.detalhe-meta-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: #475569;
+  line-height: 1.45;
+}
+
+.detalhe-meta-item i {
+  font-size: 0.9rem;
+  margin-top: 1px;
+}
+
+.meta-texto.concluida {
+  text-decoration: line-through;
+  color: #94a3b8;
+}
+
+.texto-verde { color: #2e7d32; }
+.texto-amarelo { color: #f59e0b; }
+
+.detalhe-simples {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+}
+
+.espaco-nome {
+  color: #475569;
+  font-weight: 500;
+}
+
+.espaco-valor {
+  color: #1e293b;
+  font-weight: 700;
+}
+
+/* RESPONSIVIDADE (Ajuste adaptativo em telas pequenas) */
+@media (max-width: 768px) {
+  .indicadores-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .indicadores-estrategicos-grid {
+    grid-template-columns: 1fr;
+  }
+}

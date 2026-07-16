@@ -2,6 +2,7 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { DashboardShellComponent } from '../../components/dashboard-shell/dashboard-shell.component';
 import { DashboardCardComponent } from '../../components/dashboard-card/dashboard-card.component';
 import { AuthService } from '../../services/auth.service';
+import { RouterLink } from "@angular/router";
 
 interface DestaqueSlide {
   icon: string;
@@ -23,7 +24,7 @@ interface PontoEvolucao {
 
 @Component({
   selector: 'app-home-aluno',
-  imports: [DashboardShellComponent, DashboardCardComponent],
+  imports: [DashboardShellComponent, DashboardCardComponent, RouterLink],
   templateUrl: './home-aluno.component.html',
   styleUrl: './home-aluno.component.css'
 })

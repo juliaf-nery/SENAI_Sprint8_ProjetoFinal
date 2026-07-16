@@ -25,6 +25,18 @@
   border-bottom: 2px solid #cbd5e0;
 }
 
+.cor-attention {
+  color: #f15647 ;
+}
+
+.cor-top {
+  color: #3b86f6;
+}
+
+.cor-smile {
+  color: #8b61f7;
+}
+
 .chart-grid-lines {
   position: absolute;
   top: 0;
