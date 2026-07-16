@@ -34,6 +34,7 @@ interface NovoMaterialForm {
   tipo: TipoMaterial;
   professor: string;
   disciplina: string;
+  nomeArquivo?: string;
 }
 
 @Component({
@@ -110,7 +111,7 @@ export class BibliotecaComponent {
   novoMaterial: NovoMaterialForm = this.materialEmBranco();
 
   private materialEmBranco(): NovoMaterialForm {
-    return { titulo: '', tipo: 'livro', professor: '', disciplina: this.disciplinasCadastro[0] };
+    return { titulo: '', tipo: 'livro', professor: '', disciplina: this.disciplinasCadastro[0], nomeArquivo: undefined };
   }
 
   abrirModalAdicionar(): void {
@@ -124,7 +125,7 @@ export class BibliotecaComponent {
   }
 
   adicionarMaterial(): void {
-    if (!this.podeGerenciarBiblioteca || !this.novoMaterial.titulo.trim() || !this.novoMaterial.professor.trim()) return;
+    if (!this.podeGerenciarBiblioteca || !this.novoMaterial.titulo.trim() || !this.novoMaterial.professor.trim() || !this.novoMaterial.nomeArquivo) return;
 
     this.materiais.unshift({
       id: `novo-${this.proximoId++}`,
@@ -137,6 +138,12 @@ export class BibliotecaComponent {
     });
 
     this.modalAdicionarAberto = false;
+  }
+
+  onArquivoSelecionado(evento: Event): void {
+    const input = evento.target as HTMLInputElement;
+    const arquivo = input.files?.[0];
+    this.novoMaterial.nomeArquivo = arquivo ? arquivo.name : undefined;
   }
 
   removerMaterial(material: MaterialBiblioteca, evento: Event): void {

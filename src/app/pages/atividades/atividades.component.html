@@ -4,8 +4,8 @@
   [perfilLabel]="perfilLabel"
   [corTema]="corTema"
 >
-  <!-- ALUNO: pastas por disciplina -->
-  @if (ehAluno) {
+  <!-- ALUNO / RESPONSÁVEL: pastas por disciplina -->
+  @if (ehAlunoOuResponsavel) {
     @if (!pastaAlunoSelecionada) {
       <section class="dashboard-section">
         <div class="dashboard-grid pastas-grid">
@@ -470,31 +470,38 @@
                 }
               </div>
             </div>
-          } @else if (atividadeSelecionada.tipoEntrega === 'arquivo') {
-            <!-- Caso 1: entrega por arquivo (PDF ou imagem) -->
-            <label class="upload-area">
-              <input type="file" accept=".pdf,image/*" (change)="onArquivoSelecionado($event)" hidden />
-              <i class="bi bi-cloud-arrow-up-fill"></i>
-              @if (nomeArquivoSelecionado) {
-                <span class="upload-arquivo-nome"><i class="bi bi-paperclip"></i>{{ nomeArquivoSelecionado }}</span>
-              } @else {
-                <span>Clique para selecionar um arquivo (PDF ou imagem)</span>
-              }
-            </label>
-            <button type="button" class="btn-enviar-atividade" [disabled]="!nomeArquivoSelecionado" (click)="enviarArquivo()">
-              <i class="bi bi-send-fill"></i>
-              Enviar Atividade
-            </button>
+          } @else if (ehAluno) {
+            @if (atividadeSelecionada.tipoEntrega === 'arquivo') {
+              <!-- Caso 1: entrega por arquivo (PDF ou imagem) -->
+              <label class="upload-area">
+                <input type="file" accept=".pdf,image/*" (change)="onArquivoSelecionado($event)" hidden />
+                <i class="bi bi-cloud-arrow-up-fill"></i>
+                @if (nomeArquivoSelecionado) {
+                  <span class="upload-arquivo-nome"><i class="bi bi-paperclip"></i>{{ nomeArquivoSelecionado }}</span>
+                } @else {
+                  <span>Clique para selecionar um arquivo (PDF ou imagem)</span>
+                }
+              </label>
+              <button type="button" class="btn-enviar-atividade" [disabled]="!nomeArquivoSelecionado" (click)="enviarArquivo()">
+                <i class="bi bi-send-fill"></i>
+                Enviar Atividade
+              </button>
+            } @else {
+              <!-- Caso 2: atividade realizada em link externo -->
+              <a [href]="atividadeSelecionada.linkExterno" target="_blank" rel="noopener" class="link-externo">
+                <i class="bi bi-box-arrow-up-right"></i>
+                Acessar atividade no link externo
+              </a>
+              <button type="button" class="btn-enviar-atividade" (click)="marcarComoConcluida()">
+                <i class="bi bi-check2-square"></i>
+                Marcar como Concluída
+              </button>
+            }
           } @else {
-            <!-- Caso 2: atividade realizada em link externo -->
-            <a [href]="atividadeSelecionada.linkExterno" target="_blank" rel="noopener" class="link-externo">
-              <i class="bi bi-box-arrow-up-right"></i>
-              Acessar atividade no link externo
-            </a>
-            <button type="button" class="btn-enviar-atividade" (click)="marcarComoConcluida()">
-              <i class="bi bi-check2-square"></i>
-              Marcar como Concluída
-            </button>
+            <div class="entrega-somente-leitura">
+              <i class="bi bi-eye-fill"></i>
+              O responsável não pode enviar ou responder atividades. Este conteúdo é apenas para consulta.
+            </div>
           }
         </div>
 

@@ -38,7 +38,7 @@ export class MeuPerfilComponent {
     escola: 'Colégio Estadual Modelo da Bahia',
     cargo: this.perfilLabel,
     turma: '3º Ano A',
-    email: 'joao.pedro@edu.conecta',
+    email: 'joao.pedro@educanet.com',
     cpf: '444.444.444-05',
     telefone: '(71) 99999-0000',
     dataNascimento: '15/03/2009',

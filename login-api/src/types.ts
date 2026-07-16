@@ -1,5 +1,4 @@
 export type UserRole =
-  | "administrador"
   | "direcao"
   | "professor"
   | "aluno"

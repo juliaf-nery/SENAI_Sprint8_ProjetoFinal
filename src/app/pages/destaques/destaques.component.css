@@ -14,8 +14,8 @@
 
 .destaque-categoria {
   align-self: flex-start;
-  font-size: 0.65rem;
-  font-weight: 700;
+  font-size: 0.75rem;
+  font-weight: 600;
   color: #ffffff;
   padding: 3px 10px;
   border-radius: 999px;
@@ -55,8 +55,9 @@
 }
 
 .destaque-card p {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: #64748b;
   line-height: 1.5;
   margin-top: 4px;
+  margin: 10px;
 }

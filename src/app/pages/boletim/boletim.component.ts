@@ -31,7 +31,7 @@ export class BoletimComponent {
   private readonly notasService = inject(NotasService);
 
   /** Persona fixa usada em todo o painel do aluno nesta demonstração. */
-  private readonly ALUNO_EMAIL = 'joao.pedro@edu.conecta';
+  private readonly ALUNO_EMAIL = 'joao.pedro@educanet.com';
   private readonly ALUNO_TURMA = '3º Ano A';
   private readonly DISCIPLINA_PROFESSOR = 'Matemática';
 

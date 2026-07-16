@@ -108,6 +108,61 @@
             }
           </div>
         </div>
+
+        <!-- NOVO CONTEÚDO: Ações Rápidas & Agenda -->
+        <div class="widget-actions-container">
+
+          <!-- Bloco de Ações Rápidas -->
+          <div class="quick-actions-grid">
+            <button type="button" class="action-btn btn-rose" routerLink="/atividades">
+              <i class="bi bi-list-check"></i>
+              <span>Atividades</span>
+            </button>
+
+            <button class="action-btn btn-green" routerLink="/mensagens">
+              <i class="bi bi-chat-dots"></i>
+              <div class="em-breve-container">
+                <span>Mensagens</span>
+                <span><strong>Em breve</strong></span>
+              </div>
+            </button>
+
+            <button class="action-btn btn-blue" routerLink="/professores">
+              <i class="bi bi-person-badge"></i>
+              <span>Professores</span>
+            </button>
+
+            <button class="action-btn btn-yellow" routerLink="/ouvidoria">
+              <i class="bi bi-person-raised-hand"></i>
+              <span>Ouvidoria</span>
+            </button>
+          </div>
+
+          <!-- Bloco de Eventos/Agenda -->
+          <div class="events-agenda">
+            <h4>Meus Eventos Programados</h4>
+            <ul class="agenda-list">
+              <li>
+                <i class="bi-calendar3 text-green"></i>
+                <div class="agenda-info">
+                  <span class="agenda-date">Jul 18, 08:00</span>
+                  <span class="agenda-title">Prova de Matemática</span>
+                </div>
+              </li>
+              <li>
+                <i class="bi-calendar3 text-green"></i>
+                <div class="agenda-info">
+                  <span class="agenda-date">Jul 23, 10:00</span>
+                  <span class="agenda-title">Prova de Língua POrtuguesa</span>
+                </div>
+              </li>
+            </ul>
+            <button class="btn-view-all" routerLink="/calendario">Ver Todos os Meus Eventos</button>
+          </div>
+
+        </div>
+        <!-- --- FIM DO NOVO CONTEÚDO --- -->
+
       </div>
 
       <div class="dashboard-widget">

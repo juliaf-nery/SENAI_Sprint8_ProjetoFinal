@@ -3,6 +3,7 @@ import { DashboardShellComponent } from '../../components/dashboard-shell/dashbo
 import { AuthService } from '../../services/auth.service';
 import { PERFIL_COR, PERFIL_LABEL } from '../../config/perfil';
 import { UserRole } from '../types/user';
+import { CommonModule } from '@angular/common';
 
 interface Refeicao {
   nome: string;
@@ -26,7 +27,7 @@ interface LinhaTabelaCardapio {
 @Component({
   selector: 'app-cardapio',
   standalone: true,
-  imports: [DashboardShellComponent],
+  imports: [DashboardShellComponent, CommonModule],
   templateUrl: './cardapio.component.html',
   styleUrl: './cardapio.component.css',
 })
@@ -93,4 +94,10 @@ export class CardapioComponent {
     const role = this.authService.getRole();
     return role ? PERFIL_COR[role as UserRole] : '#0057A8';
   }
+
+  editarCardapio(dia: string) {
+  console.log('Editando cardápio do dia:', dia);
+  // Aqui você abre o seu modal ou ativa o modo de edição para o dia selecionado
+}
+
 }

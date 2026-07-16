@@ -107,9 +107,19 @@
             <input type="text" name="autor" [(ngModel)]="novoMaterial.professor" placeholder="Ex: Prof. Mariana Santos" required />
           </label>
 
+          <label class="campo-form campo-largo">
+            <span>Arquivo</span>
+            <div class="arquivo-upload">
+              <input type="file" name="arquivo" (change)="onArquivoSelecionado($event)" accept=".pdf,.mp4,.doc,.docx,.txt,.pptx" />
+            </div>
+            @if (novoMaterial.nomeArquivo) {
+              <span class="arquivo-selecionado"><i class="bi bi-check-circle-fill"></i>{{ novoMaterial.nomeArquivo }}</span>
+            }
+          </label>
+
           <div class="form-acoes campo-largo">
             <button type="button" class="btn-cancelar" (click)="fecharModalAdicionar()">Cancelar</button>
-            <button type="submit" class="btn-salvar">
+            <button type="submit" class="btn-salvar" [disabled]="!novoMaterial.nomeArquivo">
               <i class="bi bi-upload"></i>
               Adicionar
             </button>

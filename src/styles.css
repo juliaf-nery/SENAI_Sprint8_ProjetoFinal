@@ -4,6 +4,7 @@
 * {
     padding: 0;
     margin: 0;
+    font-family: 'Rawline', sans-serif;
 }
 
 body {
@@ -69,9 +70,21 @@ body {
 }
 
 .dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+@media (min-width: 1200px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .dashboard-grid.kpi-grid {
@@ -98,9 +111,9 @@ body {
 }
 
 .dashboard-widget h2 {
-  font-size: 0.95rem; /* Um pouco menor para não gritar na tela */
-  font-weight: 600;    /* Semibold em vez de Bold puro (700) */
-  color: #1e293b;      /* Tom de slate escuro profissional */
+  font-size: 0.95rem; 
+  font-weight: 600;   
+  color: #1e293b;   
   letter-spacing: -0.01em;
   margin-bottom: 0;
 }

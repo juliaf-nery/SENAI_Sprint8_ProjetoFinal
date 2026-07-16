@@ -1,9 +1,15 @@
 <div class="login-container">
 
-  <div class="left-panel"
-    [style.background-image]="'linear-gradient(rgba(10, 37, 64, 0.85), rgba(10, 37, 64, 0.85)), url(' + images[currentImageIndex] + ')'">
+  <div class="left-panel">
+    <div class="carousel-images">
+      <div *ngFor="let img of images; let i = index" class="carousel-slide" [class.active]="currentImageIndex === i"
+        [style.background-image]="'url(' + img + ')'">
+      </div>
+      <div class="carousel-overlay"></div>
+    </div>
+
     <div class="brand">
-      <img class="logo-img" src="/img/logo2.png"><a class="link" routerLink="/">EduConecta</a>
+      <img class="logo-img" src="/img/logo-menor-sem-fundo.png"><a class="link" routerLink="/">EducaNet</a>
     </div>
 
     <div class="left-content">
@@ -33,7 +39,7 @@
 
       <div class="login-card">
         <div class="card-header">
-          <img class="logo-icon" src="/img/logo2.png" alt="logoConecta">
+          <img class="logo-icon" src="/img/logo-menor-sem-fundo.png" alt="logoConecta">
           <h2>Bem-vindo(a)!</h2>
           <p>Plataforma de Comunicação e Gestão Escolar</p>
         </div>
@@ -66,7 +72,6 @@
           </div>
 
           <button type="submit" class="btn btn-primary">Entrar</button>
-          <button type="button" class="btn btn-outline">Primeiro Acesso</button>
         </form>
       </div>
 

@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { LoginResponse, UserRole } from '../pages/types/user';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AuthService {
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
 
-  private readonly API_URL = 'http://localhost:3001';
+  private readonly API_URL = environment.apiUrl;
 
   private readonly ROLE_HOME_ROUTES: Record<UserRole, string> = {
     administrador: '/home-admin',

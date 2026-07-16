@@ -16,11 +16,6 @@ export const TIPO_AVISO_LABEL: Record<TipoAviso, string> = {
   atencao: 'Atenção',
 };
 
-/**
- * Fonte única dos avisos escolares.
- * Usada tanto na página "Avisos" quanto no "Calendário" — conforme o PDF,
- * os avisos aqui cadastrados também devem aparecer no calendário.
- */
 export const AVISOS: Aviso[] = [
   {
     id: 'aviso-1',

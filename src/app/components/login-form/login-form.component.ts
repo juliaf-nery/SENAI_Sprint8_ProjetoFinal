@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { RouterLink } from '@angular/router';
@@ -21,15 +21,39 @@ interface DemoAccount {
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css']
 })
-export class LoginFormularioComponent {
+export class LoginFormularioComponent implements OnInit, OnDestroy {
   // CARROSSEL DE IMAGENS
 images: string[] = [
-    'https://www.consed.org.br/storage/news/ocnqewu8vphch89tjzvsyr2702afu9.jpeg',
-    'https://bahiaeconomica.com.br/wp/wp-content/uploads/2026/01/Rede-estadual-da-Bahia-inicia-matriculas-para-o-an0137569500202601120733-ScaleDownProportional-768x512.webp',
-    'https://cdn.atarde.com.br/img/Artigo-Destaque/1260000/Estudantes-do-Ensino-Medio-da-rede-estadual-recebe0126280200202403181321.jpg?xid=6149565'
+    '/img/colegio1.png',
+    '/img/colegio3.png',
+    '/img/colegio4.png'
   ];
 
   currentImageIndex: number = 0;
+
+  // Troca automática das imagens do carrossel
+  private readonly autoPlayIntervalMs = 5000;
+  private autoPlayTimer: ReturnType<typeof setInterval> | undefined;
+
+  ngOnInit(): void {
+    this.startAutoPlay();
+  }
+
+  ngOnDestroy(): void {
+    this.stopAutoPlay();
+  }
+
+  private startAutoPlay(): void {
+    this.stopAutoPlay();
+    this.autoPlayTimer = setInterval(() => this.nextImage(), this.autoPlayIntervalMs);
+  }
+
+  private stopAutoPlay(): void {
+    if (this.autoPlayTimer) {
+      clearInterval(this.autoPlayTimer);
+      this.autoPlayTimer = undefined;
+    }
+  }
 
   nextImage(): void {
     if (this.currentImageIndex < this.images.length - 1) {
@@ -37,6 +61,7 @@ images: string[] = [
     } else {
       this.currentImageIndex = 0;
     }
+    this.startAutoPlay();
   }
 
   prevImage(): void {
@@ -45,10 +70,12 @@ images: string[] = [
     } else {
       this.currentImageIndex = this.images.length - 1;
     }
+    this.startAutoPlay();
   }
 
   setCurrentImage(index: number): void {
     this.currentImageIndex = index;
+    this.startAutoPlay();
   }
 
   // LOGIN
@@ -104,7 +131,7 @@ images: string[] = [
     },
     {
       role: 'Aluno',
-      description: 'Colégio Estadual...',
+      description: 'João Pedro Santo...',
       identifier: '2026106379',
       senha: 'aluno123',
       icon: 'bi-mortarboard-fill',

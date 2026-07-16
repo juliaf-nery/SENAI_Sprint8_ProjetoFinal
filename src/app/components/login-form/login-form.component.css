@@ -32,16 +32,45 @@ body {
 .left-panel {
     flex: 1.1;
     position: relative;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+    overflow: hidden;
     color: var(--white);
     min-height: 100vh;
     padding: 40px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: background-image 0.5s ease-in-out;
+}
+
+/* Carrossel de imagens de fundo (crossfade suave) */
+.carousel-images {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.carousel-slide {
+    position: absolute;
+    inset: 0;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+}
+
+.carousel-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 37, 64, 0.85);
+}
+
+.brand,
+.left-content {
+    z-index: 1;
 }
 
 .brand {
@@ -284,16 +313,6 @@ body {
 
 .btn-primary:hover {
     background-color: #3669b2;
-}
-
-.btn-outline {
-    background-color: transparent;
-    color: #204171;
-    border: 2px solid #204171;
-}
-
-.btn-outline:hover {
-    background-color: #e9f0f6;
 }
 
 /* Seção de Demonstração */

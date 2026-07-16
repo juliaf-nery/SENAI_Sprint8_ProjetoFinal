@@ -17,18 +17,24 @@
       <span>Acesso rápido aos módulos da unidade</span>
     </div>
     <div class="dashboard-grid">
-      <app-dashboard-card icon="bi-easel2" titulo="Projetos" descricao="FUTURO" cor="verde"
-        route="/projetos"></app-dashboard-card>
-      <app-dashboard-card icon="bi-calendar-event" titulo="Eventos" descricao="FUTURO" cor="amarelo"
-        route="/eventos"></app-dashboard-card>
       <app-dashboard-card icon="bi-megaphone" titulo="Avisos" descricao="6 comunicados publicados" cor="vermelho"
         route="/avisos"></app-dashboard-card>
       <app-dashboard-card icon="bi-calendar3" titulo="Calendário" descricao="Eventos" cor="azul"
         route="/calendario"></app-dashboard-card>
-      <app-dashboard-card icon="bi-exclamation-triangle" titulo="Problemas" descricao="FUTURO"
-        cor="vermelho"></app-dashboard-card>
       <app-dashboard-card icon="bi-chat-square-dots" titulo="Ouvidoria" descricao="Manifestações da comunidade escolar"
         cor="azul-escuro" route="/ouvidoria"></app-dashboard-card>
+      <app-dashboard-card icon="bi-person-workspace" titulo="Professores" descricao="Professores ativos" cor="amarelo"
+        route="/professores"></app-dashboard-card>
+      <app-dashboard-card icon="bi-cup-hot-fill" titulo="Cardápio" descricao="Cardápio Semanal" cor="azul-escuro"
+        route="/cardapio"></app-dashboard-card>
+        <app-dashboard-card icon="bi bi-star" titulo="Destaques" descricao="Destaques do bimestre" cor="amarelo"
+        route="/destaques"></app-dashboard-card>
+        <app-dashboard-card icon="bi-file-earmark-text" titulo="Relátorios" descricao="Relátorios do bimestre" cor="vermelho"
+        route="/relatorios"></app-dashboard-card>
+      <app-dashboard-card icon="bi-exclamation-triangle" titulo="Mensagens" descricao="EM BREVE" cor="vermelho"
+        route="/mensagens"></app-dashboard-card>
+      <app-dashboard-card icon="bi-easel2" titulo="Projetos" descricao="EM BREVE" cor="verde"
+        route="/projetos"></app-dashboard-card>
     </div>
   </section>
 
@@ -58,14 +64,14 @@
 
             <div class="mini-bar-chart">
               @for (item of frequenciaMensal; track item.label) {
-                <div class="bar-item">
-                  <div class="bar-wrapper">
-                    <div class="bar" [style.height.%]="alturaBarra(item.valor)">
-                      <span class="bar-tooltip">{{ item.valor }}%</span>
-                    </div>
+              <div class="bar-item">
+                <div class="bar-wrapper">
+                  <div class="bar" [style.height.%]="alturaBarra(item.valor)">
+                    <span class="bar-tooltip">{{ item.valor }}%</span>
                   </div>
-                  <span class="bar-label">{{ item.label }}</span>
                 </div>
+                <span class="bar-label">{{ item.label }}</span>
+              </div>
               }
             </div>
           </div>
@@ -77,28 +83,28 @@
         <p>Resumo do desempenho da unidade neste ano letivo</p>
         <div class="dashboard-list">
           <div class="dashboard-list-item">
-            <i class="bi bi-graph-up-arrow"></i>
+            <i class="bi bi-exclamation-triangle-fill cor-attention"></i>
             <div>
-              <div class="item-title">Taxa de aprovação</div>
-              <div class="item-meta">Ano letivo de 2026</div>
+              <div class="item-title">Alunos em Risco Crítico</div>
+              <div class="item-meta">Bimestre atual</div>
             </div>
-            <span class="badge-pill">92%</span>
+            <span class="badge-pill atencao">0,24%</span>
           </div>
           <div class="dashboard-list-item">
-            <i class="bi bi-person-dash"></i>
+            <i class="bi bi-trophy-fill cor-top"></i>
             <div>
-              <div class="item-title">Taxa de evasão</div>
+              <div class="item-title">Metas Estratégicas</div>
               <div class="item-meta">Ano letivo de 2026</div>
             </div>
-            <span class="badge-pill atencao">3%</span>
+            <span class="badge-pill">60%</span>
           </div>
           <div class="dashboard-list-item">
-            <i class="bi bi-calendar-check"></i>
+            <i class="bi bi-emoji-smile-fill cor-smile"></i>
             <div>
-              <div class="item-title">Frequência média</div>
+              <div class="item-title">Satisfação de pais e alunos</div>
               <div class="item-meta">Últimos 30 dias</div>
             </div>
-            <span class="badge-pill">95%</span>
+            <span class="badge-pill">88%</span>
           </div>
         </div>
       </div>

@@ -90,10 +90,7 @@ export class AtividadesComponent {
   private readonly notasService = inject(NotasService);
   private readonly pastasService = inject(PastasAtividadesService);
 
-  /** Persona fixa do aluno usada em todo o painel do aluno nesta demonstração
-   *  (mesma referência usada no Boletim), para exibir as notas publicadas
-   *  pelo professor na página "Notas". */
-  private readonly ALUNO_DEMO_EMAIL = 'joao.pedro@edu.conecta';
+  private readonly ALUNO_DEMO_EMAIL = 'joao.pedro@educanet.com';
   private readonly ALUNO_DEMO_TURMA = '3º Ano A';
   private readonly ALUNO_DEMO_DISCIPLINA = 'Matemática';
 
@@ -123,7 +120,6 @@ export class AtividadesComponent {
       .filter((n): n is { categoria: string; valor: number } => n.valor !== null);
   }
 
-  /** Atividades já corrigidas pelo professor na pasta aberta, com a nota individual de cada uma. */
   get atividadesComNota(): Atividade[] {
     return this.atividadesDaPastaAtual.filter((a) => a.nota !== undefined);
   }
@@ -313,7 +309,7 @@ export class AtividadesComponent {
   mostrarConfirmacaoEnvio = false;
 
   abrirDetalhe(atividade: Atividade): void {
-    if (!this.ehAluno) return;
+    if (!this.ehAlunoOuResponsavel) return;
     this.atividadeSelecionada = atividade;
     this.nomeArquivoSelecionado = null;
   }
@@ -330,6 +326,7 @@ export class AtividadesComponent {
   }
 
   onArquivoSelecionado(evento: Event): void {
+    if (!this.ehAluno) return;
     const input = evento.target as HTMLInputElement;
     const arquivo = input.files?.[0];
     this.nomeArquivoSelecionado = arquivo ? arquivo.name : null;
@@ -337,7 +334,7 @@ export class AtividadesComponent {
 
   /** Caso 1: a atividade é entregue por arquivo (PDF ou imagem). */
   enviarArquivo(): void {
-    if (!this.atividadeSelecionada || !this.nomeArquivoSelecionado) return;
+    if (!this.ehAluno || !this.atividadeSelecionada || !this.nomeArquivoSelecionado) return;
 
     this.atividadeSelecionada.status = 'enviada';
     this.atividadeSelecionada.progresso = 100;
@@ -349,7 +346,7 @@ export class AtividadesComponent {
 
   /** Caso 2: a atividade é feita em um link externo; o aluno só confirma a conclusão. */
   marcarComoConcluida(): void {
-    if (!this.atividadeSelecionada) return;
+    if (!this.ehAluno || !this.atividadeSelecionada) return;
 
     this.atividadeSelecionada.status = 'enviada';
     this.atividadeSelecionada.progresso = 100;
@@ -370,6 +367,14 @@ export class AtividadesComponent {
 
   get ehAluno(): boolean {
     return this.authService.getRole() === 'aluno';
+  }
+
+  get ehResponsavel(): boolean {
+    return this.authService.getRole() === 'responsavel';
+  }
+
+  get ehAlunoOuResponsavel(): boolean {
+    return this.ehAluno || this.ehResponsavel;
   }
 
   get ehProfessor(): boolean {

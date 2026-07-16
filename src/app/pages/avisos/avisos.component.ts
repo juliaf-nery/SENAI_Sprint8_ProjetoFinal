@@ -10,12 +10,6 @@ type FiltroTipo = 'todos' | TipoAviso;
 
 type QuemPostou = 'Direção Escolar' | 'Secretaria Escolar' | 'Coordenação Pedagógica';
 
-/**
- * Página "Avisos" — Direção, Aluno e Responsável.
- * Os avisos aqui cadastrados também aparecem no Calendário (fonte
- * compartilhada em config/avisos.ts). Para o perfil Aluno, o botão
- * "Novo Aviso" não é exibido, conforme especificação do PDF.
- */
 @Component({
   selector: 'app-avisos',
   standalone: true,
@@ -147,9 +141,9 @@ export class AvisosComponent implements OnInit, OnDestroy {
     }
   }
 
-  /** Para Aluno, a página é somente leitura — sem criação de avisos. */
+  /** Apenas a Direção pode criar novos avisos. Professores e alunos veem a página como leitura. */
   get exibirBotaoNovoAviso(): boolean {
-    return this.authService.getRole() !== 'aluno';
+    return this.authService.getRole() === 'direcao';
   }
 
   get perfilLabel(): string {

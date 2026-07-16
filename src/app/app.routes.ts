@@ -75,7 +75,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/ouvidoria/ouvidoria.component').then((c) => c.OuvidoriaComponent),
     canActivate: [homeGuard],
-    data: { titulo: 'Ouvidoria Escolar', icon: 'bi-megaphone', roles: ['administrador', 'direcao', 'professor', 'aluno'] },
+    data: { titulo: 'Ouvidoria Escolar', icon: 'bi-megaphone', roles: ['administrador', 'direcao', 'professor', 'aluno', 'responsavel'] },
   },
   { path: 'plano-de-acao', loadComponent: emBreve, canActivate: [homeGuard], data: { titulo: 'Plano de Ação Escolar', icon: 'bi-kanban', roles: ['administrador', 'direcao'] } },
   {
@@ -108,7 +108,12 @@ export const routes: Routes = [
     canActivate: [homeGuard],
     data: { titulo: 'Destaques', icon: 'bi-star-fill', roles: ['direcao', 'professor', 'aluno'] },
   },
-  { path: 'indicadores-escola', loadComponent: emBreve, canActivate: [homeGuard], data: { titulo: 'Indicadores da Escola', icon: 'bi-graph-up-arrow', roles: ['direcao'] } },
+  {
+    path: 'indicadores-escola',
+    loadComponent: () => import('./pages/indicadores-escola/indicadores-escola.component').then((c) => c.IndicadoresEscolaComponent),
+    canActivate: [homeGuard],
+    data: { titulo: 'Indicadores da Escola', icon: 'bi-graph-up-arrow', roles: ['direcao'] },
+  },
   {
     path: 'minhas-turmas',
     loadComponent: () =>
@@ -142,7 +147,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/atividades/atividades.component').then((c) => c.AtividadesComponent),
     canActivate: [homeGuard],
-    data: { titulo: 'Atividades', icon: 'bi-journal-check', roles: ['professor', 'aluno'] },
+    data: { titulo: 'Atividades', icon: 'bi-journal-check', roles: ['professor', 'aluno', 'responsavel'] },
   },
   { path: 'materiais', loadComponent: emBreve, canActivate: [homeGuard], data: { titulo: 'Materiais de Aula', icon: 'bi-folder2-open', roles: ['professor'] } },
   {
@@ -150,9 +155,9 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/calendario/calendario.component').then((c) => c.CalendarioComponent),
     canActivate: [homeGuard],
-    data: { titulo: 'Calendário', icon: 'bi-calendar3', roles: ['professor', 'aluno', 'responsavel'] },
+    data: { titulo: 'Calendário', icon: 'bi-calendar3', roles: ['direcao', 'professor', 'aluno', 'responsavel'] },
   },
-  { path: 'mensagens', loadComponent: emBreve, canActivate: [homeGuard], data: { titulo: 'Mensagens', icon: 'bi-chat-dots-fill', roles: ['direçao', 'professor', 'responsavel'] } },
+  { path: 'mensagens', loadComponent: emBreve, canActivate: [homeGuard], data: { titulo: 'Mensagens', icon: 'bi-chat-dots-fill', roles: ['direcao', 'professor', 'aluno', 'responsavel'] } },
   {
     path: 'boletim',
     loadComponent: () =>

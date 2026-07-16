@@ -1,11 +1,7 @@
-<app-dashboard-shell
-  tituloPagina="Boletim Escolar"
-  [subtitulo]="nomeAluno + ' · 3º Ano A · ' + anoLetivo"
-  [perfilLabel]="perfilLabel"
-  [corTema]="corTema"
->
+<app-dashboard-shell tituloPagina="Boletim Escolar" [subtitulo]="nomeAluno + ' · 3º Ano A · ' + anoLetivo"
+  [perfilLabel]="perfilLabel" [corTema]="corTema">
 
-<section class="dashboard-section">
+  <section class="dashboard-section">
     <div class="boletim-kpis">
       <div class="boletim-kpi">
         <span class="boletim-kpi-valor">{{ mediaGeral }}</span>
@@ -26,20 +22,20 @@
   <section class="dashboard-section">
     <div class="dashboard-widget">
       <h2>Médias por Disciplina</h2>
-      <div class="mini-bar-chart boletim-bar-chart">
-        @for (item of notas; track item.disciplina) {
+      <div class="div-grafico-wrap">
+        <div class="mini-bar-chart boletim-bar-chart">
+          @for (item of notas; track item.disciplina) {
           <div class="bar-item">
-            @if (item.media === maiorMedia) {
-              <span class="bar-tooltip">Média: {{ item.media.toFixed(2) }}</span>
-            }
-            <div
-              class="bar"
-              [class.bar-alerta]="item.situacao === 'recuperacao'"
-              [style.height.%]="alturaBarra(item.media)"
-            ></div>
+            <span class="bar-tooltip">Média: {{ item.media.toFixed(2) }}</span>
+
+            <div class="bar" [class.bar-alerta]="item.situacao === 'recuperacao'"
+              [style.height.%]="alturaBarra(item.media)">
+            </div>
+
             <span class="bar-label">{{ item.disciplina }}</span>
           </div>
-        }
+          }
+        </div>
       </div>
     </div>
   </section>
@@ -63,21 +59,21 @@
           </thead>
           <tbody>
             @for (item of notas; track item.disciplina) {
-              <tr>
-                <td>
-                  <span class="boletim-disciplina-nome">{{ item.disciplina }}</span>
-                  <span class="boletim-disciplina-prof">{{ item.professor }}</span>
-                </td>
-                <td>{{ item.bim1 ?? '—' }}</td>
-                <td>{{ item.bim2 ?? '—' }}</td>
-                <td>{{ item.bim3 ?? '—' }}</td>
-                <td>{{ item.bim4 ?? '—' }}</td>
-                <td class="boletim-media">{{ item.media.toFixed(1) }}</td>
-                <td>{{ item.frequencia }}%</td>
-                <td>
-                  <span [class]="situacaoClasse(item.situacao)">{{ situacaoLabel(item.situacao) }}</span>
-                </td>
-              </tr>
+            <tr>
+              <td>
+                <span class="boletim-disciplina-nome">{{ item.disciplina }}</span>
+                <span class="boletim-disciplina-prof">{{ item.professor }}</span>
+              </td>
+              <td>{{ item.bim1 ?? '—' }}</td>
+              <td>{{ item.bim2 ?? '—' }}</td>
+              <td>{{ item.bim3 ?? '—' }}</td>
+              <td>{{ item.bim4 ?? '—' }}</td>
+              <td class="boletim-media">{{ item.media.toFixed(1) }}</td>
+              <td>{{ item.frequencia }}%</td>
+              <td>
+                <span [class]="situacaoClasse(item.situacao)">{{ situacaoLabel(item.situacao) }}</span>
+              </td>
+            </tr>
             }
           </tbody>
         </table>
@@ -92,19 +88,19 @@
       <p class="boletim-avaliacoes-sub">Notas lançadas pelo professor, por categoria de avaliação</p>
 
       @if (avaliacoesPublicadas.length) {
-        <div class="boletim-avaliacoes-grid">
-          @for (item of avaliacoesPublicadas; track item.categoria) {
-            <div class="avaliacao-chip">
-              <span class="avaliacao-categoria">{{ item.categoria }}</span>
-              <span class="avaliacao-valor">{{ item.valor.toFixed(1) }}</span>
-            </div>
-          }
+      <div class="boletim-avaliacoes-grid">
+        @for (item of avaliacoesPublicadas; track item.categoria) {
+        <div class="avaliacao-chip">
+          <span class="avaliacao-categoria">{{ item.categoria }}</span>
+          <span class="avaliacao-valor">{{ item.valor.toFixed(1) }}</span>
         </div>
+        }
+      </div>
       } @else {
-        <p class="boletim-avaliacoes-vazio">
-          <i class="bi bi-hourglass-split"></i>
-          Nenhuma avaliação publicada pelo professor ainda.
-        </p>
+      <p class="boletim-avaliacoes-vazio">
+        <i class="bi bi-hourglass-split"></i>
+        Nenhuma avaliação publicada pelo professor ainda.
+      </p>
       }
     </div>
   </section>
