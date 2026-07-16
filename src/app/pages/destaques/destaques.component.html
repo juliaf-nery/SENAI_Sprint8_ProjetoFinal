@@ -1,0 +1,24 @@
+<app-dashboard-shell tituloPagina="Destaques" subtitulo="Reconhecimentos da comunidade escolar"
+  [perfilLabel]="perfilLabel" [corTema]="corTema">
+  <section class="dashboard-section">
+    <div class="destaques-grid">
+      @for (d of destaques; track d.nome + d.categoria) {
+      <div class="dashboard-widget destaque-card">
+        <span class="destaque-categoria" [style.background]="d.cor">{{ d.categoria }}</span>
+        <div class="destaque-imagem" [style.background]="d.fotoUrl ? 'none' : d.cor">
+          @if (d.fotoUrl) {
+          <img [src]="d.fotoUrl" [alt]="d.nome" class="destaque-img">
+          } @else {
+          <i class="bi {{ d.icon }}"></i>
+          }
+        </div>
+        <h3>{{ d.nome }}</h3>
+        @if (d.turma) {
+        <span class="destaque-turma">{{ d.turma }}</span>
+        }
+        <p>{{ d.motivo }}</p>
+      </div>
+      }
+    </div>
+  </section>
+</app-dashboard-shell>

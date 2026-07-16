@@ -1,0 +1,121 @@
+<app-dashboard-shell
+  tituloPagina="Notas"
+  subtitulo="Lançamento de notas por turma e categoria de avaliação"
+  [perfilLabel]="perfilLabel"
+  [corTema]="corTema"
+>
+  <section class="dashboard-section">
+    <div class="turma-tabs">
+      @for (turma of turmas; track turma.nome) {
+        <button
+          type="button"
+          class="turma-tab"
+          [class.active]="turmaSelecionadaNome === turma.nome"
+          (click)="selecionarTurma(turma.nome)"
+        >
+          {{ turma.nome }}
+        </button>
+      }
+    </div>
+  </section>
+
+  <section class="dashboard-section">
+    <div class="dashboard-widget categorias-card">
+      <span class="campo-label">Categorias de Avaliação</span>
+      <div class="categorias-lista">
+        @for (categoria of categorias; track categoria) {
+          <span class="categoria-chip">
+            {{ categoria }}
+            <button type="button" (click)="removerCategoria(categoria)" [attr.aria-label]="'Remover ' + categoria">
+              <i class="bi bi-x"></i>
+            </button>
+          </span>
+        }
+      </div>
+      <div class="categoria-nova">
+        <input
+          type="text"
+          placeholder="Nova categoria (ex: Trabalho em Grupo)"
+          [(ngModel)]="novaCategoria"
+          (keyup.enter)="adicionarCategoria()"
+        />
+        <button type="button" (click)="adicionarCategoria()">
+          <i class="bi bi-plus-lg"></i>
+          Adicionar
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="dashboard-section">
+    <div class="dashboard-widget planilha-card">
+      <div class="planilha-topo">
+        <div>
+          <h2>{{ turmaSelecionada.nome }}</h2>
+          <span class="planilha-sub">{{ turmaSelecionada.disciplina }} · {{ turmaSelecionada.alunos.length }} alunos</span>
+        </div>
+      </div>
+
+      <div class="planilha-wrapper">
+        <table class="planilha-tabela">
+          <thead>
+            <tr [style.background]="corTema">
+              <th class="coluna-aluno">Aluno</th>
+              @for (categoria of categorias; track categoria) {
+                <th>{{ categoria }}</th>
+              }
+              <th class="coluna-media">Média</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (aluno of turmaSelecionada.alunos; track aluno.email) {
+              <tr>
+                <td class="coluna-aluno">
+                  <span class="aluno-nome">{{ aluno.nome }}</span>
+                  <span class="aluno-email">{{ aluno.email }}</span>
+                </td>
+                @for (categoria of categorias; track categoria) {
+                  <td>
+                    <input
+                      type="number"
+                      min="0"
+                      max="10"
+                      step="0.5"
+                      class="celula-nota"
+                      placeholder="—"
+                      [ngModel]="notaCelula(aluno.email, categoria)"
+                      (ngModelChange)="atualizarNota(aluno.email, categoria, $event === null ? '' : $event.toString())"
+                    />
+                  </td>
+                }
+                <td class="coluna-media">{{ mediaDoAluno(aluno.email) }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div class="planilha-acoes">
+        <button type="button" class="btn-salvar" (click)="salvarAlteracao()">
+          <i class="bi bi-save2"></i>
+          Salvar Alteração
+        </button>
+        <button type="button" class="btn-publicar" (click)="publicar()">
+          <i class="bi bi-send-check-fill"></i>
+          Publicar
+        </button>
+      </div>
+    </div>
+  </section>
+
+  @if (popupNotas) {
+    <div class="modal-backdrop" (click)="fecharPopupNotas()">
+      <div class="modal-confirmacao" (click)="$event.stopPropagation()">
+        <i class="bi" [class.bi-check-circle-fill]="popupNotas.tipo === 'publicado'" [class.bi-save2-fill]="popupNotas.tipo === 'salvo'"></i>
+        <h3>{{ popupNotas.tipo === 'publicado' ? 'Notas publicadas' : 'Alterações salvas' }}</h3>
+        <p>{{ popupNotas.texto }}</p>
+        <button type="button" (click)="fecharPopupNotas()">Fechar</button>
+      </div>
+    </div>
+  }
+</app-dashboard-shell>

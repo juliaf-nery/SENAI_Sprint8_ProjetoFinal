@@ -1,0 +1,22 @@
+<div
+  class="dashboard-card cor-{{ cor }}"
+  [class.card-kpi]="valor !== undefined && valor !== null && valor !== ''"
+  [class.card-clicavel]="!!route"
+  [routerLink]="route ?? null"
+  [attr.role]="route ? 'link' : null"
+  [attr.tabindex]="route ? 0 : null"
+>
+  <div class="card-icon">
+    <i class="bi {{ icon }}"></i>
+  </div>
+
+  <div class="card-body">
+    @if (valor !== undefined && valor !== null && valor !== '') {
+      <span class="card-valor">{{ valor }}</span>
+    }
+    <h3 class="card-titulo">{{ titulo }}</h3>
+    @if (descricao) {
+      <p class="card-descricao">{{ descricao }}</p>
+    }
+  </div>
+</div>

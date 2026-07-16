@@ -1,0 +1,48 @@
+<div class="dashboard-shell">
+  <app-sidebar-menu
+    [collapsed]="sidebarCollapsed"
+    [mobileOpen]="sidebarMobileOpen"
+    (linkClicked)="fecharSidebarMobile()"
+  ></app-sidebar-menu>
+
+  @if (sidebarMobileOpen) {
+    <div class="sidebar-backdrop" (click)="fecharSidebarMobile()"></div>
+  }
+
+  <div class="dashboard-main">
+    <header class="dashboard-topbar">
+      <button
+        class="menu-toggle-btn"
+        type="button"
+        (click)="toggleSidebar()"
+        aria-label="Abrir ou recolher o menu"
+        title="Menu"
+      >
+        <i class="bi bi-list"></i>
+      </button>
+
+      <div class="topbar-page">
+        <h1>{{ tituloPagina }}</h1>
+        @if (subtitulo) {
+          <p>{{ subtitulo }}</p>
+        }
+      </div>
+
+      <div class="topbar-user">
+        <div class="user-info">
+          <span class="user-name">{{ nome }}</span>
+          @if (perfilLabel) {
+            <span class="user-role" [style.background]="corTema">{{ perfilLabel }}</span>
+          }
+        </div>
+        <button class="logout-btn" type="button" (click)="sair()" aria-label="Sair da plataforma" title="Sair">
+          <i class="bi bi-box-arrow-right"></i>
+        </button>
+      </div>
+    </header>
+
+    <main class="dashboard-content">
+      <ng-content></ng-content>
+    </main>
+  </div>
+</div>

@@ -1,0 +1,630 @@
+.unidade-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.unidade-tab {
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #64748b;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.unidade-tab:hover {
+  border-color: #3669b2;
+}
+
+.unidade-tab.active {
+  background: #204171;
+  border-color: #204171;
+  color: #ffffff;
+}
+
+.kpi-mini {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.kpi-valor {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.kpi-valor-texto {
+  font-size: 1rem;
+}
+
+.kpi-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.kpi-sub {
+  font-size: 0.72rem;
+  color: #64748b;
+}
+
+.meses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 16px;
+}
+
+.mes-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: default;
+}
+
+.mes-anel {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.mes-card:hover .mes-anel {
+  transform: scale(1.08);
+}
+
+.mes-percentual {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #0057A8;
+}
+
+.mes-label {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.mini-calendario {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.mini-dia {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #64748b;
+}
+
+.falta-justificada {
+  background: #fef6e6;
+  color: #b7791f;
+  font-weight: 700;
+}
+
+.falta-nao-justificada {
+  background: #fbeaea;
+  color: #C62828;
+  font-weight: 700;
+}
+
+.calendario-legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 14px;
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.legenda-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.legenda-justificada {
+  background: #b7791f;
+}
+
+.legenda-nao-justificada {
+  background: #C62828;
+}
+
+/* --- Modo Professor: chamada --- */
+
+.chamada-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.chamada-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 18px 20px 4px;
+}
+
+.chamada-topo h2 {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.planilha-sub {
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.chamada-data {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #204171;
+  background: #eaf2fb;
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+
+.planilha-wrapper {
+  overflow-x: auto;
+  padding: 24px;
+}
+
+.planilha-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 480px;
+}
+
+.planilha-tabela thead th {
+
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  padding: 10px 12px;
+  text-align: center;
+  white-space: nowrap;
+
+  background-color: #f8f9fa !important;
+  /* Um cinza bem neutro e leve */
+  border-bottom: 2px solid #e9ecef;
+
+  color: #495057;
+  /* Texto cinza escuro, menos agressivo que o branco no verde */
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 12px 16px;
+}
+
+.planilha-tabela thead th.coluna-aluno {
+  text-align: left;
+}
+
+.planilha-tabela tbody tr {
+  border-bottom: 1px solid #eef1f6;
+}
+
+.planilha-tabela tbody tr:hover {
+  background: #f8fafc;
+}
+
+.planilha-tabela td {
+  text-align: center;
+  text-transform: uppercase;
+  padding: 16px 20px;
+  vertical-align: middle;
+  border-bottom: 1px solid #f1f3f5;
+}
+
+.coluna-aluno {
+  text-align: left !important;
+  min-width: 200px;
+}
+
+.aluno-nome {
+  display: block;
+  font-size: 0.83rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.aluno-email {
+  display: block;
+  font-size: 0.7rem;
+  color: #94a3b8;
+}
+
+.presenca-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 999px;
+  padding: 7px 16px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.presenca-toggle.presente {
+  background: #eaf5eb;
+  color: #2E7D32;
+}
+
+.presenca-toggle.presente:hover {
+  background: #d5ecd7;
+}
+
+.presenca-toggle.falta {
+  background: #fbeaea;
+  color: #C62828;
+}
+
+.presenca-toggle.falta:hover {
+  background: #f7d6d6;
+}
+
+.motivo-select {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-family: inherit;
+  font-size: 0.78rem;
+  color: #0f172a;
+  background: #ffffff;
+}
+
+.motivo-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.76rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.resumo-turma {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.7fr) 1fr;
+  gap: 16px;
+  padding: 0 20px 20px;
+}
+
+.resumo-turma-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background: #f8fafc;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.resumo-turma-card h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #0f172a;
+}
+
+.resumo-turma-card p {
+  margin: 4px 0 0;
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.resumo-anel {
+  min-width: 70px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 0 6px #ffffff;
+}
+
+.resumo-percentual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #204171;
+}
+
+.resumo-calendario {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+}
+
+.resumo-calendario-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.resumo-dia {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #64748b;
+  font-size: 0.74rem;
+  font-weight: 600;
+}
+
+.resumo-dia.com-falta {
+  background: #fbeaea;
+  color: #C62828;
+}
+
+.resumo-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.resumo-item {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  color: #0f172a;
+  font-size: 0.74rem;
+  padding: 6px 10px;
+}
+
+.resumo-item.vazio {
+  color: #64748b;
+}
+
+.planilha-acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 18px 20px 20px;
+}
+
+.btn-salvar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #64748b;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 10px 18px;
+  cursor: pointer;
+}
+
+.btn-salvar:hover {
+  border-color: #cbd5e1;
+}
+
+.btn-salvar:disabled,
+.btn-publicar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-publicar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #ffffff;
+  background: #2E7D32;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  cursor: pointer;
+}
+
+.btn-publicar:hover {
+  background: #1b5e20;
+}
+
+/* Pop-up de confirmação (Salvar/Publicar) */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 50;
+}
+
+.modal-confirmacao {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px;
+  text-align: center;
+  max-width: 340px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
+}
+
+.modal-confirmacao i {
+  font-size: 2.2rem;
+  color: #2E7D32;
+  margin-bottom: 10px;
+}
+
+.modal-confirmacao h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.modal-confirmacao p {
+  font-size: 0.82rem;
+  color: #64748b;
+  margin-bottom: 18px;
+}
+
+.modal-confirmacao button {
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #ffffff;
+  background: #204171;
+  border: none;
+  border-radius: 10px;
+  padding: 9px 24px;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .resumo-turma {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .chamada-topo {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 12px;
+    padding: 16px 16px 8px;
+  }
+
+  .chamada-data {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .meses-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 12px;
+  }
+
+  .planilha-wrapper {
+    padding: 12px !important;
+  }
+
+  .presenca-toggle {
+    padding: 8px 12px !important;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .unidade-tabs {
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+    gap: 6px;
+  }
+
+  .unidade-tab {
+    white-space: nowrap; 
+    padding: 6px 12px !important;
+    font-size: 0.78rem;
+  }
+
+  .meses-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  .mes-anel {
+    width: 52px;
+    height: 52px;
+  }
+
+  .mes-percentual {
+    width: 38px;
+    height: 38px;
+    font-size: 0.65rem;
+  }
+
+  .planilha-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .planilha-tabela {
+    min-width: 500px; 
+  }
+
+  .planilha-tabela td {
+    padding: 12px 8px !important;
+  }
+
+  .resumo-turma-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 16px 12px;
+  }
+
+  .planilha-acoes {
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px;
+  }
+
+  .btn-salvar, 
+  .btn-publicar {
+    width: 100%;
+    justify-content: center;
+    padding: 12px !important;
+  }
+
+  .modal-confirmacao {
+    padding: 24px 16px;
+    width: 100%;
+    max-width: 300px;
+  }
+}

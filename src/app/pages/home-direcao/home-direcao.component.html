@@ -1,0 +1,113 @@
+<app-dashboard-shell tituloPagina="Painel da Direção Escolar" subtitulo="Colégio Estadual Modelo da Bahia"
+  perfilLabel="Direção Escolar" corTema="#003E7E">
+  <!-- KPIs -->
+  <section class="dashboard-section">
+    <div class="dashboard-grid kpi-grid">
+      <app-dashboard-card icon="bi-people-fill" titulo="Alunos" valor="842" descricao="Matriculados nesta unidade"
+        cor="azul"></app-dashboard-card>
+      <app-dashboard-card icon="bi-person-workspace" titulo="Professores" valor="56" descricao="Em regência de turma"
+        cor="azul-escuro"></app-dashboard-card>
+    </div>
+  </section>
+
+  <!-- Módulos da escola -->
+  <section class="dashboard-section">
+    <div class="dashboard-section-header">
+      <h2>Gestão Escolar</h2>
+      <span>Acesso rápido aos módulos da unidade</span>
+    </div>
+    <div class="dashboard-grid">
+      <app-dashboard-card icon="bi-megaphone" titulo="Avisos" descricao="6 comunicados publicados" cor="vermelho"
+        route="/avisos"></app-dashboard-card>
+      <app-dashboard-card icon="bi-calendar3" titulo="Calendário" descricao="Eventos" cor="azul"
+        route="/calendario"></app-dashboard-card>
+      <app-dashboard-card icon="bi-chat-square-dots" titulo="Ouvidoria" descricao="Manifestações da comunidade escolar"
+        cor="azul-escuro" route="/ouvidoria"></app-dashboard-card>
+      <app-dashboard-card icon="bi-person-workspace" titulo="Professores" descricao="Professores ativos" cor="amarelo"
+        route="/professores"></app-dashboard-card>
+      <app-dashboard-card icon="bi-cup-hot-fill" titulo="Cardápio" descricao="Cardápio Semanal" cor="azul-escuro"
+        route="/cardapio"></app-dashboard-card>
+        <app-dashboard-card icon="bi bi-star" titulo="Destaques" descricao="Destaques do bimestre" cor="amarelo"
+        route="/destaques"></app-dashboard-card>
+        <app-dashboard-card icon="bi-file-earmark-text" titulo="Relátorios" descricao="Relátorios do bimestre" cor="vermelho"
+        route="/relatorios"></app-dashboard-card>
+      <app-dashboard-card icon="bi-exclamation-triangle" titulo="Mensagens" descricao="EM BREVE" cor="vermelho"
+        route="/mensagens"></app-dashboard-card>
+      <app-dashboard-card icon="bi-easel2" titulo="Projetos" descricao="EM BREVE" cor="verde"
+        route="/projetos"></app-dashboard-card>
+    </div>
+  </section>
+
+  <!-- Gráficos e Indicadores -->
+  <section class="dashboard-section">
+    <div class="dashboard-widgets-row">
+      <div class="dashboard-widget">
+        <h2>Frequência Média</h2>
+        <p>Percentual de presença dos alunos nos últimos meses</p>
+        <div class="chart-container">
+          <div class="chart-y-axis">
+            <span>100</span>
+            <span>95</span>
+            <span>90</span>
+            <span>85</span>
+            <span>80</span>
+          </div>
+
+          <div class="chart-content-area">
+            <div class="chart-grid-lines">
+              <div class="grid-line"></div>
+              <div class="grid-line"></div>
+              <div class="grid-line"></div>
+              <div class="grid-line"></div>
+              <div class="grid-line"></div>
+            </div>
+
+            <div class="mini-bar-chart">
+              @for (item of frequenciaMensal; track item.label) {
+              <div class="bar-item">
+                <div class="bar-wrapper">
+                  <div class="bar" [style.height.%]="alturaBarra(item.valor)">
+                    <span class="bar-tooltip">{{ item.valor }}%</span>
+                  </div>
+                </div>
+                <span class="bar-label">{{ item.label }}</span>
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-widget">
+        <h2>Indicadores da Escola</h2>
+        <p>Resumo do desempenho da unidade neste ano letivo</p>
+        <div class="dashboard-list">
+          <div class="dashboard-list-item">
+            <i class="bi bi-exclamation-triangle-fill cor-attention"></i>
+            <div>
+              <div class="item-title">Alunos em Risco Crítico</div>
+              <div class="item-meta">Bimestre atual</div>
+            </div>
+            <span class="badge-pill atencao">0,24%</span>
+          </div>
+          <div class="dashboard-list-item">
+            <i class="bi bi-trophy-fill cor-top"></i>
+            <div>
+              <div class="item-title">Metas Estratégicas</div>
+              <div class="item-meta">Ano letivo de 2026</div>
+            </div>
+            <span class="badge-pill">60%</span>
+          </div>
+          <div class="dashboard-list-item">
+            <i class="bi bi-emoji-smile-fill cor-smile"></i>
+            <div>
+              <div class="item-title">Satisfação de pais e alunos</div>
+              <div class="item-meta">Últimos 30 dias</div>
+            </div>
+            <span class="badge-pill">88%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</app-dashboard-shell>

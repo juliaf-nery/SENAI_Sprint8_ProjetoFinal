@@ -1,0 +1,198 @@
+<app-dashboard-shell
+  tituloPagina="Frequência"
+  subtitulo="Acompanhamento de frequência por unidade e geral"
+  [perfilLabel]="perfilLabel"
+  [corTema]="corTema"
+>
+  @if (ehProfessor) {
+    <!-- Modo Professor: chamada da turma -->
+    <section class="dashboard-section">
+      <div class="unidade-tabs">
+        @for (t of turmas; track t.nome) {
+          <button
+            type="button"
+            class="unidade-tab"
+            [class.active]="turmaSelecionadaNome === t.nome"
+            (click)="selecionarTurma(t.nome)"
+          >
+            {{ t.nome }}
+          </button>
+        }
+      </div>
+    </section>
+
+    <section class="dashboard-section">
+      <div class="dashboard-widget chamada-card">
+        <div class="chamada-topo">
+          <div>
+            <h2>{{ turmaSelecionada.nome }}</h2>
+            <span class="planilha-sub">{{ turmaSelecionada.disciplina }} · {{ turmaSelecionada.alunos.length }} alunos</span>
+          </div>
+          <span class="chamada-data"><i class="bi bi-calendar3"></i>{{ dataAtualFormatada }}</span>
+        </div>
+
+        <div class="planilha-wrapper">
+          <table class="planilha-tabela">
+            <thead>
+              <tr [style.background]="corTema">
+                <th class="coluna-aluno">Aluno</th>
+                <th>Data</th>
+                <th>Presença</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (aluno of turmaSelecionada.alunos; track aluno.email) {
+                <tr>
+                  <td class="coluna-aluno">
+                    <span class="aluno-nome">{{ aluno.nome }}</span>
+                    <span class="aluno-email">{{ aluno.email }}</span>
+                  </td>
+                  <td>{{ dataAtualFormatada }}</td>
+                  <td>
+                    <button
+                      type="button"
+                      class="presenca-toggle"
+                      [class.presente]="presencaAluno(aluno.email)"
+                      [class.falta]="!presencaAluno(aluno.email)"
+                      (click)="alternarPresenca(aluno.email)"
+                    >
+                      <i class="bi" [class.bi-check-lg]="presencaAluno(aluno.email)" [class.bi-x-lg]="!presencaAluno(aluno.email)"></i>
+                      {{ presencaAluno(aluno.email) ? 'Presente' : 'Falta' }}
+                    </button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <div class="planilha-acoes">
+          <button type="button" class="btn-salvar" (click)="salvarAlteracoes()">
+            <i class="bi bi-save2"></i>
+            Salvar Alterações
+          </button>
+          <button type="button" class="btn-publicar" (click)="publicar()">
+            <i class="bi bi-send-check-fill"></i>
+            Publicar
+          </button>
+        </div>
+      </div>
+    </section>
+
+    @if (popupFrequencia) {
+      <div class="modal-backdrop" (click)="fecharPopupFrequencia()">
+        <div class="modal-confirmacao" (click)="$event.stopPropagation()">
+          <i class="bi" [class.bi-check-circle-fill]="popupFrequencia.tipo === 'publicado'" [class.bi-save2-fill]="popupFrequencia.tipo === 'salvo'"></i>
+          <h3>{{ popupFrequencia.tipo === 'publicado' ? 'Frequência publicada' : 'Alterações salvas' }}</h3>
+          <p>{{ popupFrequencia.texto }}</p>
+          <button type="button" (click)="fecharPopupFrequencia()">Fechar</button>
+        </div>
+      </div>
+    }
+  } @else {
+    <!-- Modo Aluno/Responsável: estatísticas de frequência -->
+    <section class="dashboard-section">
+      <div class="unidade-tabs">
+        @for (u of unidades; track u.id) {
+          <button
+            type="button"
+            class="unidade-tab"
+            [class.active]="unidadeSelecionadaId === u.id"
+            (click)="selecionarUnidade(u.id)"
+          >
+            {{ u.label }}
+          </button>
+        }
+      </div>
+    </section>
+
+    <section class="dashboard-section">
+      <div class="dashboard-grid kpi-grid">
+        <div class="dashboard-widget kpi-mini">
+          <span class="kpi-valor">{{ unidadeSelecionada.frequenciaGeral }}%</span>
+          <span class="kpi-label">Frequência</span>
+          <span class="kpi-sub">{{ unidadeSelecionada.periodo }}</span>
+        </div>
+        <div class="dashboard-widget kpi-mini">
+          <span class="kpi-valor kpi-valor-texto">{{ unidadeSelecionada.mesReferencia }}</span>
+          <span class="kpi-label">Referência</span>
+          <span class="kpi-sub">Último mês computado</span>
+        </div>
+        <div class="dashboard-widget kpi-mini">
+          <span class="kpi-valor">{{ faltasRegistradasComLive }}</span>
+          <span class="kpi-label">Faltas Registradas</span>
+          <span class="kpi-sub">No período selecionado</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Forma 1: dashboard por mês, com percentual ao passar o mouse -->
+    <section class="dashboard-section">
+      <div class="dashboard-section-header">
+        <h2>Frequência por Mês</h2>
+        <span>Passe o mouse sobre cada mês para ver a porcentagem</span>
+      </div>
+      <div class="dashboard-widget">
+        <div class="meses-grid">
+          @for (m of unidadeSelecionada.meses; track m.mes) {
+            <div class="mes-card" [title]="m.mes + ': ' + m.percentual + '% de frequência'">
+              <div class="mes-anel" [style.background]="'conic-gradient(#0057A8 ' + (m.percentual * 3.6) + 'deg, #eaf2fb 0deg)'">
+                <span class="mes-percentual">{{ m.percentual }}%</span>
+              </div>
+              <span class="mes-label">{{ m.mes }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+
+    <div class="dashboard-widgets-row">
+      <!-- Forma 2: mini calendário com faltas -->
+      <section class="dashboard-section" style="margin-bottom: 0;">
+        <div class="dashboard-section-header">
+          <h2>Faltas no Calendário</h2>
+          <span>{{ unidadeSelecionada.mesReferencia }}</span>
+        </div>
+        <div class="dashboard-widget">
+          <div class="mini-calendario">
+            @for (dia of diasDoMes(unidadeSelecionada.diasNoMes); track dia) {
+              <div
+                class="mini-dia"
+                [class.falta-justificada]="faltaNoDiaComLive(dia)?.justificada === true"
+                [class.falta-nao-justificada]="faltaNoDiaComLive(dia)?.justificada === false"
+              >
+                {{ dia }}
+              </div>
+            }
+          </div>
+          <div class="calendario-legenda">
+            <span><i class="legenda-dot legenda-justificada"></i>Falta justificada</span>
+            <span><i class="legenda-dot legenda-nao-justificada"></i>Falta não justificada</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Forma 3: lista por disciplina -->
+      <section class="dashboard-section" style="margin-bottom: 0;">
+        <div class="dashboard-section-header">
+          <h2>Frequência por Disciplina</h2>
+          <span>Total de aulas e faltas no período</span>
+        </div>
+        <div class="dashboard-widget">
+          <div class="dashboard-list">
+            @for (d of disciplinasComLive; track d.disciplina) {
+              <div class="dashboard-list-item">
+                <i class="bi bi-journal-bookmark-fill"></i>
+                <div>
+                  <div class="item-title">{{ d.disciplina }}</div>
+                  <div class="item-meta">{{ d.totalAulas }} aulas · {{ d.faltas }} faltas</div>
+                </div>
+                <span class="badge-pill" [class.urgente]="percentualPresenca(d) < 85">{{ percentualPresenca(d) }}%</span>
+              </div>
+            }
+          </div>
+        </div>
+      </section>
+    </div>
+  }
+</app-dashboard-shell>

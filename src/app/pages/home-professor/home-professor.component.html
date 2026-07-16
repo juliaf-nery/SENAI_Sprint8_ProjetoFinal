@@ -1,0 +1,78 @@
+<app-dashboard-shell
+  tituloPagina="Painel do Professor"
+  subtitulo="Colégio Estadual Modelo da Bahia"
+  perfilLabel="Professor"
+  corTema="#2E7D32"
+>
+  <!-- KPIs -->
+  <section class="dashboard-section">
+    <div class="dashboard-grid kpi-grid">
+      <app-dashboard-card icon="bi-easel2-fill" titulo="Turmas" valor="5" descricao="Sob sua regência" cor="azul" route="/minhas-turmas"></app-dashboard-card>
+      <app-dashboard-card icon="bi-journal-check" titulo="Atividades" valor="12" descricao="Aguardando correção" cor="amarelo" route="/atividades"></app-dashboard-card>
+    </div>
+  </section>
+
+  <!-- Módulos -->
+  <section class="dashboard-section">
+    <div class="dashboard-section-header">
+      <h2>Meus Módulos</h2>
+      <span>Acesso rápido às suas ferramentas de sala de aula</span>
+    </div>
+    <div class="dashboard-grid">
+      <app-dashboard-card icon="bi-card-checklist" titulo="Notas" descricao="Lançamento e boletim das turmas" cor="verde" route="/notas"></app-dashboard-card>
+      <app-dashboard-card icon="bi-clipboard2-pulse" titulo="Frequência" descricao="Chamada e histórico de faltas" cor="azul-escuro" route="/frequencia"></app-dashboard-card>
+      <app-dashboard-card icon="bi-calendar3" titulo="Calendário" descricao="Aulas, provas e reuniões" cor="azul" route="/calendario"></app-dashboard-card>
+      <app-dashboard-card icon="bi-megaphone" titulo="Avisos" descricao="Comunicados da direção e da escola" cor="vermelho" route="/avisos"></app-dashboard-card>
+      <app-dashboard-card icon="bi-folder2-open" titulo="Materiais" descricao="EM BREVE" cor="amarelo" route="/materiais"></app-dashboard-card>
+    </div>
+  </section>
+
+  <!-- Próximas aulas e turmas -->
+  <section class="dashboard-section">
+    <div class="dashboard-widgets-row">
+      <div class="dashboard-widget">
+        <h2>Próximas Aulas</h2>
+        <p>Sua agenda dos próximos compromissos</p>
+        <div class="dashboard-list">
+          @for (aula of proximasAulas; track aula.horario) {
+            <div class="dashboard-list-item">
+              <i class="bi bi-clock-fill"></i>
+              <div>
+                <div class="item-title">{{ aula.disciplina }} · {{ aula.turma }}</div>
+                <div class="item-meta">{{ aula.horario }} — {{ aula.sala }}</div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="dashboard-widget">
+        <h2>Minhas Turmas</h2>
+        <p>Visão geral das turmas sob sua regência</p>
+        <div class="dashboard-list">
+          <div class="dashboard-list-item">
+            <i class="bi bi-people-fill"></i>
+            <div>
+              <div class="item-title">3º Ano A</div>
+              <div class="item-meta">32 alunos · Média 8,1</div>
+            </div>
+          </div>
+          <div class="dashboard-list-item">
+            <i class="bi bi-people-fill"></i>
+            <div>
+              <div class="item-title">2º Ano B</div>
+              <div class="item-meta">29 alunos · Média 7,6</div>
+            </div>
+          </div>
+          <div class="dashboard-list-item">
+            <i class="bi bi-people-fill"></i>
+            <div>
+              <div class="item-title">1º Ano C</div>
+              <div class="item-meta">31 alunos · Média 8,4</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</app-dashboard-shell>

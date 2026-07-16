@@ -1,0 +1,134 @@
+<app-dashboard-shell
+  tituloPagina="Avisos"
+  subtitulo="Comunicados da direção e da secretaria escolar"
+  [perfilLabel]="perfilLabel"
+  [corTema]="corTema"
+>
+  @if (carrosselAvisos.length) {
+    <section class="dashboard-section">
+      <div class="mini-carousel aviso-carousel">
+        <div class="mini-carousel-track" [style.transform]="'translateX(-' + (carrosselIndex * 100) + '%)'">
+          @for (aviso of carrosselAvisos; track aviso.id) {
+            <div class="mini-carousel-slide aviso-destaque aviso-destaque-{{ aviso.tipo }}">
+              <div class="aviso-destaque-conteudo">
+                <span class="aviso-destaque-tag">{{ tipoLabel[aviso.tipo] }}</span>
+                <h2>{{ aviso.titulo }}</h2>
+                <p>{{ aviso.descricao }}</p>
+                <span class="aviso-destaque-meta"><i class="bi bi-calendar3"></i>{{ dataLabel(aviso.data) }} · {{ aviso.autor }}</span>
+              </div>
+            </div>
+          }
+        </div>
+
+        @if (carrosselAvisos.length > 1) {
+          <div class="mini-carousel-dots">
+            @for (aviso of carrosselAvisos; track aviso.id; let i = $index) {
+              <span [class.active]="carrosselIndex === i" (click)="irParaSlideAviso(i)"></span>
+            }
+          </div>
+        }
+      </div>
+    </section>
+  }
+
+  <section class="dashboard-section">
+    <div class="dashboard-toolbar avisos-toolbar">
+      <div class="avisos-busca">
+        <i class="bi bi-search"></i>
+        <input type="text" placeholder="Pesquisar avisos..." [(ngModel)]="termoBusca" />
+      </div>
+
+      <label>
+        Tipo
+        <select [(ngModel)]="filtroAtivo">
+          @for (f of filtros; track f.valor) {
+            <option [value]="f.valor">{{ f.label }}</option>
+          }
+        </select>
+      </label>
+
+      @if (exibirBotaoNovoAviso) {
+        <button type="button" class="btn-novo-aviso" (click)="abrirModalNovoAviso()">
+          <i class="bi bi-plus-lg"></i>
+          Novo Aviso
+        </button>
+      }
+    </div>
+  </section>
+
+  <section class="dashboard-section">
+    <div class="lista-avisos">
+      @for (aviso of avisosFiltrados; track aviso.id) {
+        <div class="dashboard-widget aviso-item">
+          <div class="aviso-item-topo">
+            <h3>{{ aviso.titulo }}</h3>
+            <span [class]="classeTipo(aviso.tipo)">{{ tipoLabel[aviso.tipo] }}</span>
+          </div>
+          <p>{{ aviso.descricao }}</p>
+          <span class="aviso-item-meta"><i class="bi bi-calendar3"></i>{{ dataLabel(aviso.data) }} · <i class="bi bi-person"></i>{{ aviso.autor }}</span>
+        </div>
+      } @empty {
+        <p class="avisos-vazio">Nenhum aviso encontrado.</p>
+      }
+    </div>
+  </section>
+</app-dashboard-shell>
+
+<!-- Modal: Novo Aviso -->
+@if (mostrarModalNovoAviso) {
+  <div class="modal-backdrop" (click)="fecharModalNovoAviso()">
+    <div class="modal-detalhe" (click)="$event.stopPropagation()">
+      <button type="button" class="modal-detalhe-fechar" (click)="fecharModalNovoAviso()" aria-label="Fechar">
+        <i class="bi bi-x-lg"></i>
+      </button>
+
+      <h3 class="modal-titulo">Novo Aviso</h3>
+      <p class="modal-subtitulo">Preencha as informações e publique para toda a comunidade escolar.</p>
+
+      <form class="form-grid" (ngSubmit)="publicarAviso()">
+        <label class="campo-form campo-largo">
+          <span>Título</span>
+          <input type="text" name="titulo" [(ngModel)]="novoAviso.titulo" required />
+        </label>
+
+        <label class="campo-form campo-largo">
+          <span>Descrição</span>
+          <textarea name="descricao" rows="4" [(ngModel)]="novoAviso.descricao" required></textarea>
+        </label>
+
+        <label class="campo-form">
+          <span>Data</span>
+          <input type="date" name="data" [(ngModel)]="novoAviso.data" required />
+        </label>
+
+        <label class="campo-form">
+          <span>Quem postou</span>
+          <select name="quemPostou" [(ngModel)]="novoAviso.quemPostou">
+            @for (opcao of opcoesQuemPostou; track opcao) {
+              <option [value]="opcao">{{ opcao }}</option>
+            }
+          </select>
+        </label>
+
+        <div class="form-acoes campo-largo">
+          <button type="button" class="btn-cancelar" (click)="fecharModalNovoAviso()">Cancelar</button>
+          <button type="submit" class="btn-salvar" [disabled]="!novoAvisoValido">
+            <i class="bi bi-send-fill"></i>
+            Publicar Aviso
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}
+
+@if (mostrarPopupAvisoPublicado) {
+  <div class="modal-backdrop" (click)="fecharPopupAvisoPublicado()">
+    <div class="modal-confirmacao" (click)="$event.stopPropagation()">
+      <i class="bi bi-check-circle-fill"></i>
+      <h3>Aviso publicado</h3>
+      <p>O comunicado já está visível na página de Avisos e no Calendário.</p>
+      <button type="button" (click)="fecharPopupAvisoPublicado()">Fechar</button>
+    </div>
+  </div>
+}

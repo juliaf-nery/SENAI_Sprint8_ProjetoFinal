@@ -1,0 +1,510 @@
+<app-dashboard-shell
+  tituloPagina="Atividades"
+  [subtitulo]="ehProfessor ? 'Gerencie as atividades das turmas em que você leciona' : 'Gerencie provas, trabalhos e exercícios'"
+  [perfilLabel]="perfilLabel"
+  [corTema]="corTema"
+>
+  <!-- ALUNO: pastas por disciplina -->
+  @if (ehAluno) {
+    @if (!pastaAlunoSelecionada) {
+      <section class="dashboard-section">
+        <div class="dashboard-grid pastas-grid">
+          @for (pasta of pastasAluno; track pasta.id) {
+            <div class="pasta-card" (click)="abrirPastaAluno(pasta.id)">
+              <div class="pasta-card-capa capa-{{ pasta.capaCor }}">
+                <i class="bi {{ pasta.capaIcone }}"></i>
+              </div>
+              <div class="pasta-card-corpo">
+                <span class="pasta-card-turma">{{ pasta.disciplina }} · {{ turmaDoAluno }}</span>
+                <h3>{{ pasta.titulo }}</h3>
+                <p>{{ pasta.descricao }}</p>
+                <span class="pasta-card-contagem">
+                  <i class="bi bi-journal-check"></i>
+                  {{ contarAtividadesDaDisciplina(pasta.disciplina) }} atividade(s)
+                </span>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+    } @else {
+      <section class="dashboard-section">
+        <button type="button" class="btn-voltar-pastas" (click)="fecharPastaAluno()">
+          <i class="bi bi-arrow-left"></i>
+          Voltar às disciplinas
+        </button>
+
+        <div class="pasta-banner capa-{{ pastaAlunoSelecionada.capaCor }}">
+          <div class="pasta-banner-icone"><i class="bi {{ pastaAlunoSelecionada.capaIcone }}"></i></div>
+          <div class="pasta-banner-texto">
+            <span class="pasta-banner-turma">{{ pastaAlunoSelecionada.disciplina }} · {{ turmaDoAluno }}</span>
+            <h2>{{ pastaAlunoSelecionada.titulo }}</h2>
+            <p>{{ pastaAlunoSelecionada.descricao }}</p>
+          </div>
+        </div>
+
+        <!-- Abas "Atividades" / "Notas" dentro da pasta -->
+        <div class="unidade-tabs" style="margin-top: 18px;">
+          <button type="button" class="unidade-tab" [class.active]="abaAtiva === 'atividades'" (click)="selecionarAba('atividades')">
+            <i class="bi bi-journal-check"></i>
+            Atividades
+          </button>
+          <button type="button" class="unidade-tab" [class.active]="abaAtiva === 'notas'" (click)="selecionarAba('notas')">
+            <i class="bi bi-card-checklist"></i>
+            Notas
+          </button>
+        </div>
+      </section>
+
+      @if (abaAtiva === 'atividades') {
+        <!-- Indicadores -->
+        <section class="dashboard-section">
+          <div class="dashboard-grid kpi-grid atividades-kpis">
+            <app-dashboard-card icon="bi-journal-text" titulo="Abertas" [valor]="contarPorStatus('aberta')" cor="azul"></app-dashboard-card>
+            <app-dashboard-card icon="bi-calendar2-week" titulo="Agendadas" [valor]="contarPorStatus('agendada')" cor="amarelo"></app-dashboard-card>
+            <app-dashboard-card icon="bi-send-check" titulo="Enviadas" [valor]="contarPorStatus('enviada')" cor="verde"></app-dashboard-card>
+            <app-dashboard-card icon="bi-pencil-square" titulo="Para Corrigir" [valor]="contarPorStatus('paraCorrigir')" cor="vermelho"></app-dashboard-card>
+            <app-dashboard-card icon="bi-journal-check" titulo="Total" [valor]="total" cor="azul-escuro"></app-dashboard-card>
+          </div>
+        </section>
+
+        <!-- Busca e filtro -->
+        <section class="dashboard-section">
+          <div class="atividades-filtros">
+            <div class="atividades-busca">
+              <i class="bi bi-search"></i>
+              <input type="text" placeholder="Pesquisar atividades..." [(ngModel)]="termoBusca" />
+            </div>
+
+            <select class="atividades-select" [(ngModel)]="filtroAtivo">
+              @for (opcao of filtros; track opcao.valor) {
+                <option [value]="opcao.valor">{{ opcao.label }}</option>
+              }
+            </select>
+          </div>
+        </section>
+
+        <!-- Lista de atividades -->
+        <section class="dashboard-section">
+          <div class="atividades-lista">
+          @for (atividade of atividadesFiltradas; track atividade.titulo) {
+            <div class="atividade-item atividade-clicavel" (click)="abrirDetalhe(atividade)">
+              <div class="atividade-icone">
+                <i class="bi bi-journal-text"></i>
+              </div>
+
+              <div class="atividade-corpo">
+                <div class="atividade-linha-topo">
+                  <h3>{{ atividade.titulo }}</h3>
+                  <span class="badge-status" [class]="statusClasse[atividade.status]">{{ statusLabel[atividade.status] }}</span>
+                </div>
+                <p class="atividade-descricao">{{ atividade.descricao }}</p>
+                <div class="atividade-meta">
+                  <span><i class="bi bi-book"></i>{{ atividade.disciplina }}</span>
+                  <span><i class="bi bi-people"></i>{{ atividade.turma }}</span>
+                  <span><i class="bi bi-calendar3"></i>{{ atividade.data }}</span>
+                  @if (atividade.nota !== undefined) {
+                    <span class="atividade-nota"><i class="bi bi-star-fill"></i>Nota: {{ atividade.nota.toFixed(1) }}</span>
+                  }
+                </div>
+
+                @if (atividade.progresso !== undefined) {
+                  <div class="atividade-progresso-fundo">
+                    <div
+                      class="atividade-progresso-preenchido"
+                      [class.progresso-completo]="atividade.progresso === 100"
+                      [style.width.%]="atividade.progresso"
+                    ></div>
+                  </div>
+                }
+
+                <span class="atividade-ver-mais"><i class="bi bi-eye"></i>Ver detalhes{{ atividade.status === 'aberta' || atividade.status === 'agendada' ? ' e enviar' : '' }}</span>
+              </div>
+            </div>
+          } @empty {
+            <p class="atividades-vazio">Nenhuma atividade encontrada para esse filtro.</p>
+          }
+          </div>
+        </section>
+      }
+
+      @if (abaAtiva === 'notas') {
+        <!-- Aba Notas: notas por categoria de avaliação (publicadas pelo professor) -->
+        <section class="dashboard-section">
+          <div class="dashboard-widget">
+            <div class="dashboard-section-header" style="padding: 0; margin-bottom: 14px;">
+              <h2>Notas por Categoria de Avaliação</h2>
+              <span>{{ disciplinaNotas }} · publicadas pelo professor</span>
+            </div>
+
+            @if (notasPorCategoria.length) {
+              <div class="boletim-avaliacoes-grid">
+                @for (item of notasPorCategoria; track item.categoria) {
+                  <div class="avaliacao-chip">
+                    <span class="avaliacao-categoria">{{ item.categoria }}</span>
+                    <span class="avaliacao-valor">{{ item.valor.toFixed(1) }}</span>
+                  </div>
+                }
+              </div>
+            } @else {
+              <p class="boletim-avaliacoes-vazio">
+                <i class="bi bi-hourglass-split"></i>
+                Nenhuma avaliação publicada pelo professor ainda.
+              </p>
+            }
+          </div>
+        </section>
+
+        <section class="dashboard-section">
+          <div class="dashboard-widget">
+            <div class="dashboard-section-header" style="padding: 0; margin-bottom: 14px;">
+              <h2>Notas por Atividade</h2>
+              <span>Atividades já corrigidas pelo professor</span>
+            </div>
+
+            @if (atividadesComNota.length) {
+              <div class="dashboard-list">
+                @for (a of atividadesComNota; track a.titulo) {
+                  <div class="dashboard-list-item">
+                    <i class="bi bi-journal-check"></i>
+                    <div>
+                      <div class="item-title">{{ a.titulo }}</div>
+                      <div class="item-meta">{{ a.disciplina }} · {{ a.data }}</div>
+                    </div>
+                    <span class="badge-pill">{{ a.nota!.toFixed(1) }}</span>
+                  </div>
+                }
+              </div>
+            } @else {
+              <p class="boletim-avaliacoes-vazio">
+                <i class="bi bi-hourglass-split"></i>
+                Nenhuma atividade corrigida ainda.
+              </p>
+            }
+          </div>
+        </section>
+      }
+    }
+  }
+
+  <!-- PROFESSOR: pastas por turma -->
+  @if (ehProfessor) {
+    @if (!pastaSelecionada) {
+      <section class="dashboard-section">
+        <div class="dashboard-grid pastas-grid">
+          @for (pasta of pastas; track pasta.id) {
+            <div class="pasta-card" (click)="abrirPasta(pasta.id)">
+              <div class="pasta-card-capa capa-{{ pasta.capaCor }}">
+                <i class="bi {{ pasta.capaIcone }}"></i>
+              </div>
+              <div class="pasta-card-corpo">
+                <span class="pasta-card-turma">{{ pasta.disciplina }} · {{ pasta.turma }}</span>
+                <h3>{{ pasta.titulo }}</h3>
+                <p>{{ pasta.descricao }}</p>
+                <span class="pasta-card-contagem">
+                  <i class="bi bi-journal-check"></i>
+                  {{ pasta.tarefas.length }} atividade(s) publicada(s)
+                </span>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+    } @else {
+      <section class="dashboard-section">
+        <button type="button" class="btn-voltar-pastas" (click)="fecharPasta()">
+          <i class="bi bi-arrow-left"></i>
+          Voltar às turmas
+        </button>
+
+        <div class="pasta-banner capa-{{ pastaSelecionada.capaCor }}">
+          <div class="pasta-banner-icone"><i class="bi {{ pastaSelecionada.capaIcone }}"></i></div>
+          <div class="pasta-banner-texto">
+            <span class="pasta-banner-turma">{{ pastaSelecionada.disciplina }} · {{ pastaSelecionada.turma }}</span>
+            <h2>{{ pastaSelecionada.titulo }}</h2>
+            <p>{{ pastaSelecionada.descricao }}</p>
+          </div>
+          @if (podeEditarPasta) {
+            <button type="button" class="btn-editar-pasta" (click)="abrirModalEditarPasta()">
+              <i class="bi bi-pencil-fill"></i>
+              Editar pasta
+            </button>
+          }
+        </div>
+
+        <div class="pasta-acoes">
+          <button type="button" class="btn-nova-atividade" (click)="abrirModalNovaTarefa()">
+            <i class="bi bi-plus-lg"></i>
+            Adicionar nova tarefa
+          </button>
+        </div>
+
+        <div class="atividades-lista">
+          @for (tarefa of pastaSelecionada.tarefas; track tarefa.id) {
+            <div class="atividade-item">
+              <div class="atividade-icone">
+                <i class="bi bi-journal-text"></i>
+              </div>
+              <div class="atividade-corpo">
+                <div class="atividade-linha-topo">
+                  <h3>{{ tarefa.titulo }}</h3>
+                  <span class="badge-pill" [class.atencao]="tarefa.destinatarios === 'especificos'">
+                    {{ tarefa.destinatarios === 'todos' ? 'Toda a turma' : (tarefa.alunosSelecionados?.length ?? 0) + ' aluno(s)' }}
+                  </span>
+                </div>
+                @if (tarefa.descricao) {
+                  <p class="atividade-descricao">{{ tarefa.descricao }}</p>
+                }
+                <div class="atividade-meta">
+                  <span><i class="bi bi-book"></i>{{ tarefa.disciplina }}</span>
+                  @if (tarefa.objetivo) {
+                    <span><i class="bi bi-bullseye"></i>{{ tarefa.objetivo }}</span>
+                  }
+                  @if (tarefa.dataEntrega) {
+                    <span><i class="bi bi-calendar3"></i>Entrega: {{ tarefa.dataEntrega }}</span>
+                  }
+                  @if (tarefa.valor !== null) {
+                    <span><i class="bi bi-award"></i>Valor: {{ tarefa.valor }}</span>
+                  }
+                  @if (tarefa.arquivoNome) {
+                    <span><i class="bi bi-paperclip"></i>{{ tarefa.arquivoNome }}</span>
+                  }
+                </div>
+              </div>
+            </div>
+          } @empty {
+            <p class="atividades-vazio">Nenhuma tarefa publicada nesta turma ainda. Clique em "Adicionar nova tarefa" para começar.</p>
+          }
+        </div>
+      </section>
+    }
+  }
+
+  <!-- Modal: Adicionar nova tarefa (professor) -->
+  @if (modalNovaTarefaAberto && pastaSelecionada) {
+    <div class="modal-backdrop" (click)="fecharModalNovaTarefa()">
+      <div class="modal-detalhe" (click)="$event.stopPropagation()">
+        <button type="button" class="modal-detalhe-fechar" (click)="fecharModalNovaTarefa()" aria-label="Fechar">
+          <i class="bi bi-x-lg"></i>
+        </button>
+
+        <h3 class="modal-titulo">Nova Tarefa — {{ pastaSelecionada.turma }}</h3>
+        <p class="modal-subtitulo">Preencha as informações e publique para a turma.</p>
+
+        <form class="form-grid" (ngSubmit)="publicarTarefa()">
+          <label class="campo-form campo-largo">
+            <span>Título</span>
+            <input type="text" name="titulo" [(ngModel)]="novaTarefa.titulo" required />
+          </label>
+
+          <label class="campo-form">
+            <span>Disciplina</span>
+            <input type="text" name="disciplina" [(ngModel)]="novaTarefa.disciplina" required />
+          </label>
+
+          <label class="campo-form">
+            <span>Data de entrega</span>
+            <input type="date" name="dataEntrega" [(ngModel)]="novaTarefa.dataEntrega" />
+          </label>
+
+          <label class="campo-form campo-largo">
+            <span>Descrição</span>
+            <textarea name="descricao" rows="3" [(ngModel)]="novaTarefa.descricao"></textarea>
+          </label>
+
+          <label class="campo-form campo-largo">
+            <span>Objetivo</span>
+            <textarea name="objetivo" rows="2" [(ngModel)]="novaTarefa.objetivo"></textarea>
+          </label>
+
+          <label class="campo-form">
+            <span>Valor</span>
+            <input type="number" name="valor" min="0" step="0.5" [(ngModel)]="novaTarefa.valor" placeholder="Ex: 10" />
+          </label>
+
+          <label class="campo-form">
+            <span>Arquivo (opcional)</span>
+            <input type="file" name="arquivo" (change)="onArquivoTarefaSelecionado($event)" />
+          </label>
+
+          @if (novaTarefa.arquivoNome) {
+            <span class="campo-largo upload-arquivo-nome"><i class="bi bi-paperclip"></i>{{ novaTarefa.arquivoNome }}</span>
+          }
+
+          <div class="campo-form campo-largo">
+            <span>Destinatários</span>
+            <div class="destinatarios-opcoes">
+              <label>
+                <input type="radio" name="destinatarios" value="todos" [(ngModel)]="novaTarefa.destinatarios" />
+                Todos os alunos da turma
+              </label>
+              <label>
+                <input type="radio" name="destinatarios" value="especificos" [(ngModel)]="novaTarefa.destinatarios" />
+                Alunos específicos (ex.: atividade de recuperação)
+              </label>
+            </div>
+
+            @if (novaTarefa.destinatarios === 'especificos') {
+              <div class="alunos-checklist">
+                @for (aluno of alunosDaPastaSelecionada; track aluno.email) {
+                  <label class="aluno-checkbox">
+                    <input
+                      type="checkbox"
+                      [checked]="alunoEstaSelecionado(aluno.email)"
+                      (change)="alternarAluno(aluno.email)"
+                    />
+                    {{ aluno.nome }}
+                  </label>
+                }
+              </div>
+            }
+          </div>
+
+          <div class="form-acoes campo-largo">
+            <button type="button" class="btn-cancelar" (click)="fecharModalNovaTarefa()">Cancelar</button>
+            <button type="submit" class="btn-salvar">
+              <i class="bi bi-send-fill"></i>
+              Publicar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+
+  <!-- Modal: Editar pasta (professor/direção) -->
+  @if (modalEditarPastaAberto && pastaSelecionada) {
+    <div class="modal-backdrop" (click)="fecharModalEditarPasta()">
+      <div class="modal-detalhe" (click)="$event.stopPropagation()">
+        <button type="button" class="modal-detalhe-fechar" (click)="fecharModalEditarPasta()" aria-label="Fechar">
+          <i class="bi bi-x-lg"></i>
+        </button>
+
+        <h3 class="modal-titulo">Editar Pasta</h3>
+        <p class="modal-subtitulo">{{ pastaSelecionada.disciplina }} · {{ pastaSelecionada.turma }}</p>
+
+        <form class="form-grid" (ngSubmit)="salvarPasta()">
+          <label class="campo-form campo-largo">
+            <span>Título</span>
+            <input type="text" name="tituloPasta" [(ngModel)]="editarPastaForm.titulo" required />
+          </label>
+
+          <label class="campo-form campo-largo">
+            <span>Descrição</span>
+            <textarea name="descricaoPasta" rows="3" [(ngModel)]="editarPastaForm.descricao"></textarea>
+          </label>
+
+          <div class="campo-form campo-largo">
+            <span>Capa</span>
+            <div class="capa-opcoes">
+              @for (cor of coresCapaDisponiveis; track cor) {
+                <button
+                  type="button"
+                  class="capa-opcao capa-{{ cor }}"
+                  [class.selecionada]="editarPastaForm.capaCor === cor"
+                  (click)="editarPastaForm.capaCor = cor"
+                  [attr.aria-label]="cor"
+                ></button>
+              }
+            </div>
+          </div>
+
+          <div class="form-acoes campo-largo">
+            <button type="button" class="btn-cancelar" (click)="fecharModalEditarPasta()">Cancelar</button>
+            <button type="submit" class="btn-salvar">Salvar alterações</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+
+  <!-- Painel de detalhe / envio da atividade (aluno) -->
+  @if (atividadeSelecionada) {
+    <div class="modal-backdrop" (click)="fecharDetalhe()">
+      <div class="modal-detalhe" (click)="$event.stopPropagation()">
+        <button type="button" class="modal-detalhe-fechar" (click)="fecharDetalhe()" aria-label="Fechar">
+          <i class="bi bi-x-lg"></i>
+        </button>
+
+        <div class="detalhe-topo">
+          <h3>{{ atividadeSelecionada.titulo }}</h3>
+          <span class="badge-status" [class]="statusClasse[atividadeSelecionada.status]">{{ statusLabel[atividadeSelecionada.status] }}</span>
+        </div>
+        <div class="atividade-meta">
+          <span><i class="bi bi-book"></i>{{ atividadeSelecionada.disciplina }}</span>
+          <span><i class="bi bi-people"></i>{{ atividadeSelecionada.turma }}</span>
+          <span><i class="bi bi-calendar3"></i>{{ atividadeSelecionada.data }}</span>
+        </div>
+
+        <div class="detalhe-bloco">
+          <span class="detalhe-rotulo"><i class="bi bi-file-text"></i>Descrição da atividade</span>
+          <p class="detalhe-texto">{{ atividadeSelecionada.descricaoCompleta }}</p>
+        </div>
+
+        @if (atividadeSelecionada.orientacoes.length) {
+          <div class="detalhe-bloco">
+            <span class="detalhe-rotulo"><i class="bi bi-list-check"></i>Orientações</span>
+            <ul class="detalhe-orientacoes">
+              @for (item of atividadeSelecionada.orientacoes; track item) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+          </div>
+        }
+
+        <div class="detalhe-bloco">
+          <span class="detalhe-rotulo"><i class="bi bi-send-check"></i>Entrega</span>
+
+          @if (atividadeJaEnviada) {
+            <div class="entrega-concluida">
+              <i class="bi bi-check-circle-fill"></i>
+              <div>
+                <span class="entrega-concluida-titulo">
+                  {{ atividadeSelecionada.tipoEntrega === 'arquivo' ? 'Atividade enviada' : 'Atividade concluída' }}
+                </span>
+                @if (atividadeSelecionada.arquivoEnviado) {
+                  <span class="entrega-concluida-sub"><i class="bi bi-paperclip"></i>{{ atividadeSelecionada.arquivoEnviado }}</span>
+                }
+                @if (atividadeSelecionada.nota !== undefined) {
+                  <span class="entrega-concluida-sub">Nota: {{ atividadeSelecionada.nota.toFixed(1) }}</span>
+                }
+              </div>
+            </div>
+          } @else if (atividadeSelecionada.tipoEntrega === 'arquivo') {
+            <!-- Caso 1: entrega por arquivo (PDF ou imagem) -->
+            <label class="upload-area">
+              <input type="file" accept=".pdf,image/*" (change)="onArquivoSelecionado($event)" hidden />
+              <i class="bi bi-cloud-arrow-up-fill"></i>
+              @if (nomeArquivoSelecionado) {
+                <span class="upload-arquivo-nome"><i class="bi bi-paperclip"></i>{{ nomeArquivoSelecionado }}</span>
+              } @else {
+                <span>Clique para selecionar um arquivo (PDF ou imagem)</span>
+              }
+            </label>
+            <button type="button" class="btn-enviar-atividade" [disabled]="!nomeArquivoSelecionado" (click)="enviarArquivo()">
+              <i class="bi bi-send-fill"></i>
+              Enviar Atividade
+            </button>
+          } @else {
+            <!-- Caso 2: atividade realizada em link externo -->
+            <a [href]="atividadeSelecionada.linkExterno" target="_blank" rel="noopener" class="link-externo">
+              <i class="bi bi-box-arrow-up-right"></i>
+              Acessar atividade no link externo
+            </a>
+            <button type="button" class="btn-enviar-atividade" (click)="marcarComoConcluida()">
+              <i class="bi bi-check2-square"></i>
+              Marcar como Concluída
+            </button>
+          }
+        </div>
+
+        @if (mostrarConfirmacaoEnvio) {
+          <p class="detalhe-confirmacao">
+            <i class="bi bi-check-circle-fill"></i>
+            Atividade enviada com sucesso! Ela já aparece em "Enviadas".
+          </p>
+        }
+      </div>
+    </div>
+  }
+</app-dashboard-shell>

@@ -1,0 +1,218 @@
+<app-dashboard-shell tituloPagina="Painel do Aluno" subtitulo="Colégio Estadual Modelo da Bahia · 3º Ano A"
+  perfilLabel="Aluno" corTema="#F9A825">
+
+  <section class="dashboard-section">
+    <div class="boas-vindas-banner">
+      <div>
+        <span class="boas-vindas-selo">Bem-vindo(a) de volta!</span>
+        <h2>{{ primeiroNome }}</h2>
+        <p>Turma 3º Ano A · Colégio Estadual Modelo da Bahia</p>
+      </div>
+      <i class="bi bi-emoji-sunglasses-fill boas-vindas-icone"></i>
+    </div>
+  </section>
+
+  <section class="dashboard-section">
+    <div class="dashboard-grid kpi-grid">
+      <app-dashboard-card icon="bi-graph-up-arrow" titulo="Minha Média" valor="7,9" descricao="2º Bimestre"
+        cor="verde"></app-dashboard-card>
+      <app-dashboard-card icon="bi-clipboard2-check" titulo="Frequência" valor="91%" descricao="Geral"
+        cor="azul"></app-dashboard-card>
+      <app-dashboard-card icon="bi-alarm-fill" titulo="Próxima Prova" valor="15/07" descricao="Matemática"
+        cor="vermelho"></app-dashboard-card>
+      <app-dashboard-card icon="bi-list-check" titulo="Atividades" valor="3" descricao="Pendentes"
+        cor="amarelo"></app-dashboard-card>
+    </div>
+  </section>
+
+  <section class="dashboard-section">
+    <div class="dashboard-grid atalhos-grid">
+      <app-dashboard-card icon="bi-journal-text" titulo="Boletim" cor="azul" route="/boletim"></app-dashboard-card>
+      <app-dashboard-card icon="bi-book-half" titulo="Biblioteca" cor="azul-escuro"
+        route="/biblioteca"></app-dashboard-card>
+      <app-dashboard-card icon="bi-cup-hot-fill" titulo="Cardápio" cor="amarelo" route="/cardapio"></app-dashboard-card>
+      <app-dashboard-card icon="bi-megaphone-fill" titulo="Avisos" cor="vermelho" route="/avisos"></app-dashboard-card>
+      <app-dashboard-card icon="bi-star-fill" titulo="Destaques" cor="amarelo" route="/destaques"></app-dashboard-card>
+      <app-dashboard-card icon="bi-calendar3" titulo="Calendário" cor="verde" route="/calendario"></app-dashboard-card>
+    </div>
+  </section>
+
+  <section class="dashboard-section">
+    <div class="dashboard-widgets-row">
+      <div class="dashboard-widget">
+        <h2>Notas por Disciplina</h2>
+        <div class="notas-lista">
+          @for (item of notasPorDisciplina; track item.disciplina) {
+          <div class="nota-linha">
+            <span class="nota-disciplina">{{ item.disciplina }}</span>
+            <div class="nota-barra-fundo">
+              <div class="nota-barra-preenchida" [class.nota-baixa]="item.nota < mediaNotaMinima"
+                [style.width.%]="percentualNota(item.nota)"></div>
+            </div>
+            <span class="nota-valor">{{ item.nota.toFixed(1) }}</span>
+          </div>
+          }
+        </div>
+      </div>
+
+      <div class="dashboard-widget">
+        <h2>Desempenho</h2>
+        <svg class="radar-chart" viewBox="0 0 200 200">
+          <g class="radar-eixos">
+            <line x1="100" y1="100" x2="100" y2="20" class="radar-eixo-linha" />
+            <line x1="100" y1="100" x2="169.28" y2="60" class="radar-eixo-linha" />
+            <line x1="100" y1="100" x2="169.28" y2="140" class="radar-eixo-linha" />
+            <line x1="100" y1="100" x2="100" y2="180" class="radar-eixo-linha" />
+            <line x1="100" y1="100" x2="30.72" y2="140" class="radar-eixo-linha" />
+            <line x1="100" y1="100" x2="30.72" y2="60" class="radar-eixo-linha" />
+          </g>
+
+          <polygon points="100,20 169.28,60 169.28,140 100,180 30.72,140 30.72,60" class="radar-anel" />
+          <polygon points="100,46.7 146.16,73.35 146.16,126.65 100,153.3 53.84,126.65 53.84,73.35" class="radar-anel" />
+          <polygon points="100,73.4 123.04,86.7 123.04,113.3 100,126.6 76.96,113.3 76.96,86.7" class="radar-anel" />
+
+          <polygon [attr.points]="radarPoints" class="radar-area" />
+
+          @for (item of notasPorDisciplina; track item.disciplina; let i = $index) {
+          <text [attr.x]="radarLabelPos(i).x" [attr.y]="radarLabelPos(i).y" class="radar-label" text-anchor="middle"
+            dominant-baseline="middle">
+            {{ item.disciplina }}
+          </text>
+          }
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="dashboard-section">
+    <div class="dashboard-widgets-row">
+      <div class="dashboard-widget">
+        <h2>Destaques</h2>
+        <div class="mini-carousel">
+          <div class="mini-carousel-track" [style.transform]="'translateX(-' + (currentSlide * 100) + '%)'">
+            @for (slide of destaques; track slide.titulo) {
+            <div class="mini-carousel-slide {{ slide.gradiente }}">
+              <i class="bi {{ slide.icon }}"></i>
+              <div>
+                <span class="slide-categoria">{{ slide.categoria }}</span>
+                <h3>{{ slide.titulo }}</h3>
+                <p>{{ slide.descricao }}</p>
+              </div>
+            </div>
+            }
+          </div>
+
+          <div class="mini-carousel-dots">
+            @for (slide of destaques; track slide.titulo; let i = $index) {
+            <span [class.active]="currentSlide === i" (click)="irParaSlide(i)"></span>
+            }
+          </div>
+        </div>
+
+        <!-- NOVO CONTEÚDO: Ações Rápidas & Agenda -->
+        <div class="widget-actions-container">
+
+          <!-- Bloco de Ações Rápidas -->
+          <div class="quick-actions-grid">
+            <button type="button" class="action-btn btn-rose" routerLink="/atividades">
+              <i class="bi bi-list-check"></i>
+              <span>Atividades</span>
+            </button>
+
+            <button class="action-btn btn-green" routerLink="/mensagens">
+              <i class="bi bi-chat-dots"></i>
+              <div class="em-breve-container">
+                <span>Mensagens</span>
+                <span><strong>Em breve</strong></span>
+              </div>
+            </button>
+
+            <button class="action-btn btn-blue" routerLink="/professores">
+              <i class="bi bi-person-badge"></i>
+              <span>Professores</span>
+            </button>
+
+            <button class="action-btn btn-yellow" routerLink="/ouvidoria">
+              <i class="bi bi-person-raised-hand"></i>
+              <span>Ouvidoria</span>
+            </button>
+          </div>
+
+          <!-- Bloco de Eventos/Agenda -->
+          <div class="events-agenda">
+            <h4>Meus Eventos Inscritos</h4>
+            <ul class="agenda-list">
+              <li>
+                <i class="bi-calendar3 text-green"></i>
+                <div class="agenda-info">
+                  <span class="agenda-date">Jul 18, 08:00</span>
+                  <span class="agenda-title">Prova de Matemática</span>
+                </div>
+              </li>
+              <li>
+                <i class="bi-calendar3 text-green"></i>
+                <div class="agenda-info">
+                  <span class="agenda-date">Jul 23, 10:00</span>
+                  <span class="agenda-title">Prova de Língua POrtuguesa</span>
+                </div>
+              </li>
+            </ul>
+            <button class="btn-view-all" routerLink="/calendario">Ver Todos os Meus Eventos</button>
+          </div>
+
+        </div>
+        <!-- --- FIM DO NOVO CONTEÚDO --- -->
+
+      </div>
+
+      <div class="dashboard-widget">
+        <h2>Evolução das Médias</h2>
+        <svg class="linha-chart" viewBox="0 0 300 140">
+          <g class="grade-y">
+            <line x1="35" y1="30" x2="295" y2="30" class="linha-grade" />
+            <text x="28" y="33" class="label-y">10</text>
+
+            <line x1="35" y1="50" x2="295" y2="50" class="linha-grade" />
+            <text x="28" y="53" class="label-y">9</text>
+
+            <line x1="35" y1="70" x2="295" y2="70" class="linha-grade" />
+            <text x="28" y="73" class="label-y">8</text>
+
+            <line x1="35" y1="90" x2="295" y2="90" class="linha-grade" />
+            <text x="28" y="93" class="label-y">7</text>
+
+            <text x="28" y="113" class="label-y">6</text>
+          </g>
+
+          <line x1="35" y1="30" x2="35" y2="110" class="eixo-linha" />
+          <line x1="35" y1="110" x2="295" y2="110" class="eixo-linha" />
+
+          <line x1="31" y1="30" x2="35" y2="30" class="eixo-linha" />
+          <line x1="31" y1="50" x2="35" y2="50" class="eixo-linha" />
+          <line x1="31" y1="70" x2="35" y2="70" class="eixo-linha" />
+          <line x1="31" y1="90" x2="35" y2="90" class="eixo-linha" />
+          <line x1="31" y1="110" x2="35" y2="110" class="eixo-linha" />
+
+          <polyline [attr.points]="evolucaoLinePoints" class="linha-evolucao" />
+
+          @for (ponto of evolucaoPoints; track ponto.item.bimestre) {
+          <line [attr.x1]="ponto.x" y1="110" [attr.x2]="ponto.x" y2="114" class="eixo-linha" />
+
+          <g class="ponto-grupo">
+            <text [attr.x]="ponto.x" [attr.y]="ponto.y - 12" class="tooltip-valor" text-anchor="middle">
+              {{ ponto.item.media.toFixed(1) }}
+            </text>
+
+            <circle [attr.cx]="ponto.x" [attr.cy]="ponto.y" r="10" class="ponto-gatilho" />
+            <circle [attr.cx]="ponto.x" [attr.cy]="ponto.y" r="5" class="linha-ponto" />
+          </g>
+
+          <text [attr.x]="ponto.x" [attr.y]="126" class="linha-label-x" text-anchor="middle">
+            {{ ponto.item.bimestre }}
+          </text>
+          }
+        </svg>
+      </div>
+    </div>
+  </section>
+</app-dashboard-shell>

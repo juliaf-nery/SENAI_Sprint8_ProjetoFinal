@@ -1,0 +1,85 @@
+<app-dashboard-shell tituloPagina="Cardápio" subtitulo="Refeições do refeitório planejadas para a comunidade acadêmica">
+
+  <section class="dashboard-section">
+
+    <div class="cardapio-filtros">
+      <button class="btn-filtro ativo">Semana Atual</button>
+      <button class="btn-filtro">Próxima Semana</button>
+    </div>
+
+    <div class="cardapio-container-principal">
+
+      <div class="cardapio-grid-cards">
+        @for (dia of diasSemana; track dia; let diaIndex = $index) {
+        <div class="cardapio-dia-card">
+
+          <div class="card-dia-header">
+            <h4>{{ dia | titlecase }}-feira</h4>
+            <button class="btn-editar-dia" (click)="editarCardapio(dia)" aria-label="Editar cardápio">
+              <i class="bi bi-pencil-square"></i>
+            </button>
+          </div>
+
+          <div class="card-dia-corpo">
+            @for (linha of linhasTabela; track linha.nome) {
+            <div class="refeicao-item">
+              <div class="refeicao-meta">
+                <span class="refeicao-icon-wrapper">
+                  <i class="bi" [ngClass]="linha.icon"></i>
+                </span>
+                <div class="refeicao-detalhes">
+                  <span class="refeicao-titulo">{{ linha.nome }}</span>
+                  <span class="refeicao-horario">{{ linha.horario }}</span>
+                </div>
+              </div>
+
+              <p class="refeicao-alimento">
+                {{ linha.itensPorDia[diaIndex] || 'Não informado' }}
+              </p>
+            </div>
+            }
+          </div>
+
+        </div>
+        }
+      </div>
+
+      <aside class="cardapio-sidebar">
+
+        <div class="card-sidebar">
+          <h3><i class="bi bi-person-badge"></i> Responsável Técnica</h3>
+          <div class="nutri-info">
+            <p class="nutri-nome">Dra. Ana Silva</p>
+            <p class="nutri-registro">CRN: 12345</p>
+          </div>
+        </div>
+
+        <div class="card-sidebar">
+          <h3><i class="bi bi-exclamation-triangle"></i> Alergênicos</h3>
+          <div class="legenda-lista">
+            <div class="legenda-item">
+              <span class="legenda-icon lactose"><i class="bi bi-droplet"></i></span>
+              <span>Contém Lactose</span>
+            </div>
+            <div class="legenda-item">
+              <span class="legenda-icon gluten"><i class="bi bi-egg-fried"></i></span>
+              <span>Contém Glúten</span>
+            </div>
+            <div class="legenda-item">
+              <span class="legenda-icon vegano"><i class="bi bi-tree"></i></span>
+              <span>Vegano</span>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+
+    <p class="cardapio-observacao">
+      <i class="bi bi-info-circle-fill"></i> *O cardápio pode sofrer alterações de acordo com a disponibilidade de
+      estoque...
+    </p>
+  </section>
+
+</app-dashboard-shell>

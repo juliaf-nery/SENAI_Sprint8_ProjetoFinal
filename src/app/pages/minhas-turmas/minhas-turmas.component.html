@@ -1,0 +1,60 @@
+<app-dashboard-shell tituloPagina="Minhas Turmas" subtitulo="Turmas sob sua regência e grade horária semanal">
+
+  <section class="dashboard-section">
+    <div class="dashboard-section-header">
+      <h2>Grade Horária</h2>
+      <span>Disciplina, horário, turma e sala — organizada por dia da semana</span>
+    </div>
+
+    <div class="dashboard-conteudo">
+
+      <div class="grade-tabela-wrapper">
+        <table class="grade-tabela">
+          <thead>
+            <tr [style.background]="corTema">
+              <th class="coluna-horario"><i class="bi bi-clock"></i> Horário</th>
+              <th>Disciplina</th>
+              <th>Turma</th>
+              <th>Sala</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (dia of diasSemana; track dia) {
+            <tr class="linha-dia">
+              <td colspan="4">{{ dia }}-feira</td>
+            </tr>
+            @for (aula of aulasDoDia(dia); track aula.horarioInicio + aula.turma) {
+            <tr>
+              <td class="coluna-horario">{{ aula.horarioInicio }} - {{ aula.horarioFim }}</td>
+              <td>{{ aula.disciplina }}</td>
+              <td><span class="badge-turma">{{ aula.turma }}</span></td>
+              <td><span class="badge-sala">{{ aula.sala }}</span></td>
+            </tr>
+            } @empty {
+            <tr>
+              <td colspan="4" class="grade-vazio">Sem aulas neste dia.</td>
+            </tr>
+            }
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <aside class="painel-lateral-professor">
+        <div class="card-painel proxima-aula">
+          <h3>Próxima Aula</h3>
+          <p class="horario-destaque">09:00 - 09:50</p>
+          <p><strong>1º Ano C</strong> - Sala 03</p>
+        </div>
+
+        <div class="card-painel atalhos">
+          <h3>Atalhos Rápidos</h3>
+          <button class="btn-atalho" routerLink="/frequencia">Fazer Chamada</button>
+          <button class="btn-atalho" routerLink="/notas">Lançar Notas</button>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+</app-dashboard-shell>

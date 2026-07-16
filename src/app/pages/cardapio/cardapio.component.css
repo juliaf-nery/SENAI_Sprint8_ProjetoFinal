@@ -1,0 +1,287 @@
+
+/* LAYOUT GERAL E FLEXBOX */
+.cardapio-container-principal {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+  width: 100%;
+}
+
+/* Grid de cards diários (Lado Esquerdo) */
+.cardapio-grid-cards {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+/* FILTROS DE SEMANA */
+.cardapio-filtros {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.btn-filtro {
+  background-color: #f1f5f9;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-filtro:hover {
+  background-color: #e2e8f0;
+  color: #1e293b;
+}
+
+.btn-filtro.ativo {
+  background-color: #204171;
+  color: #ffffff;
+  border-color: #204171;
+  box-shadow: 0 4px 10px rgba(46, 125, 50, 0.2);
+}
+
+/* CARDS DIÁRIOS DO CARDÁPIO */
+.cardapio-dia-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cardapio-dia-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+.card-dia-header {
+  background: linear-gradient(120deg, #204171, #3669b2);
+  padding: 12px 16px;
+  text-align: center;
+}
+
+.card-dia-header h4 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.card-dia-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+}
+
+.btn-editar-dia {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-editar-dia:hover {
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+.btn-editar-dia:active {
+  transform: scale(0.95);
+}
+
+.card-dia-corpo {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.refeicao-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.refeicao-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.refeicao-icon-wrapper {
+  background-color: #f8fafc;
+  color: #3669b2;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.refeicao-detalhes {
+  display: flex;
+  flex-direction: column;
+}
+
+.refeicao-titulo {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.refeicao-horario {
+  font-size: 0.7rem;
+  color: #64748b;
+}
+
+.refeicao-alimento {
+  font-size: 0.85rem;
+  color: #475569;
+  line-height: 1.4;
+  margin: 0;
+  background-color: #f8fafc;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border-left: 3px solid #3669b2;
+}
+
+/* BARRA LATERAL INFORMATIVA (SIDEBAR) */
+.cardapio-sidebar {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.card-sidebar {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+}
+
+.card-sidebar h3 {
+  font-size: 0.95rem;
+  color: #1e293b;
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 8px;
+}
+
+.nutri-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nutri-nome {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #204171;
+  margin: 0;
+}
+
+.nutri-registro {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-style: italic;
+  margin: 0;
+}
+
+/* Legendas */
+.legenda-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.legenda-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: #475569;
+}
+
+.legenda-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+}
+
+.lactose {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.gluten {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.vegano {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+/* PARÁGRAFO DE OBSERVAÇÃO (RODAPÉ) */
+.cardapio-observacao {
+  margin-top: 32px; 
+  padding: 16px 20px;  
+  background-color: #EAF0F8; 
+  border-left: 4px solid #204171; 
+  border-radius: 0 12px 12px 0; 
+  display: flex;
+  align-items: center;
+  gap: 12px; 
+  font-size: 0.9rem;
+  color: #3669b2;
+  line-height: 1.5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.cardapio-observacao i {
+  font-size: 1.25rem;
+  color: #3669b2;
+  flex-shrink: 0;
+}
+
+/* RESPONSIVIDADE (Celular e Tablet) */
+@media (max-width: 1024px) {
+  .cardapio-container-principal {
+    flex-direction: column;
+  }
+  
+  .cardapio-sidebar {
+    width: 100%;
+  }
+}

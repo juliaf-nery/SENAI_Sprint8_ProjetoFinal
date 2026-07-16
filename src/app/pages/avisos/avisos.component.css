@@ -1,0 +1,321 @@
+.avisos-toolbar {
+  justify-content: space-between;
+}
+
+.avisos-busca {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 200px;
+}
+
+.avisos-busca i {
+  color: #64748b;
+}
+
+.avisos-busca input {
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 0.85rem;
+  background: transparent;
+  width: 100%;
+}
+
+.btn-novo-aviso {
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: #204171;
+  border: none;
+  border-radius: 10px;
+  padding: 9px 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.aviso-destaque {
+  border-radius: 16px;
+  padding: 22px 26px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #204171, #3669b2);
+}
+
+.aviso-destaque-urgente { background: linear-gradient(135deg, #C62828, #8e1c1c); }
+.aviso-destaque-atencao { background: linear-gradient(135deg, #b7791f, #8a5a13); }
+.aviso-destaque-evento { background: linear-gradient(135deg, #2E7D32, #1b5e20); }
+
+.aviso-destaque-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.aviso-destaque h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 10px 0 6px;
+}
+
+.aviso-destaque p {
+  font-size: 0.88rem;
+  opacity: 0.92;
+  max-width: 720px;
+}
+
+.aviso-destaque-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  opacity: 0.85;
+  margin-top: 12px;
+}
+
+.lista-avisos {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.aviso-item-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.aviso-item h3 {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.aviso-item p {
+  font-size: 0.83rem;
+  color: #64748b;
+  margin: 6px 0 10px;
+}
+
+.aviso-item-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.74rem;
+  color: #94a3b8;
+}
+
+.badge-pill.tipo-evento { background: #eaf5eb; color: #2E7D32; }
+.badge-pill.tipo-informativo { background: #eaf2fb; color: #204171; }
+
+.avisos-vazio {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  padding: 20px 0;
+}
+
+/* ==========================================================================
+   Carrossel de avisos em destaque (banner do topo)
+   ========================================================================== */
+
+.aviso-destaque-conteudo {
+  display: block;
+  width: 100%;
+}
+
+/* ==========================================================================
+   Modal: Novo Aviso
+   ========================================================================== */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 50;
+}
+
+.modal-detalhe {
+  position: relative;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 28px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 88vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
+}
+
+.modal-detalhe-fechar {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: #f1f5f9;
+  color: #64748b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-titulo {
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #0f172a;
+  padding-right: 30px;
+}
+
+.modal-subtitulo {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-top: 2px;
+  margin-bottom: 18px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.campo-largo {
+  grid-column: 1 / -1;
+}
+
+.campo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.campo-form span {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #64748b;
+}
+
+.campo-form input[type="text"],
+.campo-form input[type="date"],
+.campo-form select,
+.campo-form textarea {
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: #0f172a;
+  border: 1px solid #e5e9f0;
+  border-radius: 10px;
+  padding: 9px 12px;
+  background: #f8fafc;
+  resize: vertical;
+}
+
+.campo-form input:focus,
+.campo-form select:focus,
+.campo-form textarea:focus {
+  outline: none;
+  border-color: #204171;
+  background: #ffffff;
+}
+
+.form-acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.btn-cancelar {
+  background: #f1f5f9;
+  color: #334155;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-salvar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #204171;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-salvar:hover {
+  background: #3669b2;
+}
+
+.btn-salvar:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   Pop-up de confirmação (Aviso publicado)
+   ========================================================================== */
+
+.modal-confirmacao {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px;
+  text-align: center;
+  max-width: 340px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
+}
+
+.modal-confirmacao i {
+  font-size: 2.2rem;
+  color: #2E7D32;
+  margin-bottom: 10px;
+}
+
+.modal-confirmacao h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.modal-confirmacao p {
+  font-size: 0.82rem;
+  color: #64748b;
+  margin-bottom: 18px;
+}
+
+.modal-confirmacao button {
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #ffffff;
+  background: #204171;
+  border: none;
+  border-radius: 10px;
+  padding: 9px 24px;
+  cursor: pointer;
+}

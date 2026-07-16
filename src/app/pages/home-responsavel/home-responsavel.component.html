@@ -1,0 +1,63 @@
+<app-dashboard-shell
+  tituloPagina="Painel do Responsável"
+  subtitulo="Acompanhando: João Pedro Santos · 3º Ano A"
+  perfilLabel="Responsável"
+  corTema="#6b21a8"
+>
+  <!-- KPIs -->
+  <section class="dashboard-section">
+    <div class="dashboard-grid kpi-grid">
+      <app-dashboard-card icon="bi-award-fill" titulo="Média Geral" valor="8,2" descricao="Desempenho do aluno no bimestre" cor="verde"></app-dashboard-card>
+      <app-dashboard-card icon="bi-clipboard2-check" titulo="Frequência" valor="94%" descricao="Presença no ano letivo" cor="azul"></app-dashboard-card>
+    </div>
+  </section>
+
+  <!-- Acompanhamento -->
+  <section class="dashboard-section">
+    <div class="dashboard-section-header">
+      <h2>Acompanhamento Escolar</h2>
+      <span>Informações do aluno vinculado à sua conta</span>
+    </div>
+    <div class="dashboard-grid">
+      <app-dashboard-card icon="bi-journal-text" titulo="Boletim" descricao="Situação por bimestre" cor="azul-escuro" route="/boletim"></app-dashboard-card>
+      <app-dashboard-card icon="bi-clipboard2-check" titulo="Frequência" descricao="Frequência do aluno" cor="azul" route="/frequencia"></app-dashboard-card>
+      <app-dashboard-card icon="bi-calendar3" titulo="Calendário" descricao="Provas e datas importantes" cor="verde" route="/calendario"></app-dashboard-card>
+      <app-dashboard-card icon="bi-megaphone-fill" titulo="Avisos" descricao="" cor="vermelho" route="/avisos"></app-dashboard-card>
+      <app-dashboard-card icon="bi-chat-dots-fill" titulo="Mensagens" descricao="EM BREVE" cor="vermelho" route="/mensagens"></app-dashboard-card>
+    </div>
+  </section>
+
+  <!-- Próximos compromissos -->
+  <section class="dashboard-section">
+    <div class="dashboard-widget">
+      <h2>Próximos Compromissos</h2>
+      <p>Datas importantes relacionadas ao aluno acompanhado</p>
+      <div class="dashboard-list">
+        <div class="dashboard-list-item">
+          <i class="bi bi-pencil-square"></i>
+          <div>
+            <div class="item-title">Prova de Matemática</div>
+            <div class="item-meta">Sexta-feira, 08h00</div>
+          </div>
+          <span class="badge-pill urgente">Prova</span>
+        </div>
+        <div class="dashboard-list-item">
+          <i class="bi bi-people-fill"></i>
+          <div>
+            <div class="item-title">Reunião de Pais e Mestres</div>
+            <div class="item-meta">Dia 22, 19h00</div>
+          </div>
+          <span class="badge-pill atencao">Reunião</span>
+        </div>
+        <div class="dashboard-list-item">
+          <i class="bi bi-calendar-event"></i>
+          <div>
+            <div class="item-title">Semana Cultural</div>
+            <div class="item-meta">De 24 a 28 deste mês</div>
+          </div>
+          <span class="badge-pill">Evento</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</app-dashboard-shell>

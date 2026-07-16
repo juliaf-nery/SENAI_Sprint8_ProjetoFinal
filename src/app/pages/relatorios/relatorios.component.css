@@ -1,0 +1,626 @@
+/* Espaçamentos utilitários entre widgets dentro da mesma seção */
+.rel-mt {
+  margin-top: 20px;
+}
+
+.rel-mb {
+  margin-bottom: 20px;
+}
+
+/* Barra de ações no topo da página */
+.rel-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.rel-toolbar h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.rel-toolbar span {
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.rel-btn-imprimir {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #ffffff;
+  background: #0057A8;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.rel-btn-imprimir:hover {
+  background: #003E7E;
+}
+
+@media print {
+  .rel-btn-imprimir {
+    display: none;
+  }
+}
+
+/* Barra segmentada: situação final dos alunos */
+.rel-barra-segmentada {
+  display: flex;
+  width: 100%;
+  height: 22px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #eef1f6;
+  margin-top: 6px;
+}
+
+.rel-segmento {
+  height: 100%;
+  transition: opacity 0.2s;
+}
+
+.rel-segmento:hover {
+  opacity: 0.85;
+}
+
+.rel-segmento-aprovado {
+  background: #2E7D32;
+}
+
+.rel-segmento-recuperacao {
+  background: #F9A825;
+}
+
+.rel-segmento-reprovado {
+  background: #C62828;
+}
+
+.rel-segmento-evadido {
+  background: #64748b;
+}
+
+.rel-legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 22px;
+  margin-top: 18px;
+}
+
+.rel-legenda-coluna {
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 0;
+}
+
+.rel-legenda span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: #334155;
+}
+
+.kpi-container-interno {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  margin-top: 24px;
+  width: 100%;
+}
+
+.kpi-box {
+  flex: 1;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kpi-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.kpi-titulo {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.kpi-valor {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.2;
+}
+
+.kpi-valor.kpi-atencao {
+  color: #f59e0b;
+}
+
+.kpi-valor.kpi-positivo {
+  color: #10b981;
+}
+
+.kpi-subtitulo {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.status-atencao {
+  color: #d97706;
+}
+
+.status-positivo {
+  color: #059669;
+}
+
+.insight-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background-color: #fffbeb;
+  border-left: 4px solid #f59e0b;
+  border-radius: 8px;
+
+  /* O PULO DO GATO: */
+  margin-top: auto;
+}
+
+.insight-icon {
+  font-size: 1.4rem;
+  color: #d97706;
+  display: flex;
+  align-items: center;
+}
+
+.insight-texto {
+  font-size: 0.85rem;
+  color: #78350f;
+  line-height: 1.5;
+}
+
+.insight-texto strong {
+  font-weight: 700;
+  color: #451a03;
+}
+
+.icon {
+  gap: 5px;
+}
+
+.dashboard-relatorios-row {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  width: 100%;
+
+  align-items: flex-start;
+}
+
+.dashboard-relatorios-row>.dashboard-widget:first-child {
+  flex: 4;
+  min-width: 0;
+}
+
+.dashboard-relatorios-row>.dashboard-widget:last-child {
+  flex: 6;
+  min-width: 0;
+}
+
+.planilha-tabela {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th:last-child,
+td:last-child {
+  text-align: center;
+}
+
+.turma {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.serie {
+  display: block;
+  margin-top: 2px;
+  font-size: .78rem;
+  color: #64748b;
+}
+
+.coluna-aluno,
+th,
+td {
+  padding: 8px;
+  align-items: center;
+}
+
+thead {
+  background: #204171;
+}
+
+thead th {
+  color: white;
+  padding: 16px;
+  font-size: .82rem;
+  font-weight: 600;
+}
+
+tbody td {
+  padding: 14.6px 20px;
+}
+
+tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+tbody tr {
+  transition: .2s;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+tbody tr:hover {
+  background: #eef5ff;
+  transform: scale(1.003);
+}
+
+th,
+td {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.media {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+
+.rel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: #94a3b8;
+}
+
+.rel-dot-aprovado {
+  background: #2E7D32;
+}
+
+.rel-dot-recuperacao {
+  background: #F9A825;
+}
+
+.rel-dot-reprovado {
+  background: #C62828;
+}
+
+.rel-dot-evadido {
+  background: #64748b;
+}
+
+/* Tabela (Desempenho por turma / Alunos abaixo do mínimo) */
+.rel-tabela-widget {
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Listas de barras horizontais (Média por disciplina, Matrículas por turma,
+   Frequência média por turma) */
+.rel-hbar-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rel-hbar-linha {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.rel-hbar-linha:hover {
+  background-color: #f1f5f9;
+}
+
+.rel-hbar-nome {
+  width: 150px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #334155;
+}
+
+.rel-hbar-fundo {
+  height: 12px;
+  background-color: #f1f5f9;
+  border-radius: 999px;
+  flex-grow: 1;
+  margin: 0 16px;
+}
+
+
+
+.rel-hbar-barra {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #3669b2 0%, #204171 100%);
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+.rel-hbar-barra-verde {
+  background: #2E7D32;
+}
+
+.rel-hbar-barra-alerta {
+  background: #C62828;
+}
+
+.rel-hbar-valor {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1e293b;
+  min-width: 30px;
+  text-align: right;
+}
+
+@media (max-width: 480px) {
+  .rel-hbar-linha {
+    grid-template-columns: 90px 1fr 34px;
+  }
+}
+
+/* Gráfico de pizza/rosca (composição das matrículas) */
+.rel-donut-widget h2,
+.rel-donut-widget>p:first-of-type {
+  margin-bottom: 0;
+}
+
+.rel-donut-conteudo {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.rel-donut {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.rel-donut::after {
+  content: '';
+  position: absolute;
+  inset: 22px;
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+.rel-donut-total {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.rel-donut-valor {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.rel-donut-label {
+  font-size: 0.7rem;
+  color: #64748b;
+}
+
+/* Gráfico de linha (evolução da frequência) */
+.rel-linha-wrapper {
+  margin-top: 16px;
+}
+
+.rel-linha-svg {
+  width: 100%;
+  height: 160px;
+  display: block;
+  overflow: visible;
+}
+
+.rel-linha-traco {
+  stroke: #204171;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.rel-linha-ponto {
+  fill: #ffffff;
+  stroke: #204171;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.rel-linha-labels {
+  display: flex;
+  margin-top: 8px;
+}
+
+.rel-linha-label {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.7rem;
+  color: #64748b;
+  text-align: center;
+}
+
+.rel-linha-label b {
+  font-size: 0.75rem;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+/* Ranking das turmas por frequência */
+.rel-ranking-pos {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #334155;
+  background: #eef1f6;
+}
+
+.rel-ranking-ouro {
+  background: #fef6e6;
+  color: #b7791f;
+}
+
+.rel-ranking-prata {
+  background: #eef1f6;
+  color: #475569;
+}
+
+.rel-ranking-bronze {
+  background: #fbeee5;
+  color: #b45309;
+}
+
+@media (max-width: 1024px) {
+  .dashboard-relatorios-row {
+    flex-direction: column !important;
+    gap: 24px;
+  }
+
+  .dashboard-relatorios-row > .dashboard-widget:first-child,
+  .dashboard-relatorios-row > .dashboard-widget:last-child {
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    min-width: 0;
+  }
+
+  .kpi-container-interno {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .rel-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .rel-btn-imprimir {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .kpi-container-interno {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  tbody td, th {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .rel-hbar-linha {
+    padding: 8px;
+  }
+
+  .rel-hbar-nome {
+    width: 110px;
+    font-size: 0.8rem;
+  }
+
+  .rel-hbar-fundo {
+    margin: 0 10px;
+    height: 8px;
+  }
+
+  .rel-hbar-valor {
+    font-size: 0.85rem;
+  }
+
+  .rel-donut-conteudo {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .rel-legenda {
+    justify-content: center;
+    gap: 10px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .table-responsive, 
+  .rel-tabela-widget {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .planilha-tabela {
+    min-width: 500px;
+  }
+
+  .insight-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .rel-linha-label {
+    font-size: 0.65rem;
+  }
+  
+  .rel-linha-label b {
+    font-size: 0.7rem;
+  }
+}

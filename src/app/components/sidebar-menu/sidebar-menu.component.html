@@ -1,0 +1,68 @@
+<aside class="sidebar" [class.collapsed]="collapsed" [class.mobile-open]="mobileOpen">
+  <div class="sidebar-brand">
+    <i class="bi bi-mortarboard-fill"></i>
+    @if (!collapsed) {
+      <span>EduConecta</span>
+    }
+  </div>
+
+  <nav class="sidebar-nav">
+    <a
+      [routerLink]="inicioRoute"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="sidebar-link"
+      [title]="collapsed ? 'Início' : ''"
+      (click)="onLinkClick()"
+    >
+      <i class="bi bi-house-door-fill"></i>
+      @if (!collapsed) {
+        <span>Início</span>
+      }
+    </a>
+
+    @for (item of itensPerfil; track item.route) {
+      <a
+        [routerLink]="item.route"
+        routerLinkActive="active"
+        class="sidebar-link"
+        [title]="collapsed ? item.label : ''"
+        (click)="onLinkClick()"
+      >
+        <i class="bi {{ item.icon }}"></i>
+        @if (!collapsed) {
+          <span>{{ item.label }}</span>
+        }
+      </a>
+    }
+  </nav>
+
+  <div class="sidebar-footer">
+    @for (item of itensComuns; track item.route) {
+      <a
+        [routerLink]="item.route"
+        routerLinkActive="active"
+        class="sidebar-link"
+        [title]="collapsed ? item.label : ''"
+        (click)="onLinkClick()"
+      >
+        <i class="bi {{ item.icon }}"></i>
+        @if (!collapsed) {
+          <span>{{ item.label }}</span>
+        }
+      </a>
+    }
+
+    <button
+      type="button"
+      class="sidebar-link sidebar-logout"
+      [title]="collapsed ? 'Sair' : ''"
+      (click)="sair()"
+    >
+      <i class="bi bi-box-arrow-right"></i>
+      @if (!collapsed) {
+        <span>Sair</span>
+      }
+    </button>
+  </div>
+</aside>

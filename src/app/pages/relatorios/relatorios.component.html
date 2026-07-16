@@ -1,0 +1,217 @@
+<app-dashboard-shell tituloPagina="Relatórios"
+  subtitulo="Visão estratégica e consolidada da instituição — ano letivo de 2026" [perfilLabel]="perfilLabel"
+  [corTema]="corTema">
+  <!-- Ações do relatório -->
+  <section class="dashboard-section rel-toolbar">
+    <div>
+      <h2>Painel de Indicadores</h2>
+      <span>Dados consolidados de toda a instituição, atualizados ao final de cada bimestre</span>
+    </div>
+    <button type="button" class="rel-btn-imprimir" (click)="imprimirRelatorio()">
+      <i class="bi bi-printer-fill"></i>
+      Imprimir / Exportar
+    </button>
+  </section>
+
+  <section class="dashboard-section">
+    <div class="dashboard-grid">
+      <app-dashboard-card icon="bi-people-fill" titulo="Alunos Matriculados" [valor]="totalAlunos"
+        descricao="Total na rede escolar" cor="azul"></app-dashboard-card>
+      <app-dashboard-card icon="bi-person-workspace" titulo="Professores" [valor]="totalProfessores"
+        descricao="Corpo docente ativo" cor="azul-escuro"></app-dashboard-card>
+      <app-dashboard-card icon="bi-collection-fill" titulo="Turmas" [valor]="totalTurmas"
+        descricao="Distribuídas na unidade" cor="azul"></app-dashboard-card>
+      <app-dashboard-card icon="bi-person-hearts" titulo="Responsáveis" [valor]="totalResponsaveis"
+        descricao="Cadastrados no sistema" cor="azul-escuro"></app-dashboard-card>
+      <app-dashboard-card icon="bi-calendar-check" titulo="Frequência Média" valor="{{ frequenciaMediaEscola }}%"
+        descricao="Ano letivo de 2026" cor="verde"></app-dashboard-card>
+      <app-dashboard-card icon="bi-award-fill" titulo="Média Geral" [valor]="mediaGeralEscola"
+        descricao="Escala de 0 a 10" cor="amarelo"></app-dashboard-card>
+      <app-dashboard-card icon="bi-journal-text" titulo="Em Recuperação" [valor]="alunosRecuperacao"
+        descricao="{{ percentualRecuperacao }}% dos alunos" cor="amarelo"></app-dashboard-card>
+      <app-dashboard-card icon="bi-check-circle-fill" titulo="Aprovados" [valor]="alunosAprovados"
+        descricao="{{ percentualAprovados }}% dos alunos" cor="verde"></app-dashboard-card>
+      <app-dashboard-card icon="bi-x-circle-fill" titulo="Reprovados" [valor]="alunosReprovados"
+        descricao="{{ percentualReprovados }}% dos alunos" cor="vermelho"></app-dashboard-card>
+      <app-dashboard-card icon="bi-person-dash-fill" titulo="Evadidos" [valor]="alunosEvadidos"
+        descricao="{{ percentualEvadidos }}% dos alunos" cor="vermelho"></app-dashboard-card>
+    </div>
+  </section>
+
+  <!-- Relatório Geral da Escola -->
+  <section class="dashboard-section">
+    <div class="dashboard-section-header">
+      <h2>Relatório Geral da Escola</h2>
+      <span>Resumo institucional e indicadores gerais de desempenho</span>
+    </div>
+
+    <div class="dashboard-widgets-row">
+      <div class="dashboard-widget">
+        <h2>Resumo Institucional</h2>
+        <p>Números consolidados do ano letivo de 2026</p>
+        <div class="dashboard-list">
+          <div class="dashboard-list-item">
+            <i class="bi bi-people-fill"></i>
+            <div>
+              <div class="item-title">Alunos matriculados</div>
+              <div class="item-meta">Todas as séries e turnos</div>
+            </div>
+            <span class="badge-pill">{{ totalAlunos }}</span>
+          </div>
+          <div class="dashboard-list-item">
+            <i class="bi bi-person-workspace"></i>
+            <div>
+              <div class="item-title">Professores</div>
+              <div class="item-meta">Em regência de turma</div>
+            </div>
+            <span class="badge-pill">{{ totalProfessores }}</span>
+          </div>
+          <div class="dashboard-list-item">
+            <i class="bi bi-collection-fill"></i>
+            <div>
+              <div class="item-title">Turmas</div>
+              <div class="item-meta">Ativas na unidade</div>
+            </div>
+            <span class="badge-pill">{{ totalTurmas }}</span>
+          </div>
+          <div class="dashboard-list-item">
+            <i class="bi bi-journal-bookmark-fill"></i>
+            <div>
+              <div class="item-title">Disciplinas</div>
+              <div class="item-meta">Ofertadas na grade curricular</div>
+            </div>
+            <span class="badge-pill">{{ totalDisciplinas }}</span>
+          </div>
+          <div class="dashboard-list-item">
+            <i class="bi bi-calendar-check"></i>
+            <div>
+              <div class="item-title">Frequência média geral</div>
+              <div class="item-meta">Ano letivo de 2026</div>
+            </div>
+            <span class="badge-pill">{{ frequenciaMediaEscola }}%</span>
+          </div>
+          <div class="dashboard-list-item">
+            <i class="bi bi-award-fill"></i>
+            <div>
+              <div class="item-title">Média geral das notas</div>
+              <div class="item-meta">Escala de 0 a 10</div>
+            </div>
+            <span class="badge-pill">{{ mediaGeralEscola }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-widget">
+        <h2>Indicadores Gerais de Desempenho</h2>
+        <p>Situação final dos alunos no ano letivo</p>
+
+        <div class="rel-barra-segmentada">
+          <div class="rel-segmento rel-segmento-aprovado" [style.width.%]="percentualAprovados"
+            [title]="'Aprovados: ' + percentualAprovados + '%'"></div>
+          <div class="rel-segmento rel-segmento-recuperacao" [style.width.%]="percentualRecuperacao"
+            [title]="'Em recuperação: ' + percentualRecuperacao + '%'"></div>
+          <div class="rel-segmento rel-segmento-reprovado" [style.width.%]="percentualReprovados"
+            [title]="'Reprovados: ' + percentualReprovados + '%'"></div>
+          <div class="rel-segmento rel-segmento-evadido" [style.width.%]="percentualEvadidos"
+            [title]="'Evadidos: ' + percentualEvadidos + '%'"></div>
+        </div>
+
+        <div class="rel-legenda">
+          <span><i class="rel-dot rel-dot-aprovado"></i>Aprovados — {{ alunosAprovados }} ({{ percentualAprovados
+            }}%)</span>
+          <span><i class="rel-dot rel-dot-recuperacao"></i>Recuperação — {{ alunosRecuperacao }} ({{
+            percentualRecuperacao }}%)</span>
+          <span><i class="rel-dot rel-dot-reprovado"></i>Reprovados — {{ alunosReprovados }} ({{ percentualReprovados
+            }}%)</span>
+          <span><i class="rel-dot rel-dot-evadido"></i>Evadidos — {{ alunosEvadidos }} ({{ percentualEvadidos
+            }}%)</span>
+        </div>
+
+        <div class="kpi-container-interno">
+
+          <div class="kpi-box">
+            <span class="kpi-titulo">Total de Alunos</span>
+            <span class="kpi-valor">842</span>
+            <span class="kpi-subtitulo">Matriculados no ano</span>
+          </div>
+
+          <div class="kpi-box">
+            <span class="kpi-titulo">Meta de Aprovação</span>
+            <span class="kpi-valor kpi-atencao">84,6%</span>
+            <span class="kpi-subtitulo status-atencao">Faltou 0,4% para a meta (85%)</span>
+          </div>
+
+          <div class="kpi-box">
+            <span class="kpi-titulo">Evasão Controlada</span>
+            <span class="kpi-valor kpi-positivo">3,1%</span>
+            <span class="kpi-subtitulo status-positivo">↓ 0,8% menor que o ano anterior</span>
+          </div>
+
+        </div>
+
+        <div class="insight-container">
+          <div class="insight-icon">
+            <i class="bi bi-lightbulb-fill"></i>
+          </div>
+          <div class="insight-texto">
+            <strong>Recomendação Pedagógica:</strong> A taxa de aprovação está em <strong>84,6%</strong> (meta: 85%). Há
+            <strong>63 alunos</strong> em recuperação que precisam de acompanhamento especial para garantir o
+            atingimento da meta até o fim do período letivo.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="dashboard-relatorios-row">
+
+      <div class="dashboard-widget rel-tabela-widget rel-mt">
+        <div class="planilha-wrapper">
+          <table class="planilha-tabela">
+            <thead>
+              <tr [style.background]="corTema">
+                <th class="coluna-aluno">Turma</th>
+                <th>Alunos</th>
+                <th>Frequência</th>
+                <th>Média Geral</th>
+                <th>Situação</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (t of desempenhoPorTurma; track t.turma) {
+              <tr>
+                <td class="coluna-aluno">
+                  <span class="turma">{{ t.turma }}</span>
+                  <span class="serie">{{ t.serie }}</span>
+                </td>
+                <td><i class="bi bi-people-fill icon">{{ t.alunos }}</i></td>
+                <td>{{ t.frequencia }}%</td>
+                <td class="media">{{ t.media.toFixed(1) }}</td>
+                <td>
+                  <span class="badge-pill" [class.atencao]="t.situacao === 'Atenção'"
+                    [class.urgente]="t.situacao === 'Crítico'">{{ t.situacao }}</span>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="dashboard-widget rel-mt">
+        <h2>Média por Disciplina</h2>
+        <p>Média geral das notas em cada disciplina</p>
+        <div class="rel-hbar-lista">
+          @for (d of mediasPorDisciplina; track d.disciplina) {
+          <div class="rel-hbar-linha">
+            <span class="rel-hbar-nome">{{ d.disciplina }}</span>
+            <div class="rel-hbar-fundo">
+              <div class="rel-hbar-barra" [style.width.%]="escalaPercentual(d.media, maiorMediaDisciplina)"></div>
+            </div>
+            <span class="rel-hbar-valor">{{ d.media.toFixed(1) }}</span>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
