@@ -12,7 +12,7 @@ login-api/
 └── src/
     ├── server.ts               # bootstrap do Express
     ├── types.ts                # tipos/contratos da API
-    ├── data/users.ts           # 5 usuários mock (em memória)
+    ├── data/users.ts           # 4 usuários mock (em memória)
     ├── services/authService.ts # validação de credenciais + geração/verificação de JWT
     ├── middleware/authMiddleware.ts # protege rotas exigindo Bearer token
     ├── routes/authRoutes.ts    # POST /login e GET /me
